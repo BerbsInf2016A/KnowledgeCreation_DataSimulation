@@ -1,0 +1,41 @@
+\documentclass[a4paper, 12pt, oneside]{scrbook}
+\input{settings.tex}
+
+\addbibresource{bibliography.bib}
+
+\makeglossaries
+\makeindex
+\begin{document}
+
+
+\chapter{Funktion zur Berechnung der Kreuz-Korrelation}
+Das Python Skript \enquote{func\_cross\_correlation.py} bietet als Einstiegspunkt die Funktion\\ \mbox{\enquote{crossCorrelation(...)}} an. Im Folgenden werden die Parameter und deren Bedeutung beschrieben.
+
+\section{Beschreibung der Parameter}
+Manche der Parameter sind optional, während andere angegeben werden müssen.
+\subsection{Pflichtparameter}
+Es gibt nur zwei Parameter, die beim Aufruf der Funktion mitgegeben werden müssen. Dabei handelt es sich um die beiden Sequenzen, die verarbeitet werden sollen.
+\begin{description}
+\item[seqA] Die erste Datensequenz in Form eines eindimensionalen Arrays. Die enthaltenen Zahlenwerte müssen in Float konvertierbar sein.
+\item[seqB] Die zweite Datensequenz in Form eines eindimensionalen Arrays. Die enthaltenen Zahlenwerte müssen in Float konvertierbar sein.
+\end{description}
+
+\subsection{Optionale Parameter}
+Folgende Parameter sind optional:
+\begin{description}
+\item[plotNormalizedData][Default: False] Die erste Datensequenz
+\item[plotCorrelations] [Default: False] Die zweite Datensequenz
+\item[plotResults] [Default: True] Die zweite Datensequenz
+\item[plotNormalizedResults] [Default: True] Die zweite Datensequenz
+\item[subtractMeanFromResult] [Default: True] Die zweite Datensequenz
+\end{description}
+
+\section{Beispiel Ergebnisse}
+\subsection{Pflichtparameter}
+\subsection{Optionaler Parameter: plotNormalizedData}
+\subsection{Optionaler Parameter: plotCorrelations}
+\subsection{Optionaler Parameter: plotResults}
+\subsection{Optionaler Parameter: plotNormalizedResults}
+\subsection{Optionaler Parameter: subtractMeanFromResult}
+
+\end{document}

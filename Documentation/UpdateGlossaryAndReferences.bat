@@ -1,0 +1,5 @@
+pdflatex Documentation
+makeglossaries Documentation
+biber Documentation
+pdflatex Documentation
+pause

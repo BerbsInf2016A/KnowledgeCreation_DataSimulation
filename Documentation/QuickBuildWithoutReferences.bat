@@ -1,0 +1,3 @@
+pdflatex Documentation
+makeglossaries Documentation
+pause

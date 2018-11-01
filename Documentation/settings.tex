@@ -1,0 +1,186 @@
+\usepackage[style=authoryear,backend=biber]{biblatex}
+%Farbige Tabelle
+\usepackage[table,dvipsnames]{xcolor}
+%\addbibresource{bibliography.bib}
+\usepackage[ngerman]{babel}		
+%=====Schrift============================
+%\usepackage{helvet}
+\usepackage{mathptmx} 
+\renewcommand{\familydefault}{\rmdefault} 
+%-----
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{float}
+\usepackage{acronym}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{csquotes}
+\usepackage{fancyhdr}
+\usepackage{url}
+\usepackage{listings} 
+\usepackage[datesep=.]{datetime2}
+\DTMsetstyle{ddmmyy}
+\usepackage[binary-units=true]{siunitx}
+%Enforce pictures to be in the same section. Use \FloatBarrier before a new subsection to enforce it on subsection level.
+\usepackage[section]{placeins}
+%Landscape support for pdfs.
+\usepackage{pdflscape}
+\usepackage[subfigure]{tocloft}
+
+%Settings for the header line
+\newcommand{\defineHeader}{
+\pagestyle{fancy}
+\lhead{}
+\chead{}
+\rhead{\rightmark}
+\renewcommand{\headrulewidth}{1pt}}
+
+
+%Do not reset footnote numbering
+\usepackage{chngcntr}
+\counterwithout{footnote}{chapter}
+
+\renewcommand{\lstlistoflistings}{\begingroup
+\tocfile{\lstlistingname}{lol}
+\endgroup}
+
+%Selbst eingefügte
+%TimesNewRoman
+\usepackage{mathptmx}
+\usepackage{lipsum,mathptmx,etoolbox}% http://ctan.org/pkg/{lipsum,mathptmx,etoolbox}
+\makeatletter
+\usepackage{subfigure} 
+
+%Zeilenabstand auf 1,5 gesetzt
+\usepackage[onehalfspacing]{setspace}
+\usepackage{wrapfig}
+\usepackage{tocbibind}
+\usepackage{pdfpages}
+\usepackage{enumitem}
+\definecolor{tecrmigreen}{HTML}{1EA12D}
+\definecolor{tecallianceBlue}{HTML}{193366}
+%Zum durchgehenden Numerieren der Abbildungen
+\usepackage{chngcntr}
+\counterwithout{figure}{chapter}
+\counterwithout{table}{chapter}
+%Um SubSubSection auch numeriert zu bekommen
+%\setcounter{secnumdepth}{3}
+
+\usepackage{multirow}
+\usepackage[right]{eurosym} 
+\usepackage{longtable}
+
+\usepackage{blindtext}
+%Load hyperref at the end, otherwise it could be that the footnotes are broken
+\usepackage[hidelinks]{hyperref}
+
+\renewcommand*{\headfont}{\normalfont}
+\renewcommand*{\multicitedelim}{\addsemicolon\space}
+\renewcommand*{\headrulewidth}{0pt}
+\renewcommand*{\arraystretch}{1.5}
+
+\setlength{\parskip}{1.5ex}
+% Absätze am Seitenende müssen mindestens drei Zeilen haben
+\clubpenalties=3 10000 7500 2500
+\widowpenalties=3 10000 7500 2500
+
+
+%Listing
+\usepackage{color}
+\definecolor{gray}{rgb}{0.4,0.4,0.4}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\definecolor{cyan}{rgb}{.0,0.6,0.6}
+
+%Farben Layout
+\definecolor{backgroundWhite}{rgb}{1,1,1}
+\definecolor{classesCyan}{rgb}{0.05, 0.545, 0.545}
+\definecolor{keywordBlue}{rgb}{0.13,0.13,1}
+\definecolor{commentGreen}{rgb}{0,0.5,0}
+\definecolor{stringRed}{rgb}{0.7,0.05,0.05}
+\definecolor{red}{rgb}{255,0,0}
+\definecolor{borderGray}{rgb}{0.87,0.88,0.89}
+\definecolor{brandBlue}{rgb}{0.30,0.50,0.74}
+\definecolor{attributePurple}{rgb}{0.5,0.0,1}
+
+%Farben für logische Einheiten
+\definecolor{logicalUnitsBlue}{RGB}{85, 85, 255}
+%\definecolor{logicalUnitsGreen}{RGB}{90, 255, 90}
+\definecolor{logicalUnitsGreen}{RGB}{60, 190, 60}
+\definecolor{logicalUnitsOrange}{RGB}{255, 165, 0}
+\definecolor{logicalUnitsPink}{RGB}{255, 192, 203}
+
+\lstset{
+	basicstyle=\ttfamily,
+	columns=fullflexible,
+	showstringspaces=false,
+	commentstyle=\color{gray}\upshape,
+	numbers=left,
+	%Um eine durchgehende Numerierung bei Listings zu erhalten
+	numberbychapter=false
+}
+
+
+
+%Für das Anhangsverzeichnis
+\makeatletter
+\newcommand*{\maintoc}{% Hauptinhaltsverzeichnis
+  \begingroup
+    \@fileswfalse% kein neues Verzeichnis öffnen
+    \renewcommand*{\appendixattoc}{% Trennanweisung im Inhaltsverzeichnis
+      \value{tocdepth}=-10000 % lokal tocdepth auf sehr kleinen Wert setzen
+    }%
+    \tableofcontents% Verzeichnis ausgeben
+  \endgroup
+}
+\newcommand*{\appendixtoc}{% Anhangsinhaltsverzeichnis
+  \begingroup
+    \edef\@alltocdepth{\the\value{tocdepth}}% tocdepth merken
+    \setcounter{tocdepth}{-10000}% Keine Verzeichniseinträge
+    \renewcommand*{\contentsname}{% Verzeichnisname ändern
+      Anhang}%
+    \renewcommand*{\appendixattoc}{% Trennanweisung im Inhaltsverzeichnis
+      \setcounter{tocdepth}{\@alltocdepth}% tocdepth wiederherstellen
+    }%
+    \tableofcontents% Verzeichnis ausgeben
+    \setcounter{tocdepth}{\@alltocdepth}% tocdepth wiederherstellen
+  \endgroup
+}
+\newcommand*{\appendixattoc}{% Trennanweisung im Inhaltsverzeichnis
+}
+\g@addto@macro\appendix{% \appendix erweitern
+  \if@openright\cleardoublepage\else\clearpage\fi% Neue Seite
+  \phantomsection
+  \addcontentsline{toc}{chapter}{\appendixname}% Eintrag ins Hauptverzeichnis
+  \addtocontents{toc}{\protect\appendixattoc}% Trennanweisung in die toc-Datei
+}
+
+\g@addto@macro\appendix{%
+  %\pagenumbering{Roman}%
+  \addtocontents{toc}{\protect\renewcommand*{\protect\@pnumwidth}{3.5em}}%Seitenzahlen im Anhangverzeichnis nicht über Seitenrand hinaus. Problem entstand durch die langen römischen Zahlen. Siehe auch: http://www.komascript.de/node/608
+}
+
+\makeatother
+\usepackage[toc,automake]{glossaries}
+% Formatiere Glossareinträge:
+\renewcommand{\glstextformat}[1]{\textbf{\em #1}}
+%\renewcommand{\glstextformat}[1]{\textbf{\color{blue}\em #1}}
+
+\usepackage{longtable}
+\definecolor{tecrmigreen}{HTML}{1EA12D}
+\definecolor{tecallianceBlue}{HTML}{193366}
+
+
+%Custom Settings
+%C# SourceCode format settings for listings
+%\setmonofont{Consolas} %to be used with XeLaTeX or LuaLaTeX
+\definecolor{bluekeywords}{rgb}{0,0,1}
+\definecolor{greencomments}{rgb}{0,0.5,0}
+\definecolor{redstrings}{rgb}{0.64,0.08,0.08}
+\definecolor{xmlcomments}{rgb}{0.5,0.5,0.5}
+\definecolor{types}{rgb}{0.17,0.57,0.68}
+
+
+
+\setlength{\parindent}{0em} 

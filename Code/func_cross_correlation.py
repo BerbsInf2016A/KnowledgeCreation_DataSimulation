@@ -94,7 +94,6 @@ def plotNormalizedCorrelationResults(figure, gridSystem, plotRow, seqA, seqB):
     return plotRow
 
 def crossCorrelation(seqA: [], seqB: [], plotNormalizedData = False, plotCorrelations = False, plotResults = True, plotNormalizedResults = True, subtractMeanFromResult = True):
-
     seqA = seqA.astype(float)
     seqB = seqB.astype(float)
     numberOfRowsToPlot = 2
