@@ -42,9 +42,9 @@ def extractIndicesFromCorrelationData(correlationData, threshold = 0.3):
     for index in sorted:
         value = correlationData[index]
         if value >= threshold:
-            valuesList.append([index, value])
+            valuesList.append([int(index), value])
     
     # Define the return value, first entry is index, which is an integer
-    return np.asarray(valuesList, dtype='int, float')
+    return np.asarray(valuesList)
 
     
