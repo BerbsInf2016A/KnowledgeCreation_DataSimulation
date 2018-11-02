@@ -93,7 +93,7 @@ def plotNormalizedCorrelationResults(figure, gridSystem, plotRow, seqA, seqB):
     plotRow += 1
     return plotRow
 
-def crossCorrelation(seqA: [], seqB: [], plotNormalizedData = False, plotCorrelations = False, plotResults = True, plotNormalizedResults = True, subtractMeanFromResult = True):
+def crossCorrelation(seqA: [], seqB: [], plotNormalizedData = False, plotCorrelations = False, plotResults = False, plotNormalizedResults = True, subtractMeanFromResult = True):
     seqA = seqA.astype(float)
     seqB = seqB.astype(float)
     numberOfRowsToPlot = 2
