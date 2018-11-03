@@ -93,7 +93,7 @@ def plotNormalizedCorrelationResults(figure, gridSystem, plotRow, seqA, seqB):
     plotRow += 1
     return plotRow
 
-def crossCorrelation(seqA: [], seqB: [], plotNormalizedData = False, plotCorrelations = False, plotResults = False, plotNormalizedResults = True, subtractMeanFromResult = True):
+def crossCorrelation(seqA: [], seqB: [], plotNormalizedData = False, plotCorrelations = False, plotNonNormalizedResults = False, plotNormalizedResults = True, subtractMeanFromResult = True):
     seqA = seqA.astype(float)
     seqB = seqB.astype(float)
     numberOfRowsToPlot = 2
@@ -105,7 +105,7 @@ def crossCorrelation(seqA: [], seqB: [], plotNormalizedData = False, plotCorrela
     if plotNormalizedData: numberOfRowsToPlot += 1
     if plotCorrelations: numberOfRowsToPlot += 3
     if plotCorrelations and plotNormalizedData:  numberOfRowsToPlot += 3
-    if plotResults: numberOfRowsToPlot += 1
+    if plotNonNormalizedResults: numberOfRowsToPlot += 1
     if plotNormalizedResults: numberOfRowsToPlot += 1
 
     fig = plt.figure(constrained_layout=True)
@@ -128,7 +128,7 @@ def crossCorrelation(seqA: [], seqB: [], plotNormalizedData = False, plotCorrela
         currentPlotRow += 1
 
     if plotCorrelations:
-        currentPlotRow = plotRawCorrelations(fig, gs, currentPlotRow, seqA,seqA)  
+        currentPlotRow = plotRawCorrelations(fig, gs, currentPlotRow, seqA,seqB)  
 
     if plotCorrelations and plotNormalizedData:
         currentPlotRow = plotNormalizedCorrelations(fig, gs, currentPlotRow, seqANorm, seqBNorm)
@@ -140,10 +140,10 @@ def crossCorrelation(seqA: [], seqB: [], plotNormalizedData = False, plotCorrela
         seqBSubtracted = seqB
         seqBMean = np.mean(seqB)
         seqBSubtracted[:] =[x - seqBMean for x in seqBSubtracted]
-        if plotResults: currentPlotRow = plotCorrelationResults(fig, gs, currentPlotRow, seqASubtracted,seqBSubtracted)  
+        if plotNonNormalizedResults: currentPlotRow = plotCorrelationResults(fig, gs, currentPlotRow, seqASubtracted,seqBSubtracted)  
         if plotNormalizedResults : currentPlotRow = plotNormalizedCorrelationResults(fig, gs, currentPlotRow, seqASubtracted,seqBSubtracted)
     else:
-        if plotResults: currentPlotRow = plotCorrelationResults(fig, gs, currentPlotRow, seqA,seqB)  
+        if plotNonNormalizedResults: currentPlotRow = plotCorrelationResults(fig, gs, currentPlotRow, seqA,seqB)  
         if plotNormalizedResults : currentPlotRow = plotNormalizedCorrelationResults(fig, gs, currentPlotRow, seqA,seqB)  
 
    #fig.tight_layout()

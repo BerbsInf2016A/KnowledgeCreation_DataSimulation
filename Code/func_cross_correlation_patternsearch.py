@@ -13,7 +13,7 @@ def normalized(a, axis=-1, order=2):
     return a / np.expand_dims(l2, axis)
 
 
-def searchForPattern(seqA: [], pattern: [], plotResults = False):
+def getCorrelationDataForPatternSearch(seqA: [], pattern: [], plotCorrelation = False):
     seqA = seqA.astype(float)
     pattern = pattern.astype(float)
 
@@ -21,20 +21,18 @@ def searchForPattern(seqA: [], pattern: [], plotResults = False):
     patternNorm = normalized(pattern)[0]
 
     correlated = np.correlate(seqANorm, patternNorm)
-    if plotResults:        
+    if plotCorrelation:        
         fig = plt.figure(constrained_layout=True)
         gs = GridSpec(1, 1, figure=fig) 
         ax = fig.add_subplot(gs[0,0])
         ax.plot(correlated, 'ro')
-        ax.set_title('Raw data: Sequence A')
+        ax.set_title('Correlation: Sequence A and Pattern')
         plt.draw()
     return correlated
 
 def extractIndicesFromCorrelationData(correlationData, threshold = 0.3):
     # Suppres scientific notation when printing floats:
     np.set_printoptions(suppress=True)
-    # Normalize the data
-    correlationData = normalized(correlationData)[0]
     sorted = np.argsort(correlationData)
     sorted = sorted[::-1]
     # Filter with threshold
