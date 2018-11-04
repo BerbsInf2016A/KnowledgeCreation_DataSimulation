@@ -1,0 +1,4 @@
+https://ezgif.com/split
+ -> gif splitten + convert to png
+
+dir | rename-item -NewName {$_.name -replace "__","_"}
