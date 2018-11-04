@@ -1,7 +1,7 @@
 \chapter{Kreuzkorrelation und Faltung}
 \section{Einführung Kreuzkorrelation}
 Die Kreuzkorrelation wird verwendet, um die Korrelation zwischen zwei Signalen oder Sequenzen zu berechnen. Dabei werden unterschiedliche Zeitverschiebungen zwischen
-den Sequenzen eingesetzt. Numpy verwendet dabei folgende Formel für die 
+den Sequenzen eingesetzt. NumPy verwendet dabei folgende Formel für die 
 Kreuzkorrelation\footnote{Siehe: Dokumentation NumPy:\cite{DocumentationNumpyCorrelate} und Definition Kreuzkorrelation: \cite{DefinitionCrossCorrelation}.}.
 
 \[
@@ -13,7 +13,7 @@ ist\footnote{Umformung: siehe: \cite{DefinitionCrossCorrelation}.}:
   f \star g \equiv \int\limits_{-\infty}^{+\infty} \overline{f}(-\tau)*g(t + \tau) \text{ } \mathrm{d}\tau
 \]
 
-Numpy bietet dabei unterschiedliche Modi bei der Berechnung der Kreuzkorrelation an. Diese entsprechen den Modi der mathematischen Faltung ( zu Englisch \enquote{Convolution}).
+NumPy bietet dabei unterschiedliche Modi bei der Berechnung der Kreuzkorrelation an. Diese entsprechen den Modi der mathematischen Faltung ( zu Englisch \enquote{Convolution}).
 Die Unterschiede der Kreuzkorrelation und Faltung sowie der Autokorrelation sind in den folgenden Abbildungen dargestellt.
 Abbildung~\ref{fig:compareConvulationCrosscorrelationAutoCorrelation} bietet einen Überblick, während die Abbildungen~\ref{fig:convolutionExample1} und \ref{fig:convolutionExample2} animiert sind.
 Sollte die Animation nicht korrekt dargestellt werden, sind diese über die jeweilige Quellenangaben einsehbar.
