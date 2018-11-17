@@ -18,7 +18,7 @@ seq2[0][[1000,2000,1500,3500,5500,6000,6500,8000,8500,9000]] = 1
 seq1 = seq1[0]
 seq2 = seq2[0]
 
-fcc.crossCorrelation(seq1, seq2, plotNonNormalizedResults= True)
+fcc.crossCorrelation(seq1, seq2)
 
 
 
@@ -27,7 +27,7 @@ seq3[0][[1005,1007,1010,6005,6007,6010]] = 1
 
 pattern = np.asarray([1,0,1,0,0,1,0])
 
-correlatedSearch = ps.getCorrelationDataForPatternSearch(seq3, pattern, plotCorrelation= True)
+correlatedSearch = ps.getCorrelationDataForPatternSearch(seq3, pattern)
 indices = ps.extractIndicesFromCorrelationData(correlatedSearch, threshold= 0.2)
 
 print(indices)
