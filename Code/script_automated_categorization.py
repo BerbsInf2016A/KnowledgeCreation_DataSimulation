@@ -1,8 +1,8 @@
 
 import os
-import automated_categorization as ac
+from categorization.automated_categorization import executeCategorization
 
 
 dirname = os.path.dirname(__file__)
 directoryPath = os.path.join(dirname, 'source')
-ac.executeCategorization(directoryPath)
+executeCategorization(directoryPath)

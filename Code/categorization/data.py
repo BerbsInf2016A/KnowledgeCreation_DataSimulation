@@ -1,4 +1,5 @@
 import numpy as np
+
 class BlockInfo:
     def __init__(self, blockSize):
         self.blockSize = blockSize
@@ -15,6 +16,7 @@ class CategorizationFile:
         self.sequences = []
         self.frequencyResults = []
         self.blockInfos = []
+        self.balances =[]
 
     def updateBlockInfo(self, sequenceIndex, blockSize, index):
         targetBlockInfoDictionary = self.blockInfos[sequenceIndex]
