@@ -4,7 +4,7 @@ import numpy as np
 from os import listdir, path
 from os.path import isfile, join
 
-from categorization.functions import analyzeFrequency, analyzeBalance 
+from categorization.functions import analyzeFrequency, analyzeBalance, analyzeBlockInfos
 import categorization.data as catData
 from categorization.pdfGeneration import generatePdfsForDataset
 
@@ -77,7 +77,8 @@ def executeCategorization(sourceDirectoryPath: str):
         data = analyzeFrequency(data)
         data = analyzeBalance(data)
         print("Calculating block size information for", data.fileName)
-        data.calculateBlockInfos()
+        #data.calculateBlockInfos()
+        data = analyzeBlockInfos(data)
         datasets.append(data)
         
     print("\nGenerating pdfs...")

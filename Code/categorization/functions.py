@@ -17,6 +17,18 @@ def analyzeBalance(data: CategorizationFile):
         
     return data
 
+def analyzeBlockInfos(data: CategorizationFile):
+    data.blockInfos = np.empty(len(data.sequences), dtype=object)
+    for i in range(0, len(data.sequences)):   
+        data.blockInfos[i] = {}
+    for sequenceIndex, sequence in enumerate(data.sequences):
+        print("Calculating block infos for", data.fileName,"Sequence", sequenceIndex)
+        calculatedBlockInfos = calculateBlockInfosForSequence(sequence)
+        for blockInfo in calculatedBlockInfos:
+            data.updateBlockInfo(sequenceIndex, blockInfo[1], blockInfo[0])
+        
+    return data
+
 def calculateFrequencyForSequence(sequence):
     oldValue = 0
     changeCounter = 0
@@ -41,4 +53,26 @@ def calculateBalanceForSequence(sequence):
         if value == 1:
             counter += 1
     return np.round((counter / len(sequence)), 2)
+
+def calculateBlockInfosForSequence(sequence):        
+    blockinfos = []
+    currentValue = 0
+    currentValueCounter = 0
+    startIndex = 0
+    for index, value in enumerate(sequence):
+        if index == 0:
+            currentValue = value
+            currentValueCounter += 1
+            continue
+
+        if currentValue == value:
+            currentValueCounter += 1                    
+        else:
+            blockinfos.append([startIndex, currentValueCounter])
+            currentValueCounter = 1
+            currentValue = value
+            startIndex = index
+    blockinfos.append([startIndex, currentValueCounter])
+    return blockinfos
+
 

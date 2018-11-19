@@ -9,7 +9,6 @@ class BlockInfo:
         self.indizes.append(startIndex)
 
 class CategorizationFile:
-
     def __init__(self, fileName):
         self.fileName = fileName
         self.rawSequences = []
@@ -28,18 +27,17 @@ class CategorizationFile:
             info = targetBlockInfoDictionary[blockSize]
             info.addStartIndexEntry(index)
             targetBlockInfoDictionary[blockSize] = info
-
-
-    def calculateBlockInfos(self):
-        self.blockInfos = np.empty(len(self.sequences), dtype=object)
-        for i in range(0, len(self.sequences)):   
-            self.blockInfos[i] = {}
-        for sequenceIndex, sequence in  enumerate(self.rawSequences):
-            index = 0
-            for sequenceEntry in sequence:
-                blocksize = sequenceEntry[0]
-                self.updateBlockInfo(sequenceIndex, blocksize, index)
-                index += blocksize
+    
+    def getBlockSizesSortedByIndex(self, sequenceIndex):
+        if sequenceIndex < len(self.blockInfos):
+            blockInfos = self.blockInfos[sequenceIndex]
+            sortedByIndex = list()
+            for blocksize, value in blockInfos.items():
+                for index in value.indizes:
+                    sortedByIndex.append([index, blocksize])
             
+            
+            return sorted(sortedByIndex, key=lambda x: x[0])
+        else:
+            return []
 
-        
