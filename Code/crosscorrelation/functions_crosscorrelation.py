@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.gridspec import GridSpec
+import crosscorrelation.settings as crossSettings
 
 # Execute the following command to install the python dependencies
 # pip install numpy scipy matplotlib ipython jupyter pandas sympy nose
@@ -109,9 +110,11 @@ def plotNormalizedCorrelationResults(figure, gridSystem, plotRow, seqA, seqB):
     return plotRow
 
 
-def crossCorrelation(seqA: [], seqB: [], plotNormalizedData=False,
-                     plotCorrelations=False, plotNonNormalizedResults=False,
-                     plotNormalizedResults=True, subtractMeanFromResult=True):
+def crossCorrelation(seqA: [], seqB: [], settings: crossSettings.Settings):
+    seqA = np.asarray(seqA)
+    seqB = np.asarray(seqB)
+    if len(seqA) != len(seqB):
+        raise ValueError('Length of sequences must be equal for cross correlation')
     seqA = seqA.astype(float)
     seqB = seqB.astype(float)
     numberOfRowsToPlot = 2
@@ -120,63 +123,66 @@ def crossCorrelation(seqA: [], seqB: [], plotNormalizedData=False,
     seqANorm = normalized(seqA)[0]
     seqBNorm = normalized(seqB)[0]
 
-    if plotNormalizedData:
+    if settings.plotNormalizedData:
         numberOfRowsToPlot += 1
-    if plotCorrelations:
+    if settings.plotCorrelations:
         numberOfRowsToPlot += 3
-    if plotCorrelations and plotNormalizedData:
+    if settings.plotCorrelations and settings.plotNormalizedData:
         numberOfRowsToPlot += 3
-    if plotNonNormalizedResults:
+    if settings.plotNonNormalizedResults:
         numberOfRowsToPlot += 1
-    if plotNormalizedResults:
+    if settings.plotNormalizedResults:
         numberOfRowsToPlot += 1
 
-    fig = plt.figure(constrained_layout=True)
-    gs = GridSpec(numberOfRowsToPlot, 2, figure=fig)
-    ax = fig.add_subplot(gs[currentPlotRow, 0])
+    figure = plt.figure(constrained_layout=True)
+    gs = GridSpec(numberOfRowsToPlot, 2, figure=figure)
+    ax = figure.add_subplot(gs[currentPlotRow, 0])
     ax.plot(seqA, 'ro')
     ax.set_title('Raw data: Sequence A')
-    ax = fig.add_subplot(gs[currentPlotRow, 1])
+    ax = figure.add_subplot(gs[currentPlotRow, 1])
     ax.plot(seqB, 'ro')
     ax.set_title('Raw data: Sequence B')
     currentPlotRow += 1
 
-    if plotNormalizedData:
-        ax = fig.add_subplot(gs[currentPlotRow, 0])
+    if settings.plotNormalizedData:
+        ax = figure.add_subplot(gs[currentPlotRow, 0])
         ax.plot(seqANorm, 'ro')
         ax.set_title('Normalized: Sequence A')
-        ax = fig.add_subplot(gs[currentPlotRow, 1])
+        ax = figure.add_subplot(gs[currentPlotRow, 1])
         ax.plot(seqBNorm, 'ro')
         ax.set_title('Normalized: Sequence B')
         currentPlotRow += 1
 
-    if plotCorrelations:
+    if settings.plotCorrelations:
         currentPlotRow = plotRawCorrelations(
-            fig, gs, currentPlotRow, seqA, seqB)
+            figure, gs, currentPlotRow, seqA, seqB)
 
-    if plotCorrelations and plotNormalizedData:
+    if settings.plotCorrelations and settings.plotNormalizedData:
         currentPlotRow = plotNormalizedCorrelations(
-            fig, gs, currentPlotRow, seqANorm, seqBNorm)
+            figure, gs, currentPlotRow, seqANorm, seqBNorm)
 
-    if subtractMeanFromResult:
+    if settings.subtractMeanFromResult:
         seqAMean = np.mean(seqA)
         seqASubtracted = seqA
         seqASubtracted[:] = [x - seqAMean for x in seqASubtracted]
         seqBSubtracted = seqB
         seqBMean = np.mean(seqB)
         seqBSubtracted[:] = [x - seqBMean for x in seqBSubtracted]
-        if plotNonNormalizedResults:
+        if settings.plotNonNormalizedResults:
             currentPlotRow = plotCorrelationResults(
-                fig, gs, currentPlotRow, seqASubtracted, seqBSubtracted)
-        if plotNormalizedResults:
+                figure, gs, currentPlotRow, seqASubtracted, seqBSubtracted)
+        if settings.plotNormalizedResults:
             currentPlotRow = plotNormalizedCorrelationResults(
-                fig, gs, currentPlotRow, seqASubtracted, seqBSubtracted)
+                figure, gs, currentPlotRow, seqASubtracted, seqBSubtracted)
     else:
-        if plotNonNormalizedResults:
+        if settings.plotNonNormalizedResults:
             currentPlotRow = plotCorrelationResults(
-                fig, gs, currentPlotRow, seqA, seqB)
-        if plotNormalizedResults:
+                figure, gs, currentPlotRow, seqA, seqB)
+        if settings.plotNormalizedResults:
             currentPlotRow = plotNormalizedCorrelationResults(
-                fig, gs, currentPlotRow, seqA, seqB)
-
-    plt.draw()
+                figure, gs, currentPlotRow, seqA, seqB)
+    if settings.drawResults:
+        plt.draw()
+    if settings.exportToPdf:
+        figure.savefig(settings.exportFilePath, bbox_inches='tight')
+        plt.close(figure)

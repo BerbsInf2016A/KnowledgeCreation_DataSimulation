@@ -100,3 +100,4 @@ def executeCategorization(sourceDirectoryPath: str):
     print("\nGenerating pdfs...")
     for dataset in datasets:
         generatePdfsForDataset(dataset)
+    return datasets

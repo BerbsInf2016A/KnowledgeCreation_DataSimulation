@@ -1,8 +1,9 @@
-import categorization.data as catData
-import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.gridspec import GridSpec
 from matplotlib.font_manager import FontProperties
+import categorization.data as catData
+import matplotlib
+import matplotlib.pyplot as plt
 
 
 def generatePdfsForDataset(data: catData.CategorizationFile):
@@ -16,6 +17,7 @@ def generatePdfsForDataset(data: catData.CategorizationFile):
 
 def generateSummaries(sequenceIndex, sequence,
                       data: catData.CategorizationFile):
+
     figure = plt.figure(constrained_layout=True)
     gs = GridSpec(3, 1, figure=figure)
     # plot sequence
@@ -48,6 +50,7 @@ def generateSummaries(sequenceIndex, sequence,
     exportPath = data.fileName.replace(
         ".csv",  "_Sequence_" + str(sequenceIndex) + ".pdf")
     figure.savefig(exportPath, bbox_inches='tight')
+    plt.close(figure)
 
 
 def generateBlockInfos(sequenceIndex, sequence,
@@ -117,3 +120,4 @@ def generateBlockInfos(sequenceIndex, sequence,
     exportPath = data.fileName.replace(
         ".csv",  "_Blocks_Sequence_" + str(sequenceIndex) + ".pdf")
     figure.savefig(exportPath, bbox_inches='tight')
+    plt.close(figure)
