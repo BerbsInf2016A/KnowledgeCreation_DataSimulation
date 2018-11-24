@@ -2,21 +2,41 @@ import numpy as np
 from matplotlib.gridspec import GridSpec
 from matplotlib.font_manager import FontProperties
 import categorization.data as catData
-import matplotlib
 import matplotlib.pyplot as plt
 
 
 def generatePdfsForDataset(data: catData.CategorizationFile):
+    """ Generate the pdfs for a dataset. """
     for sequenceIndex, sequence in enumerate(data.sequences):
         print("Generating pdf reports for",
               data.fileName, "Sequence", sequenceIndex)
-        generateSummaries(sequenceIndex, sequence, data)
+        generateSummaryPdf(sequenceIndex, sequence, data)
+        generateBlockInfoPdf(sequenceIndex, sequence, data)
 
-        generateBlockInfos(sequenceIndex, sequence, data)
+
+def resolveFrequencyValueToDescriptiveString(value):
+    """ Resolve a frequency value to a more descriptive string. """
+    if value <= 0.25:
+        return "Niederfrequent"
+    if value > 0.25 and value < 0.75:
+        return "Mittelfrequent"
+    if value >= 0.75:
+        return "Hochfrequent"
+    return "Unbekannt"
 
 
-def generateSummaries(sequenceIndex, sequence,
-                      data: catData.CategorizationFile):
+def resolveBalanceValueToDescriptiveString(value):
+    """ Resolve a balance value to a more descriptive string. """
+    if value >= 0.4 and value <= 0.6:
+        return "Ausgeglichen"
+    if value < 0.4 or value > 0.6:
+        return "Unausgeglichen"
+    return "Unbekannt"
+
+
+def generateSummaryPdf(sequenceIndex, sequence,
+                       data: catData.CategorizationFile):
+    """ Generate a summary pdf for a sequnce in a given data file. """
 
     figure = plt.figure(constrained_layout=True)
     gs = GridSpec(3, 1, figure=figure)
@@ -36,9 +56,19 @@ def generateSummaries(sequenceIndex, sequence,
     ax.set_title("Sequenzeigenschaften")
     columns = ('Eigenschaft', 'Wert')
     tableData = []
+    # Write Length into the table
     tableData.append(["Länge", len(sequence)])
-    tableData.append(["Frequenz", data.frequencyResults[sequenceIndex]])
-    tableData.append(["Balance", data.balances[sequenceIndex]])
+    frequencyString = str(data.frequencyResults[sequenceIndex]) + ' - ' + \
+        resolveFrequencyValueToDescriptiveString(
+            data.frequencyResults[sequenceIndex])
+
+    # Write Frequency into the table
+    tableData.append(["Frequenz", frequencyString])
+    balanceString = str(data.balances[sequenceIndex]) + " - " + \
+        resolveBalanceValueToDescriptiveString(data.balances[sequenceIndex])
+
+    # Write Balance into the table
+    tableData.append(["Balance", balanceString])
     table = ax.table(cellText=tableData, colLabels=columns,
                      loc='center', cellLoc="left", colLoc="left")
 
@@ -47,14 +77,17 @@ def generateSummaries(sequenceIndex, sequence,
         if (row == 0) or (col == -1):
             cell.set_text_props(fontproperties=FontProperties(weight='bold'))
 
+    # Export the pdf
     exportPath = data.fileName.replace(
         ".csv",  "_Sequence_" + str(sequenceIndex) + ".pdf")
     figure.savefig(exportPath, bbox_inches='tight')
     plt.close(figure)
 
 
-def generateBlockInfos(sequenceIndex, sequence,
-                       data: catData.CategorizationFile):
+def generateBlockInfoPdf(sequenceIndex, sequence,
+                         data: catData.CategorizationFile):
+    """ Generate a block info pdf. """
+
     figure = plt.figure(constrained_layout=True)
     gs = GridSpec(3, 1, figure=figure)
     ax = figure.add_subplot(gs[0])
@@ -62,6 +95,8 @@ def generateBlockInfos(sequenceIndex, sequence,
     ax.axis('tight')
     ax.set_title("Blockeigenschaften")
     columns = ('BlockSize', 'Count', 'Indizes')
+
+    # Plot the blocks descending by the block size:
     sequenceBlockInfo = data.blockInfos[sequenceIndex]
     sortedBlockInfos = sorted(sequenceBlockInfo.items(
     ), key=lambda kv: kv[1].blockSize, reverse=True)
@@ -74,6 +109,7 @@ def generateBlockInfos(sequenceIndex, sequence,
 
     table = ax.table(cellText=tableData, colLabels=columns, colWidths=[
                      0.3, 0.3, 0.9], loc='center', colLoc="left")
+
     # Set first row (header) text to bold
     for (row, col), cell in table.get_celld().items():
         if (row == 0) or (col == -1):

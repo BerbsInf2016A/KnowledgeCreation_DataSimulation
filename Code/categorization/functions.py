@@ -3,6 +3,7 @@ from categorization.data import CategorizationFile
 
 
 def analyzeFrequency(data: CategorizationFile):
+    """ Analyze the frequency for all given sequences. """
     data.frequencyResults = np.ndarray(len(data.sequences), float)
     for sequenceIndex, sequence in enumerate(data.sequences):
         print("Calculating frequency for",
@@ -14,6 +15,7 @@ def analyzeFrequency(data: CategorizationFile):
 
 
 def analyzeBalance(data: CategorizationFile):
+    """ Analyze the balance for all given sequences. """
     data.balances = np.ndarray(len(data.sequences), float)
     for sequenceIndex, sequence in enumerate(data.sequences):
         print("Calculating balance for",
@@ -23,7 +25,8 @@ def analyzeBalance(data: CategorizationFile):
     return data
 
 
-def analyzeBlockInfos(data: CategorizationFile):
+def calculateBlockInfos(data: CategorizationFile):
+    """ Calculate the BlockInfos for all given sequences. """
     data.blockInfos = np.empty(len(data.sequences), dtype=object)
     for i in range(0, len(data.sequences)):
         data.blockInfos[i] = {}
@@ -38,6 +41,9 @@ def analyzeBlockInfos(data: CategorizationFile):
 
 
 def calculateFrequencyForSequence(sequence):
+    """ Calculate the frequency for a given sequence.
+        Returns a value between 0 and 1. A value near 0 is a infrequent
+        sequence, a value near 1 is highly frequent sequence. """
     oldValue = 0
     changeCounter = 0
     for index, value in enumerate(sequence):
@@ -49,12 +55,17 @@ def calculateFrequencyForSequence(sequence):
             oldValue = value
 
     if changeCounter == 0 or len(sequence) == 0:
-        return 1
+        return 0
     else:
         return np.round((changeCounter / len(sequence)), 2)
 
 
 def calculateBalanceForSequence(sequence):
+    """ Calculate the balance for a sequence.
+        The balance is calculated with the following formula:+
+        Count of occurences of 1 / length of sequence.
+        A squence with a value around 0.5 is balanced, all others
+        are unbalanced. """
     counter = 0
     if len(sequence) == 0:
         return 1
@@ -65,6 +76,7 @@ def calculateBalanceForSequence(sequence):
 
 
 def calculateBlockInfosForSequence(sequence):
+    """ Calculate the BlockInformation for a sequence. """
     blockinfos = []
     currentValue = 0
     currentValueCounter = 0

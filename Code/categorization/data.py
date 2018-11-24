@@ -1,13 +1,20 @@
 class BlockInfo:
+    """ The BlockInfo class stroes the size of the block
+        and the indices for the  block. """
+
     def __init__(self, blockSize):
         self.blockSize = blockSize
         self.indizes = []
 
     def addStartIndexEntry(self, startIndex):
-        self.indizes.append(startIndex)
+        """ Add a index for a block. """
+        if startIndex not in self.indizes:
+            self.indizes.append(startIndex)
 
 
 class CategorizationFile:
+    """ A CategorzationFile contains the data which should be analyzed. """
+
     def __init__(self, fileName):
         self.fileName = fileName
         self.rawSequences = []
@@ -17,6 +24,8 @@ class CategorizationFile:
         self.balances = []
 
     def updateBlockInfo(self, sequenceIndex, blockSize, index):
+        """ Update the stored BlockInfos for a a given sequence,
+            identified by the index. """
         targetBlockInfoDictionary = self.blockInfos[sequenceIndex]
         if blockSize not in targetBlockInfoDictionary:
             blockInfo = BlockInfo(blockSize)
@@ -28,6 +37,7 @@ class CategorizationFile:
             targetBlockInfoDictionary[blockSize] = info
 
     def getBlockSizesSortedByIndex(self, sequenceIndex):
+        """ Get the BlockInfos, sorted by the indices of their occurrences. """
         if sequenceIndex < len(self.blockInfos):
             blockInfos = self.blockInfos[sequenceIndex]
             sortedByIndex = list()

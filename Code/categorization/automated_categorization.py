@@ -9,7 +9,9 @@ import categorization.data as catData
 from categorization.pdfGeneration import generatePdfsForDataset
 
 
-def representsInt(s):
+def isInteger(s: str):
+    """ Check if the given string is a integer value.
+        Returns true if integer, false if not. """
     try:
         int(s)
         return True
@@ -18,6 +20,7 @@ def representsInt(s):
 
 
 def getAllFilePathsFromDiretoryPath(path):
+    """ Get all file paths in the given folder path. """
     files = [f for f in listdir(path) if isfile(join(path, f))]
     files = [k for k in files if k.endswith(".csv")]
     files = [join(path, f) for f in files]
@@ -25,11 +28,14 @@ def getAllFilePathsFromDiretoryPath(path):
 
 
 def readRawDataFile(sourceFile: str):
+    """ Read raw data files. Will only read csv files.
+        The values will be parsed. """
     print("Reading data from ", sourceFile, "...")
     source = catData.CategorizationFile(sourceFile)
     with open(sourceFile) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         rowIndex = -1
+        # Iterate the rows, each row is a sequence:
         for row in csv_reader:
             rowIndex += 1
             sequence = []
@@ -44,7 +50,8 @@ def readRawDataFile(sourceFile: str):
                 # Parse the values
                 # Check if the values are valid: isDigit only returns true,
                 # when the value is an integer and positive.
-                countIsValid = splitted[0].isdigit()
+                count = splitted[0]
+                countIsValid = count.isdigit()
                 if countIsValid is False:
                     raise ValueError('Error during parsing of file: ',
                                      sourceFile,
@@ -53,13 +60,16 @@ def readRawDataFile(sourceFile: str):
                                      " entry ",
                                      entry,
                                      " count is invalid")
-                valueValid = representsInt(splitted[1])
+                value = splitted[1]
+                valueValid = isInteger(value)
                 if valueValid is False:
                     raise ValueError('Error during parsing of file: ',
                                      sourceFile,
                                      " in row ", rowIndex, " entry ", entry,
                                      " value is invalid")
-                sequence.append([int(splitted[0]), int(splitted[1])])
+                # Count and value are valid. Cast the to int and save them.
+                sequence.append([int(count), int(value)])
+            # Sequence is finished, store it:
             source.rawSequences.append(sequence)
 
     print("Found sequences: ", str(len(source.rawSequences)))
@@ -67,13 +77,14 @@ def readRawDataFile(sourceFile: str):
 
 
 def expandRawData(data: catData.CategorizationFile):
+    """ Expand the compressed sequences in a data file to full sequences. """
     data.sequences = np.empty(len(data.rawSequences), dtype=object)
     for sequenceIndex, sequence in enumerate(data.rawSequences):
         print("Expanding data for", data.fileName, "Sequence", sequenceIndex)
         expandedSequence = []
-        for entry in enumerate(sequence):
-            counter = entry[1][0]
-            value = entry[1][1]
+        for entry in sequence:
+            counter = entry[0]
+            value = entry[1]
             extendedData = [value] * counter
             expandedSequence.extend(extendedData)
         data.sequences[sequenceIndex] = expandedSequence
@@ -82,6 +93,8 @@ def expandRawData(data: catData.CategorizationFile):
 
 
 def executeCategorization(sourceDirectoryPath: str):
+    """ Execute the categorization for all csv files in the
+        given source directory. """
     print('Executing categorization: source path:')
     print(sourceDirectoryPath)
     files = getAllFilePathsFromDiretoryPath(sourceDirectoryPath)
@@ -94,7 +107,7 @@ def executeCategorization(sourceDirectoryPath: str):
         data = catFunc.analyzeFrequency(data)
         data = catFunc.analyzeBalance(data)
         print("Calculating block size information for", data.fileName)
-        data = catFunc.analyzeBlockInfos(data)
+        data = catFunc.calculateBlockInfos(data)
         datasets.append(data)
 
     print("\nGenerating pdfs...")
