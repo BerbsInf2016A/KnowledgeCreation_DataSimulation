@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import crosscorrelation.functions_crosscorrelation as fcc
 import crosscorrelation.functions_crosscorrelation_patternsearch as ps
+import crosscorrelation.settings as crossSettings
 
 #  pip install numpy scipy matplotlib ipython jupyter pandas sympy nose
 
@@ -16,7 +17,8 @@ seq2[0][[1000, 2000, 1500, 3500, 5500, 6000, 6500, 8000, 8500, 9000]] = 1
 seq1 = seq1[0]
 seq2 = seq2[0]
 
-fcc.crossCorrelation(seq1, seq2)
+settings = crossSettings.Settings()
+fcc.crossCorrelation(seq1, seq2, settings)
 
 
 seq3 = np.full((1, 10000), 0)

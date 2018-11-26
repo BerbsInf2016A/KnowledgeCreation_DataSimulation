@@ -11,7 +11,7 @@ def generatePdfsForDataset(data: catData.CategorizationFile):
         print("Generating pdf reports for",
               data.fileName, "Sequence", sequenceIndex)
         generateSummaryPdf(sequenceIndex, sequence, data)
-        generateBlockInfoPdf(sequenceIndex, sequence, data)
+        #generateBlockInfoPdf(sequenceIndex, sequence, data)
 
 
 def resolveFrequencyValueToDescriptiveString(value):
@@ -90,6 +90,7 @@ def generateBlockInfoPdf(sequenceIndex, sequence,
 
     figure = plt.figure(constrained_layout=True)
     gs = GridSpec(3, 1, figure=figure)
+    '''
     ax = figure.add_subplot(gs[0])
     ax.axis('off')
     ax.axis('tight')
@@ -115,6 +116,7 @@ def generateBlockInfoPdf(sequenceIndex, sequence,
         if (row == 0) or (col == -1):
             cell.set_text_props(fontproperties=FontProperties(weight='bold'))
 
+'''
     # Plot block size diagram
     blockSizeIndices = data.getBlockSizesSortedByIndex(sequenceIndex)
     ax = figure.add_subplot(gs[1])
@@ -125,12 +127,14 @@ def generateBlockInfoPdf(sequenceIndex, sequence,
     yValues = []
     xValues = []
     for entry in blockSizeIndices:
-        xValues.append(entry[0])
+       # xValues.append(entry[0])
         yValues.append(entry[1])
 
-    plt.xticks(np.arange(len(xValues)), xValues)
-    ax.bar(np.arange(len(xValues)), yValues)
+    #plt.xticks(np.arange(len(xValues)), xValues)
+    #ax.bar(np.arange(len(xValues)), yValues)
+    ax.bar(np.arange(len(yValues)), yValues)
 
+    '''
     # Plot block size counts
     ax = figure.add_subplot(gs[2])
     ax.axis('off')
@@ -153,6 +157,7 @@ def generateBlockInfoPdf(sequenceIndex, sequence,
         if (row == 0) or (col == -1):
             cell.set_text_props(fontproperties=FontProperties(weight='bold'))
 
+    '''
     exportPath = data.fileName.replace(
         ".csv",  "_Blocks_Sequence_" + str(sequenceIndex) + ".pdf")
     figure.savefig(exportPath, bbox_inches='tight')
