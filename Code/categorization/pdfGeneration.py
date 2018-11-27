@@ -1,4 +1,3 @@
-import numpy as np
 from matplotlib.gridspec import GridSpec
 from matplotlib.font_manager import FontProperties
 import categorization.data as catData
@@ -11,7 +10,8 @@ def generatePdfsForDataset(data: catData.CategorizationFile):
         print("Generating pdf reports for",
               data.fileName, "Sequence", sequenceIndex)
         generateSummaryPdf(sequenceIndex, sequence, data)
-        #generateBlockInfoPdf(sequenceIndex, sequence, data)
+        generateSubSequenceFrequencyInfoPdf(sequenceIndex, data)
+        generateSubSequenceBalanceInfoPdf(sequenceIndex, data)
 
 
 def resolveFrequencyValueToDescriptiveString(value):
@@ -32,6 +32,80 @@ def resolveBalanceValueToDescriptiveString(value):
     if value < 0.4 or value > 0.6:
         return "Unausgeglichen"
     return "Unbekannt"
+
+
+def generateSubSequenceBalanceInfoPdf(sequenceIndex,
+                                      data: catData.CategorizationFile):
+    """ Generate a pdf containing the balances for the sub sequences. """
+
+    subSequenceBalances = data.subSequenceBalances[sequenceIndex]
+
+    figure = plt.figure(constrained_layout=True)
+    gs = GridSpec(3, 1, figure=figure)
+
+    # plot buckets with size of 10
+    ax = figure.add_subplot(gs[0])
+    ax.plot(subSequenceBalances[0], '-')
+    ax.set_title("10er SubSequenz")
+    ax.set_xlabel('SubSequenz')
+    ax.set_ylabel('Balance')
+
+    # plot buckets with size of 100
+    ax = figure.add_subplot(gs[1])
+    ax.plot(subSequenceBalances[1], '-')
+    ax.set_title("100er SubSequenz")
+    ax.set_xlabel('SubSequenz')
+    ax.set_ylabel('Balance')
+
+    # plot buckets with size of 1000
+    ax = figure.add_subplot(gs[2])
+    ax.plot(subSequenceBalances[2], '-')
+    ax.set_title("1000er SubSequenz")
+    ax.set_xlabel('SubSequenz')
+    ax.set_ylabel('Balance')
+
+    # Export the pdf
+    exportPath = data.fileName.replace(
+        ".csv", "_SubSequences_Balances_" + str(sequenceIndex) + ".pdf")
+    figure.savefig(exportPath, bbox_inches='tight')
+    plt.close(figure)
+
+
+def generateSubSequenceFrequencyInfoPdf(sequenceIndex,
+                                        data: catData.CategorizationFile):
+    """ Generate a pdf containing the frequencies for the sub sequences. """
+
+    subSequenceFrequencies = data.subSequenceFrequencyResults[sequenceIndex]
+
+    figure = plt.figure(constrained_layout=True)
+    gs = GridSpec(3, 1, figure=figure)
+
+    # plot buckets with size of 10
+    ax = figure.add_subplot(gs[0])
+    ax.plot(subSequenceFrequencies[0], '-')
+    ax.set_title("10er SubSequenz")
+    ax.set_xlabel('SubSequenz')
+    ax.set_ylabel('Frequenz')
+
+    # plot buckets with size of 100
+    ax = figure.add_subplot(gs[1])
+    ax.plot(subSequenceFrequencies[1], '-')
+    ax.set_title("100er SubSequenz")
+    ax.set_xlabel('SubSequenz')
+    ax.set_ylabel('Frequenz')
+
+    # plot buckets with size of 1000
+    ax = figure.add_subplot(gs[2])
+    ax.plot(subSequenceFrequencies[2], '-')
+    ax.set_title("1000er SubSequenz")
+    ax.set_xlabel('SubSequenz')
+    ax.set_ylabel('Frequenz')
+
+    # Export the pdf
+    exportPath = data.fileName.replace(
+        ".csv", "_SubSequences_Frequency_" + str(sequenceIndex) + ".pdf")
+    figure.savefig(exportPath, bbox_inches='tight')
+    plt.close(figure)
 
 
 def generateSummaryPdf(sequenceIndex, sequence,
@@ -80,85 +154,5 @@ def generateSummaryPdf(sequenceIndex, sequence,
     # Export the pdf
     exportPath = data.fileName.replace(
         ".csv",  "_Sequence_" + str(sequenceIndex) + ".pdf")
-    figure.savefig(exportPath, bbox_inches='tight')
-    plt.close(figure)
-
-
-def generateBlockInfoPdf(sequenceIndex, sequence,
-                         data: catData.CategorizationFile):
-    """ Generate a block info pdf. """
-
-    figure = plt.figure(constrained_layout=True)
-    gs = GridSpec(3, 1, figure=figure)
-    '''
-    ax = figure.add_subplot(gs[0])
-    ax.axis('off')
-    ax.axis('tight')
-    ax.set_title("Blockeigenschaften")
-    columns = ('BlockSize', 'Count', 'Indizes')
-
-    # Plot the blocks descending by the block size:
-    sequenceBlockInfo = data.blockInfos[sequenceIndex]
-    sortedBlockInfos = sorted(sequenceBlockInfo.items(
-    ), key=lambda kv: kv[1].blockSize, reverse=True)
-    tableData = []
-    for i in range(0, len(sequenceBlockInfo)):
-        blockInfo = sortedBlockInfos[i][1]
-        indizes = ",".join(map(str, blockInfo.indizes))
-        tableData.append(
-            [blockInfo.blockSize, len(blockInfo.indizes), indizes])
-
-    table = ax.table(cellText=tableData, colLabels=columns, colWidths=[
-                     0.3, 0.3, 0.9], loc='center', colLoc="left")
-
-    # Set first row (header) text to bold
-    for (row, col), cell in table.get_celld().items():
-        if (row == 0) or (col == -1):
-            cell.set_text_props(fontproperties=FontProperties(weight='bold'))
-
-'''
-    # Plot block size diagram
-    blockSizeIndices = data.getBlockSizesSortedByIndex(sequenceIndex)
-    ax = figure.add_subplot(gs[1])
-    ax.set_title("Blöcke über die Zeit")
-    ax.set_xlabel('Index')
-    ax.set_ylabel('Blockgröße')
-    # Only the blocksizes are needed:
-    yValues = []
-    xValues = []
-    for entry in blockSizeIndices:
-       # xValues.append(entry[0])
-        yValues.append(entry[1])
-
-    #plt.xticks(np.arange(len(xValues)), xValues)
-    #ax.bar(np.arange(len(xValues)), yValues)
-    ax.bar(np.arange(len(yValues)), yValues)
-
-    '''
-    # Plot block size counts
-    ax = figure.add_subplot(gs[2])
-    ax.axis('off')
-    ax.axis('tight')
-    ax.set_title("Blockanzahl")
-    columns = ('Count', 'BlockSize')
-    sequenceBlockInfo = data.blockInfos[sequenceIndex]
-    sortedBlockInfos = sorted(sequenceBlockInfo.items(
-    ), key=lambda kv: len(kv[1].indizes), reverse=True)
-    tableData = []
-
-    for i in range(0, len(sequenceBlockInfo)):
-        blockInfo = sortedBlockInfos[i][1]
-        tableData.append([len(blockInfo.indizes), blockInfo.blockSize])
-
-    table = ax.table(cellText=tableData, colLabels=columns,
-                     colWidths=[0.25, 0.75], loc='center')
-    # Set first row (header) text to bold
-    for (row, col), cell in table.get_celld().items():
-        if (row == 0) or (col == -1):
-            cell.set_text_props(fontproperties=FontProperties(weight='bold'))
-
-    '''
-    exportPath = data.fileName.replace(
-        ".csv",  "_Blocks_Sequence_" + str(sequenceIndex) + ".pdf")
     figure.savefig(exportPath, bbox_inches='tight')
     plt.close(figure)

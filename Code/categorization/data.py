@@ -20,8 +20,10 @@ class CategorizationFile:
         self.rawSequences = []
         self.sequences = []
         self.frequencyResults = []
+        self.subSequenceFrequencyResults = []
         self.blockInfos = []
         self.balances = []
+        self.subSequenceBalances = []
 
     def updateBlockInfo(self, sequenceIndex, blockSize, index):
         """ Update the stored BlockInfos for a a given sequence,

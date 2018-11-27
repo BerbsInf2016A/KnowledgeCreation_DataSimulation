@@ -5,10 +5,13 @@ from categorization.data import CategorizationFile
 def analyzeFrequency(data: CategorizationFile):
     """ Analyze the frequency for all given sequences. """
     data.frequencyResults = np.ndarray(len(data.sequences), float)
+    data.subSequenceFrequencyResults = np.ndarray(len(data.sequences), object)
     for sequenceIndex, sequence in enumerate(data.sequences):
         print("Calculating frequency for",
               data.fileName, "Sequence", sequenceIndex)
         data.frequencyResults[sequenceIndex] = calculateFrequencyForSequence(
+            sequence)
+        data.subSequenceFrequencyResults[sequenceIndex] = calculateFrequenciesForSubSequences(
             sequence)
 
     return data
@@ -17,10 +20,12 @@ def analyzeFrequency(data: CategorizationFile):
 def analyzeBalance(data: CategorizationFile):
     """ Analyze the balance for all given sequences. """
     data.balances = np.ndarray(len(data.sequences), float)
+    data.subSequenceBalances = np.ndarray(len(data.sequences), object)
     for sequenceIndex, sequence in enumerate(data.sequences):
         print("Calculating balance for",
               data.fileName, "Sequence", sequenceIndex)
         data.balances[sequenceIndex] = calculateBalanceForSequence(sequence)
+        data.subSequenceBalances[sequenceIndex] = calculateBalancesForSubSequences(sequence)
 
     return data
 
@@ -38,6 +43,56 @@ def calculateBlockInfos(data: CategorizationFile):
             data.updateBlockInfo(sequenceIndex, blockInfo[1], blockInfo[0])
 
     return data
+
+
+def calculateBalancesForSubSequences(sequence):
+    """ Calculate the balances for the sub sequences. """
+    list10 = np.array_split(sequence, 1000)
+    list100 = np.array_split(sequence, 100)
+    list1000 = np.array_split(sequence, 10)
+
+    resultList = []
+    result10 = []
+    for entry in list10:
+        result10.append(calculateBalanceForSequence(entry))
+    resultList.append(result10)
+
+    result100 = []
+    for entry in list100:
+        result100.append(calculateBalanceForSequence(entry))
+    resultList.append(result100)
+
+    result1000 = []
+    for entry in list1000:
+        result1000.append(calculateBalanceForSequence(entry))
+    resultList.append(result1000)
+
+    return resultList
+
+
+def calculateFrequenciesForSubSequences(sequence):
+    """ Calculate the frequency for the sub sequences. """
+    list10 = np.array_split(sequence, 1000)
+    list100 = np.array_split(sequence, 100)
+    list1000 = np.array_split(sequence, 10)
+
+    resultList = []
+    result10 = []
+    for entry in list10:
+        result10.append(calculateFrequencyForSequence(entry))
+    resultList.append(result10)
+
+    result100 = []
+    for entry in list100:
+        result100.append(calculateFrequencyForSequence(entry))
+    resultList.append(result100)
+
+    result1000 = []
+    for entry in list1000:
+        result1000.append(calculateFrequencyForSequence(entry))
+    resultList.append(result1000)
+
+    return resultList
 
 
 def calculateFrequencyForSequence(sequence):
