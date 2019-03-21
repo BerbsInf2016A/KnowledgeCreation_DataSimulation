@@ -115,19 +115,20 @@ def generateSummaryPdf(sequenceIndex, sequence,
     figure = plt.figure(constrained_layout=True)
     gs = GridSpec(3, 1, figure=figure)
     # plot sequence
-    ax = figure.add_subplot(gs[0])
-    ax.plot(sequence, 'ro')
-    ax.set_title("Sequenz")
-    ax.set_xlabel('Index')
-    ax.set_ylabel('Wert')
+    axes = figure.add_subplot(gs[0])
+    axes.plot(sequence, 'ro')
+    axes.set_title("Sequenz")
+    axes.set_xlabel('Index')
+    axes.set_ylabel('Wert')
+    axes.set_ylim(-0.05, 1.1)
 
     # The middle row is empty and used as a separator between the subfigures.
 
     # plot summary
-    ax = figure.add_subplot(gs[2])
-    ax.axis('off')
-    ax.axis('tight')
-    ax.set_title("Sequenzeigenschaften")
+    axes = figure.add_subplot(gs[2])
+    axes.axis('off')
+    axes.axis('tight')
+    axes.set_title("Sequenzeigenschaften")
     columns = ('Eigenschaft', 'Wert')
     tableData = []
     # Write Length into the table
@@ -143,7 +144,7 @@ def generateSummaryPdf(sequenceIndex, sequence,
 
     # Write Balance into the table
     tableData.append(["Balance", balanceString])
-    table = ax.table(cellText=tableData, colLabels=columns,
+    table = axes.table(cellText=tableData, colLabels=columns,
                      loc='center', cellLoc="left", colLoc="left")
 
     # Set first row (header) text to bold
