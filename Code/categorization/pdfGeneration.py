@@ -1,10 +1,10 @@
 from matplotlib.gridspec import GridSpec
 from matplotlib.font_manager import FontProperties
-import categorization.data as catData
+import analysationrequest.request as catData
 import matplotlib.pyplot as plt
 
 
-def generatePdfsForDataset(data: catData.CategorizationFile):
+def generatePdfsForDataset(data: catData.AnalysationRequest):
     """ Generate the pdfs for a dataset. """
     for sequenceIndex, sequence in enumerate(data.sequences):
         print("Generating pdf reports for",
@@ -35,7 +35,7 @@ def resolveBalanceValueToDescriptiveString(value):
 
 
 def generateSubSequenceBalanceInfoPdf(sequenceIndex,
-                                      data: catData.CategorizationFile):
+                                      data: catData.AnalysationRequest):
     """ Generate a pdf containing the balances for the sub sequences. """
 
     subSequenceBalances = data.subSequenceBalances[sequenceIndex]
@@ -72,7 +72,7 @@ def generateSubSequenceBalanceInfoPdf(sequenceIndex,
 
 
 def generateSubSequenceFrequencyInfoPdf(sequenceIndex,
-                                        data: catData.CategorizationFile):
+                                        data: catData.AnalysationRequest):
     """ Generate a pdf containing the frequencies for the sub sequences. """
 
     subSequenceFrequencies = data.subSequenceFrequencyResults[sequenceIndex]
@@ -109,7 +109,7 @@ def generateSubSequenceFrequencyInfoPdf(sequenceIndex,
 
 
 def generateSummaryPdf(sequenceIndex, sequence,
-                       data: catData.CategorizationFile):
+                       data: catData.AnalysationRequest):
     """ Generate a summary pdf for a sequnce in a given data file. """
 
     figure = plt.figure(constrained_layout=True)

@@ -1,8 +1,8 @@
 import numpy as np
-from categorization.data import CategorizationFile
+from analysationrequest.request import AnalysationRequest
 
 
-def analyzeFrequency(data: CategorizationFile):
+def analyzeFrequency(data: AnalysationRequest) -> AnalysationRequest:
     """ Analyze the frequency for all given sequences. """
     data.frequencyResults = np.ndarray(len(data.sequences), float)
     data.subSequenceFrequencyResults = np.ndarray(len(data.sequences), object)
@@ -17,7 +17,7 @@ def analyzeFrequency(data: CategorizationFile):
     return data
 
 
-def analyzeBalance(data: CategorizationFile):
+def analyzeBalance(data: AnalysationRequest) -> AnalysationRequest:
     """ Analyze the balance for all given sequences. """
     data.balances = np.ndarray(len(data.sequences), float)
     data.subSequenceBalances = np.ndarray(len(data.sequences), object)
@@ -30,7 +30,7 @@ def analyzeBalance(data: CategorizationFile):
     return data
 
 
-def calculateBlockInfos(data: CategorizationFile):
+def calculateBlockInfos(data: AnalysationRequest) -> AnalysationRequest:
     """ Calculate the BlockInfos for all given sequences. """
     data.blockInfos = np.empty(len(data.sequences), dtype=object)
     for i in range(0, len(data.sequences)):
@@ -40,12 +40,12 @@ def calculateBlockInfos(data: CategorizationFile):
               data.fileName, "Sequence", sequenceIndex)
         calculatedBlockInfos = calculateBlockInfosForSequence(sequence)
         for blockInfo in calculatedBlockInfos:
-            data.updateBlockInfo(sequenceIndex, blockInfo[1], blockInfo[0])
+            data.updateBlockInfoForSequence(sequenceIndex, blockInfo[1], blockInfo[0])
 
     return data
 
 
-def calculateBalancesForSubSequences(sequence):
+def calculateBalancesForSubSequences(sequence) -> []:
     """ Calculate the balances for the sub sequences. """
     list10 = np.array_split(sequence, 1000)
     list100 = np.array_split(sequence, 100)
@@ -70,7 +70,7 @@ def calculateBalancesForSubSequences(sequence):
     return resultList
 
 
-def calculateFrequenciesForSubSequences(sequence):
+def calculateFrequenciesForSubSequences(sequence) -> []:
     """ Calculate the frequency for the sub sequences. """
     list10 = np.array_split(sequence, 1000)
     list100 = np.array_split(sequence, 100)
@@ -95,7 +95,7 @@ def calculateFrequenciesForSubSequences(sequence):
     return resultList
 
 
-def calculateFrequencyForSequence(sequence):
+def calculateFrequencyForSequence(sequence) -> float:
     """ Calculate the frequency for a given sequence.
         Returns a value between 0 and 1. A value near 0 is a infrequent
         sequence, a value near 1 is highly frequent sequence. """
@@ -115,7 +115,7 @@ def calculateFrequencyForSequence(sequence):
         return np.round((changeCounter / len(sequence)), 2)
 
 
-def calculateBalanceForSequence(sequence):
+def calculateBalanceForSequence(sequence) -> float:
     """ Calculate the balance for a sequence.
         The balance is calculated with the following formula:+
         Count of occurences of 1 / length of sequence.
@@ -130,7 +130,7 @@ def calculateBalanceForSequence(sequence):
     return np.round((counter / len(sequence)), 2)
 
 
-def calculateBlockInfosForSequence(sequence):
+def calculateBlockInfosForSequence(sequence) -> []:
     """ Calculate the BlockInformation for a sequence. """
     blockinfos = []
     currentValue = 0

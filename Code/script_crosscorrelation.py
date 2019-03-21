@@ -4,8 +4,6 @@ import crosscorrelation.functions_crosscorrelation as fcc
 import crosscorrelation.functions_crosscorrelation_patternsearch as ps
 import crosscorrelation.settings as crossSettings
 
-#  pip install numpy scipy matplotlib ipython jupyter pandas sympy nose
-
 seq1 = np.full((1, 10000), 0)
 seq2 = np.full((1, 10000), 0)
 
