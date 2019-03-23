@@ -17,4 +17,4 @@ requests = fileAccessFuntions.readFiles(directoryPath)
 categorizedDatasets = executeCategorization(requests)
 # This will calculate the cross correlation between sequences in the same
 # source file. Additionally, the sequences must have the same length.
-crosscorrFunctions.executeCrossCorrelationForDatasets(categorizedDatasets)
+crosscorrFunctions.executeCrossCorrelationForDatasets(requests)
