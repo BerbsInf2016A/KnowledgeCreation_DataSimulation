@@ -1,4 +1,3 @@
-
 \chapter{Funktion zur Berechnung der Kreuz-Korrelation}
 Das Python Skript \enquote{func\_cross\_correlation.py} bietet als Einstiegspunkt die Funktion\\ \mbox{\enquote{crossCorrelation(...)}} an. Im Folgenden werden die Parameter und deren Bedeutung beschrieben.
 
@@ -43,7 +42,7 @@ Es ist ersichlich, dass die Sequenzen zueinander um einen Index von 5 verschoben
 \subsection{Nur Pflichtparameter angegeben}
 Der Aufruf der Funktion ohne optionale Parameter, liefert für die Beispielsequenzen folgendes Ergebnis (dargestellt in Abbildung~\ref{fig:correlationDefaultParams}):
 \begin{figure}[H]
-    \includegraphics[width=\linewidth]{./images/correlationDefaultParams.PNG}
+    \includegraphics[width=\linewidth]{pythonImplementation/images/correlationDefaultParams.PNG}
     \caption[Ergebnis: Default-Parameter]{Ergebnis der Funktion bei Default-Parametern\footnotemark.}
     \label{fig:correlationDefaultParams}
 \end{figure}
@@ -53,7 +52,7 @@ Der Aufruf der Funktion ohne optionale Parameter, liefert für die Beispielseque
 Durch setzen des optionalen Parameters \enquote{plotNormalizedData} auf True, werden die beiden Sequenzen, zusätzlich in normalisierter Form dargestellt. 
 Siehe dazu Abbildung~\ref{fig:correlationPlotNormalizedData}. 
 \begin{figure}[H]
-    \includegraphics[width=\linewidth]{./images/correlationPlotNormalizedData.PNG}
+    \includegraphics[width=\linewidth]{pythonImplementation/images/correlationPlotNormalizedData.PNG}
     \caption[Ergebnis: plotNormalizedData]{Ergebnis der Funktion bei \enquote{plotNormalizedData = True} (Darstellung der Ergebnisse weggelassen)\footnotemark. }
     \label{fig:correlationPlotNormalizedData}
 \end{figure}
@@ -65,7 +64,7 @@ wird die Kreuz-Korrelation der beiden Sequenzen berechnet.
 Dabei werden alle drei Berechnungsmethoden \enquote{Valid}, \enquote{Same} und \enquote{Full} dargestellt.
 Siehe dazu Abbildung~\ref{fig:correlationPlotCorrelations}. 
 \begin{figure}[H]
-    \includegraphics[width=\linewidth]{./images/correlationPlotCorrelations.PNG}
+    \includegraphics[width=\linewidth]{pythonImplementation/images/correlationPlotCorrelations.PNG}
     \caption[Ergebnis: plotCorrelations]{Zusätzliche Ausgabe der Funktion bei \enquote{plotCorrelations = True} (Darstellung der Ergebnisse weggelassen)\footnotemark. }
     \label{fig:correlationPlotCorrelations}
 \end{figure}
@@ -75,7 +74,7 @@ Siehe dazu Abbildung~\ref{fig:correlationPlotCorrelations}.
 Durch setzen des optionalen Parameters \enquote{plotNonNormalizedResults} auf True, können die Ergebnisse zusätzlich in unnormalisierter Form ausgegeben werden.
 Siehe dazu Abbildung~\ref{fig:correlationPlotNonNormalizedResults}. 
 \begin{figure}[H]
-    \includegraphics[width=\linewidth]{./images/correlationPlotNonNormalizedResults.PNG}
+    \includegraphics[width=\linewidth]{pythonImplementation/images/correlationPlotNonNormalizedResults.PNG}
     \caption[Ergebnis: plotNonNormalizedResults]{Zusätzliche Ausgabe der Funktion bei \enquote{plotNonNormalizedResults = True}\footnotemark. }
     \label{fig:correlationPlotNonNormalizedResults}
 \end{figure}
@@ -105,14 +104,14 @@ Die Ergebnisse können dabei unübersichtlich werden, deshalb wird ohne Angabe d
 Dadurch wird das arithmethische Mittel des Ergebnis vom Ergebnis selbst abgezogen. Abbildung~\ref{fig:correlationSubtractMeamFromResultTrue} 
 und \ref{fig:correlationSubtractMeamFromResultFalse} zeigen die Auswirkung des Parameters. 
 \begin{figure}[H]
-    \includegraphics[width=\linewidth]{./images/correlationSubtractMeamFromResultFalse.PNG}
+    \includegraphics[width=\linewidth]{pythonImplementation/images/correlationSubtractMeamFromResultFalse.PNG}
     \caption[Ergebnis: subtractMeanFromResult = False]{Darstellung des Ergebnis bei \enquote{subtractMeanFromResult = False}. Ausschläge sind sehr schwer erkennbar\footnotemark. }
     \label{fig:correlationSubtractMeamFromResultFalse}
 \end{figure}
 \footnotetext{Quelle: Eigene Darstellung}
 
 \begin{figure}[H]
-    \includegraphics[width=\linewidth]{./images/correlationSubtractMeamFromResultTrue.PNG}
+    \includegraphics[width=\linewidth]{pythonImplementation/images/correlationSubtractMeamFromResultTrue.PNG}
     \caption[Ergebnis: subtractMeanFromResult = True]{Darstellung des Ergebnis bei \enquote{subtractMeanFromResult = True}. Ausschläge sind besser erkennbar\footnotemark. }
     \label{fig:correlationSubtractMeamFromResultTrue}
 \end{figure}
