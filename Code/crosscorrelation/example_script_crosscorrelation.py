@@ -16,7 +16,14 @@ seq1 = seq1[0]
 seq2 = seq2[0]
 
 settings = crossSettings.Settings()
+settings.drawResults = True
+settings.plotNormalizedData = True
+settings.plotCorrelations = True
 fcc.crossCorrelation(seq1, seq2, settings)
+# Show the results in a window. Attention: This will block the execution:
+# plt is from matplotlib
+if settings.drawResults:
+    plt.show()
 
 
 seq3 = np.full((1, 10000), 0)

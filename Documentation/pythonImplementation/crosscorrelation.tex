@@ -1,27 +1,30 @@
 \chapter{Funktion zur Berechnung der Kreuz-Korrelation}
-Das Python Skript \enquote{func\_cross\_correlation.py} bietet als Einstiegspunkt die Funktion\\ \mbox{\enquote{crossCorrelation(...)}} an. Im Folgenden werden die Parameter und deren Bedeutung beschrieben.
+Die Skripte zur Berechnung der Kreuz-Korrelation befinden sich im \enquote{crosscorrelation}-Verzeichnis.
+Das Python Skript \enquote{functions\_crosscorrelation.py} bietet als Einstiegspunkt die Funktion\\ \mbox{\enquote{crossCorrelation(...)}} an. Im Folgenden werden die Parameter und deren Bedeutung beschrieben.
 
 \section{Beschreibung der Parameter}
-Manche der Parameter sind optional, während andere angegeben werden müssen.
-\subsection{Pflichtparameter}
-Es gibt nur zwei Parameter, die beim Aufruf der Funktion mitgegeben werden müssen. Dabei handelt es sich um die beiden Sequenzen, die verarbeitet werden sollen.
+
+Es gibt drei Parameter, die beim Aufruf der Funktion mitgegeben werden müssen. Dabei handelt es sich um die beiden Sequenzen, die verarbeitet werden sollen sowie um die Einstellungen. Aufgrund der vielen Einstellungsmöglichkeiten, wurden diese in eigene eigene Klasse ausgelagert, die beim Aufruf als dritter Parameter übergeben werden muss.
 \begin{description}[style=nextline]
 \item[seqA] Die erste Datensequenz in Form eines eindimensionalen Arrays. Die enthaltenen Zahlenwerte müssen in Float konvertierbar sein.
 \item[seqB] Die zweite Datensequenz in Form eines eindimensionalen Arrays. Die enthaltenen Zahlenwerte müssen in Float konvertierbar sein.
 \end{description}
 
-\subsection{Optionale Parameter}
-Folgende Parameter sind optional:
+\subsection{Einstellungsparameter}
+Folgende Parameter stehen für die Konfiguration zur Verfügung. Die standardmäßig gesetzten Werte sind mit angegeben:
 \begin{description}[style=nextline]
 \item[plotNormalizedData] [Default: False] Auf True setzen, wenn die beiden Sequenzen auch normalisiert dargestellt werden sollen.
 \item[plotCorrelations] [Default: False] Auf True setzen, wenn die berechnete Kreuz-Korrelation dargestellt werden soll. Dabei werden alle drei Berechnungsmethoden \enquote{Valid}, \enquote{Same} und \enquote{Full} dargestellt.
 \item[plotNonNormalizedResults] [Default: False] Auf True setzen, wenn auch die unnormalisierten Ergebnisse dargestellt werden sollen.
 \item[plotNormalizedResults] [Default: True] Auf False setzen, wenn auch die normalisierten Ergebnisse nicht dargestellt werden sollen.
 \item[subtractMeanFromResult] [Default: True] Auf False setzen, wenn das arithmethische Mittel nicht von den Ergebnissen abgezogen werden soll.
+\item[drawResults] [Default: False] Wird dieser Parameter auf True gesetzt, werden die Ergebnisse auf dem Bildschirm ausgegeben. Dies kann sinnvoll sein, wenn keine PDF-Dateien erstellt werden sollen, die Ergebnisse aber dennoch sichtbar sein sollten. Der Standardwert ist auf False gesetzt, da die Skripte automatisiert durch weitere Skripte aufgerufen werden. Die Verarbeitung der Skripte blockiert dabei solange das Fenster zur Anzeige geöffnet ist. In einem automatisierten Kontext würde niemand das Fenster schließen, wodurch der Prozess blockiert werden würde.
+\item[exportToPdf] [Default: False] Auf True setzen, wenn eine PDF-Datei mit den Ergebnissen generiert werden soll.
+\item[exportFilePath] [Default: \enquote{}] Der Pfad zur PDF-Datei, in dem die Ergebnisse gespeichert werden sollen. Wenn \enquote{exportToPdf} auf True gesetzt wird, muss mit dieser Einstellung der Pfad zur PDF-Datei angegeben werden. Ansonsten wird die Einstellung ignoriert.
 \end{description}
 
 \section{Beispiel Ergebnisse}
-Es gilt für alle Beispiele (solange nicht im Beispiel spezifiziert):\\
+Es gilt für alle Beispiele (solange nicht im Beispiel genauer spezifiziert):\\
 Vorbedingung: Zwei Sequenzen mit je 10000 Einträgen. \\
 SeqA:
 \[ a_{n} =
@@ -39,8 +42,8 @@ SeqB:
 \]
 Es ist ersichlich, dass die Sequenzen zueinander um einen Index von 5 verschoben sind.
 
-\subsection{Nur Pflichtparameter angegeben}
-Der Aufruf der Funktion ohne optionale Parameter, liefert für die Beispielsequenzen folgendes Ergebnis (dargestellt in Abbildung~\ref{fig:correlationDefaultParams}):
+\subsection{Anzeige der beiden Sequenzen mit normalisiertem Ergebnis}
+Der Aufruf der Funktion mit den Standard-Parametern der Einstellungen, liefert für die Beispielsequenzen folgendes Ergebnis (dargestellt in Abbildung~\ref{fig:correlationDefaultParams}):
 \begin{figure}[H]
     \includegraphics[width=\linewidth]{pythonImplementation/images/correlationDefaultParams.PNG}
     \caption[Ergebnis: Default-Parameter]{Ergebnis der Funktion bei Default-Parametern\footnotemark.}
@@ -48,7 +51,7 @@ Der Aufruf der Funktion ohne optionale Parameter, liefert für die Beispielseque
 \end{figure}
 \footnotetext{Quelle: Eigene Darstellung}
 
-\subsection{Optionaler Parameter: plotNormalizedData}
+\subsection{Auswirkungen des Parameter: plotNormalizedData}
 Durch setzen des optionalen Parameters \enquote{plotNormalizedData} auf True, werden die beiden Sequenzen, zusätzlich in normalisierter Form dargestellt. 
 Siehe dazu Abbildung~\ref{fig:correlationPlotNormalizedData}. 
 \begin{figure}[H]
@@ -58,7 +61,7 @@ Siehe dazu Abbildung~\ref{fig:correlationPlotNormalizedData}.
 \end{figure}
 \footnotetext{Quelle: Eigene Darstellung}
 
-\subsection{Optionaler Parameter: plotCorrelations}
+\subsection{Auswirkungen des Parameter: plotCorrelations}
 Durch setzen des optionalen Parameters \enquote{plotCorrelations} auf True, 
 wird die Kreuz-Korrelation der beiden Sequenzen berechnet.
 Dabei werden alle drei Berechnungsmethoden \enquote{Valid}, \enquote{Same} und \enquote{Full} dargestellt.
@@ -70,7 +73,7 @@ Siehe dazu Abbildung~\ref{fig:correlationPlotCorrelations}.
 \end{figure}
 \footnotetext{Quelle: Eigene Darstellung}
 
-\subsection{Optionaler Parameter: plotNonNormalizedResults}
+\subsection{Auswirkungen des Parameter: plotNonNormalizedResults}
 Durch setzen des optionalen Parameters \enquote{plotNonNormalizedResults} auf True, können die Ergebnisse zusätzlich in unnormalisierter Form ausgegeben werden.
 Siehe dazu Abbildung~\ref{fig:correlationPlotNonNormalizedResults}. 
 \begin{figure}[H]
@@ -80,10 +83,10 @@ Siehe dazu Abbildung~\ref{fig:correlationPlotNonNormalizedResults}.
 \end{figure}
 \footnotetext{Quelle: Eigene Darstellung}
 
-\subsection{Optionaler Parameter: plotNormalizedResults}
+\subsection{Auswirkungen des Parameter: plotNormalizedResults}
 Durch setzen des optionalen Parameters \enquote{plotNormalizedResults} auf False, kann die Ausgabe der normalisierten Ergebnisse verhindert werden.
 
-\subsection{Optionaler Parameter: subtractMeanFromResult}
+\subsection{Auswirkungen des Parameter: subtractMeanFromResult}
 Um die Auswirkung des Parameters darzustellen, werden folgende Sequenzen vorrausgesetzt (je 10000 Einträge):\\
 SeqA:
 \[ a_{n} =
@@ -116,6 +119,13 @@ und \ref{fig:correlationSubtractMeamFromResultFalse} zeigen die Auswirkung des P
     \label{fig:correlationSubtractMeamFromResultTrue}
 \end{figure}
 \footnotetext{Quelle: Eigene Darstellung}
+
+
+\section{Beispiel-Skripte}
+Ein Skript welches die Funktion aus diesem Kapitel nutzt ist im \enquote{crosscorrelation} Verzeichnis unter \enquote{example\_script\_crosscorrelation.py} abgelegt.\\
+Das Skript das im Zuge der Automatisierung verwendet wird, ist im gleichen Verzeichnis unter \enquote{automated\_crosscorrelation.py} zu finden.
+
+
 
 \chapter{Suche nach Pattern mit Hilfe der Kreuz-Korrelation}
 Das Python Skript \enquote{func\_cross\_correlation\_patternsearch.py} bietet zwei Funktionen an, die verwendet werden können, 
