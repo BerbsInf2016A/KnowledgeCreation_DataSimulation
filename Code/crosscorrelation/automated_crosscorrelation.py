@@ -12,13 +12,13 @@ def executeCrossCorrelationForDatasets(datasets: []):
                         continue
                     if len(firstSequence) != len(secondSequence):
                         print(dataset.fileName,
-                              "Crosscorrelation between sequence",
+                              "Cross-Correlation between sequence",
                               str(firstIndex), "and",
                               str(secondIndex),
                               "ignored. Sequence-Length not equal!")
                         continue
                     print(dataset.fileName,
-                          "exporting Crosscorrelation between sequence",
+                          "exporting Cross-Correlation between sequence",
                           str(firstIndex), "and", str(secondIndex))
                     exportPath = dataset.fileName.replace(
                         ".csv",  "_CrossCorrelation_Sequence_" +

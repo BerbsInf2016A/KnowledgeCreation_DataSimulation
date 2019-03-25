@@ -3,8 +3,7 @@ import matplotlib.pyplot as plt
 from matplotlib.gridspec import GridSpec
 import crosscorrelation.settings as crossSettings
 
-# Execute the following command to install the python dependencies
-# pip install numpy scipy matplotlib ipython jupyter pandas sympy nose
+RASTERIZE_PLOTS = False
 
 
 def normalized(a, axis=-1, order=2):
@@ -27,17 +26,17 @@ def plotRawCorrelations(figure, gridSystem, plotRow, seqA, seqB):
 
     # Plot the correlations:
     ax = figure.add_subplot(gridSystem[plotRow, :])
-    ax.plot(valid, 'ro')
+    ax.plot(valid, 'ro', rasterized=RASTERIZE_PLOTS)
     ax.set_title('Correlation: Valid')
     plotRow += 1
 
     ax = figure.add_subplot(gridSystem[plotRow, :])
-    ax.plot(same, 'ro')
+    ax.plot(same, 'ro', rasterized=RASTERIZE_PLOTS)
     ax.set_title('Correlation: Same')
     plotRow += 1
 
     ax = figure.add_subplot(gridSystem[plotRow, :])
-    ax.plot(full, 'ro')
+    ax.plot(full, 'ro', rasterized=RASTERIZE_PLOTS)
     ax.set_title('Correlation: Full')
     plotRow += 1
 
@@ -57,17 +56,17 @@ def plotNormalizedCorrelations(figure, gridSystem,
     fullNormalized = np.correlate(seqANorm, seqBNorm, 'full')
 
     ax = figure.add_subplot(gridSystem[plotRow, :])
-    ax.plot(validNormalized, 'ro')
+    ax.plot(validNormalized, 'ro', rasterized=RASTERIZE_PLOTS)
     ax.set_title('Correlation Normalized: Valid')
     plotRow += 1
 
     ax = figure.add_subplot(gridSystem[plotRow, :])
-    ax.plot(sameNormalized, 'ro')
+    ax.plot(sameNormalized, 'ro', rasterized=RASTERIZE_PLOTS)
     ax.set_title('Correlation Normalized: Same')
     plotRow += 1
 
     ax = figure.add_subplot(gridSystem[plotRow, :])
-    ax.plot(fullNormalized, 'ro')
+    ax.plot(fullNormalized, 'ro', rasterized=RASTERIZE_PLOTS)
     ax.set_title('Correlation Normalized: Full')
     plotRow += 1
     return plotRow
@@ -137,19 +136,19 @@ def crossCorrelation(seqA: [], seqB: [], settings: crossSettings.Settings):
     figure = plt.figure(constrained_layout=True)
     gs = GridSpec(numberOfRowsToPlot, 2, figure=figure)
     ax = figure.add_subplot(gs[currentPlotRow, 0])
-    ax.plot(seqA, 'ro')
+    ax.plot(seqA, 'ro', rasterized=RASTERIZE_PLOTS)
     ax.set_title('Raw data: Sequence A')
     ax = figure.add_subplot(gs[currentPlotRow, 1])
-    ax.plot(seqB, 'ro')
+    ax.plot(seqB, 'ro', rasterized=RASTERIZE_PLOTS)
     ax.set_title('Raw data: Sequence B')
     currentPlotRow += 1
 
     if settings.plotNormalizedData:
         ax = figure.add_subplot(gs[currentPlotRow, 0])
-        ax.plot(seqANorm, 'ro')
+        ax.plot(seqANorm, 'ro', rasterized=RASTERIZE_PLOTS)
         ax.set_title('Normalized: Sequence A')
         ax = figure.add_subplot(gs[currentPlotRow, 1])
-        ax.plot(seqBNorm, 'ro')
+        ax.plot(seqBNorm, 'ro', rasterized=RASTERIZE_PLOTS)
         ax.set_title('Normalized: Sequence B')
         currentPlotRow += 1
 
