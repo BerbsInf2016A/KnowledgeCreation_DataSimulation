@@ -122,13 +122,19 @@ und \ref{fig:correlationSubtractMeamFromResultFalse} zeigen die Auswirkung des P
 
 
 \section{Beispiel-Skripte}
-Ein Skript welches die Funktion aus diesem Kapitel nutzt ist im \enquote{crosscorrelation} Verzeichnis unter \enquote{example\_script\_crosscorrelation.py} abgelegt.\\
-Das Skript das im Zuge der Automatisierung verwendet wird, ist im gleichen Verzeichnis unter \enquote{automated\_crosscorrelation.py} zu finden.
+Ein Skript welches die Funktion aus diesem Kapitel nutzt ist als Beispiel im Projekt unter \enquote{example\_script\_crosscorrelation.py} abgelegt.\\
+Das Skript das im Zuge der Automatisierung verwendet wird, ist im Unterverzeichnis \enqoute{crosscorrelation} unter \enquote{automated\_crosscorrelation.py} zu finden.
+
+
+
+
+
+
 
 
 
 \chapter{Suche nach Pattern mit Hilfe der Kreuz-Korrelation}
-Das Python Skript \enquote{func\_cross\_correlation\_patternsearch.py} bietet zwei Funktionen an, die verwendet werden können, 
+Das Python Skript \enquote{functions\_crosscorrelation\_patternsearch.py} bietet zwei Funktionen an, die verwendet werden können, 
 um nach einem gegebenen Pattern in einer Sequenz zu suchen.
 
 \section{Angebotene Funktionen}
@@ -142,12 +148,16 @@ Mit Hilfe der \enquote{getCorrelationDataForPatternSearch} Funktion kann nach ei
     \item[plotCorrelation] [Default: False] Auf True setzen, wenn die berechnete Kreuz-Korrelation dargestellt werden soll.
 \end{description}
 Die Funktion gibt die berechnete Kreuz-Korrelation zurück, die in der nächsten Funktion \enquote{extractIndicesFromCorrelationData} verwendet werden kann.
+\\
+\\
+Die Funktion verwendet intern die von NumPy bereitgestellte \enquote{correlate} Funktion. Als Modus wird der in Kapitel~\ref{sec:numpy_correlate_mode} beschriebene Modus \enquote{Valid} genutzt.
 
 \subsection{Funktion: extractIndicesFromCorrelationData}
 Die Funktion kann verwendet werden, um die Indizes zu berechnen, an denen das Pattern in der Sequenz auftritt. Dafür muss der Funktion das Ergebnis der \enquote{getCorrelationDataForPatternSearch} Funktion
 übergeben werden. Als Rückgabe erhält man die Indizes und der Wert der Korrelation an dieser Stelle.\\
 Optional kann ein Schwellwert übergeben werden. Je nachdem wie dieser Schwellwert gewählt ist, werden mehr oder weniger Indizes zurückgegeben. Bei einem hohen Schwellwert wird 
 jeweils nur der erste Index zurückgegeben, bei dem das Pattern auftritt. Bei einem niedriger gewählten Schwellwert werden alle Indizes zurückgegeben, an denen das Pattern auftritt. 
+Bei einem zu niedrigem Schwellwert werden auch Indizes zurückgegeben, die außerhalb des eigentlichen Patterns liegen. Diese Bereiche sind direkt vor und nach dem Ende des Patterns. Ein zu niedriger Schwellwert kann erkannt werden, wenn der gefundene Bereich größer als das Pattern selbst ist. Durch einen höheren Schwellwert kann dieses \enquote{Auswaschen} oder \enquote{Aufweichen} verhindert werden.
 
 \subsection{Beispiel für die Pattern-Suche}
 Vorbedingung: Eine Sequenzen mit 10000 Einträgen. \\

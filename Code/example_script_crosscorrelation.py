@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import crosscorrelation.functions_crosscorrelation as fcc
+from crosscorrelation import functions_crosscorrelation as fcc
 import crosscorrelation.functions_crosscorrelation_patternsearch as ps
 import crosscorrelation.settings as crossSettings
 
@@ -17,8 +17,6 @@ seq2 = seq2[0]
 
 settings = crossSettings.Settings()
 settings.drawResults = True
-settings.plotNormalizedData = True
-settings.plotCorrelations = True
 fcc.crossCorrelation(seq1, seq2, settings)
 # Show the results in a window. Attention: This will block the execution:
 # plt is from matplotlib
@@ -26,19 +24,19 @@ if settings.drawResults:
     plt.show()
 
 
-seq3 = np.full((1, 10000), 0)
-seq3[0][[1005, 1007, 1010, 6005, 6007, 6010]] = 1
+# Prepare the sequence. Everything is set to 0.
+sequenceForPatternSearch = np.full((1, 10000), 0)
+# Set the pattern in the sequence (set it two times, starting at index 1005 and index 6005)
+sequenceForPatternSearch[0][[1005, 1007, 1010, 6005, 6007, 6010]] = 1
 
 pattern = np.asarray([1, 0, 1, 0, 0, 1, 0])
 
-correlatedSearch = ps.getCorrelationDataForPatternSearch(seq3, pattern)
-indices = ps.extractIndicesFromCorrelationData(correlatedSearch, threshold=0.2)
+correlatedSearch = ps.getCorrelationDataForPatternSearch(sequenceForPatternSearch, pattern)
+indices = ps.extractIndicesFromCorrelationData(correlatedSearch, threshold=0.3)
 
-print(indices)
-onlinIndices = []
+# Print the indices (sorted) in one line:
+oneLineIndices = []
 for entry in indices:
-    onlinIndices.append(entry[0])
-onlinIndices.sort()
-print(onlinIndices)
-plt.show()
-placeholder = 2
+    oneLineIndices.append(entry[0])
+oneLineIndices.sort()
+print(oneLineIndices)
