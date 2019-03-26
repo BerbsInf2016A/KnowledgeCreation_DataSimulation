@@ -47,27 +47,19 @@ def calculateBlockInfos(data: AnalysationRequest) -> AnalysationRequest:
 
 def calculateBalancesForSubSequences(sequence) -> []:
     """ Calculate the balances for the sub sequences. """
-    list10 = np.array_split(sequence, 1000)
-    list100 = np.array_split(sequence, 100)
-    list1000 = np.array_split(sequence, 10)
 
-    resultList = []
-    result10 = []
-    for entry in list10:
-        result10.append(calculateBalanceForSequence(entry))
-    resultList.append(result10)
+    sequenceLength = len(sequence)
+    resultDictionary = {}
 
-    result100 = []
-    for entry in list100:
-        result100.append(calculateBalanceForSequence(entry))
-    resultList.append(result100)
-
-    result1000 = []
-    for entry in list1000:
-        result1000.append(calculateBalanceForSequence(entry))
-    resultList.append(result1000)
-
-    return resultList
+    subSequenceSize = 10
+    while (sequenceLength / subSequenceSize) >= 10:
+        splittedList = np.array_split(sequence, sequenceLength/10)
+        resultDictionary[subSequenceSize] = []
+        for entry in splittedList:
+            resultDictionary[subSequenceSize].append(calculateBalanceForSequence(entry))
+        subSequenceSize *= 10   
+    
+    return resultDictionary
 
 
 def calculateFrequenciesForSubSequences(sequence) -> {}:

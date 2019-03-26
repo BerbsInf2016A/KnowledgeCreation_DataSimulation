@@ -46,31 +46,20 @@ def generateSubSequenceBalanceInfoPdf(sequenceIndex,
     subSequenceBalances = data.subSequenceBalances[sequenceIndex]
 
     figure = plt.figure(constrained_layout=True)
-    gs = GridSpec(3, 1, figure=figure)
+    numberOfNeededRows = len(subSequenceBalances)
+    if numberOfNeededRows == 0:
+        return
+    gs = GridSpec(numberOfNeededRows, 1, figure=figure)
 
-    # plot buckets with size of 10
-    ax = figure.add_subplot(gs[0])
-    ax.plot(subSequenceBalances[0], '-', color=BALANCE_PLOT_COLOR, rasterized=RASTERIZE_PLOTS)
-    ax.set_title("10er SubSequenz")
-    ax.set_xlabel('SubSequenz')
-    ax.set_ylabel('Balance')
-    ax.set_ylim(-0.05, 1.1)
-
-    # plot buckets with size of 100
-    ax = figure.add_subplot(gs[1])
-    ax.plot(subSequenceBalances[1], '-', color=BALANCE_PLOT_COLOR, rasterized=RASTERIZE_PLOTS)
-    ax.set_title("100er SubSequenz")
-    ax.set_xlabel('SubSequenz')
-    ax.set_ylabel('Balance')
-    ax.set_ylim(-0.05, 1.1)
-
-    # plot buckets with size of 1000
-    ax = figure.add_subplot(gs[2])
-    ax.plot(subSequenceBalances[2], '-', color=BALANCE_PLOT_COLOR, rasterized=RASTERIZE_PLOTS)
-    ax.set_title("1000er SubSequenz")
-    ax.set_xlabel('SubSequenz')
-    ax.set_ylabel('Balance')
-    ax.set_ylim(-0.05, 1.1)
+    currentRowIndex = 0
+    for key, values in subSequenceBalances.items():
+        ax = figure.add_subplot(gs[currentRowIndex])
+        currentRowIndex += 1
+        ax.plot(values, '-', color=BALANCE_PLOT_COLOR, rasterized=RASTERIZE_PLOTS)
+        ax.set_title(str(key) + "er SubSequenz")
+        ax.set_xlabel('SubSequenz')
+        ax.set_ylabel('Balance')
+        ax.set_ylim(-0.05, 1.1)
 
     # Export the pdf
     exportPath = data.fileName.replace(
