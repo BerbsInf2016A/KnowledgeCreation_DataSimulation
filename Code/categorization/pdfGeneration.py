@@ -55,7 +55,10 @@ def generateSubSequenceBalanceInfoPdf(sequenceIndex,
     for key, values in subSequenceBalances.items():
         ax = figure.add_subplot(gs[currentRowIndex])
         currentRowIndex += 1
-        ax.plot(values, '-', color=BALANCE_PLOT_COLOR, rasterized=RASTERIZE_PLOTS)
+        ax.plot(values,
+                '-',
+                color=BALANCE_PLOT_COLOR,
+                rasterized=RASTERIZE_PLOTS)
         ax.set_title(str(key) + "er SubSequenz")
         ax.set_xlabel('SubSequenz')
         ax.set_ylabel('Balance')
@@ -84,7 +87,10 @@ def generateSubSequenceFrequencyInfoPdf(sequenceIndex,
     for key, values in subSequenceFrequencies.items():
         ax = figure.add_subplot(gs[currentRowIndex])
         currentRowIndex += 1
-        ax.plot(values, '-', color=FREQUENCY_PLOT_COLOR, rasterized=RASTERIZE_PLOTS)
+        ax.plot(values,
+                '-',
+                color=FREQUENCY_PLOT_COLOR,
+                rasterized=RASTERIZE_PLOTS)
         ax.set_title(str(key) + "er SubSequenz")
         ax.set_xlabel('SubSequenz')
         ax.set_ylabel('Frequenz')
@@ -105,7 +111,10 @@ def generateSummaryPdf(sequenceIndex, sequence,
     gs = GridSpec(3, 1, figure=figure)
     # plot sequence
     axes = figure.add_subplot(gs[0])
-    axes.plot(sequence, 'ro', markersize=MARKERSIZE, rasterized=RASTERIZE_PLOTS)
+    axes.plot(sequence,
+              'ro',
+              markersize=MARKERSIZE,
+              rasterized=RASTERIZE_PLOTS)
     axes.set_title("Sequenz")
     axes.set_xlabel('Index')
     axes.set_ylabel('Wert')
@@ -134,7 +143,7 @@ def generateSummaryPdf(sequenceIndex, sequence,
     # Write Balance into the table
     tableData.append(["Balance", balanceString])
     table = axes.table(cellText=tableData, colLabels=columns,
-                     loc='center', cellLoc="left", colLoc="left")
+                       loc='center', cellLoc="left", colLoc="left")
 
     # Set first row (header) text to bold
     for (row, col), cell in table.get_celld().items():

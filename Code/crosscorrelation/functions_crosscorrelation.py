@@ -113,7 +113,8 @@ def crossCorrelation(seqA: [], seqB: [], settings: crossSettings.Settings):
     seqA = np.asarray(seqA)
     seqB = np.asarray(seqB)
     if len(seqA) != len(seqB):
-        raise ValueError('Length of sequences must be equal for cross correlation')
+        raise ValueError('Length of sequences must be equal'
+                         'for cross correlation')
     seqA = seqA.astype(float)
     seqB = seqB.astype(float)
     numberOfRowsToPlot = 2

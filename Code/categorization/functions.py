@@ -10,10 +10,10 @@ def analyzeFrequency(data: AnalysationRequest) -> AnalysationRequest:
     for sequenceIndex, sequence in enumerate(data.sequences):
         print("Calculating frequency for",
               data.fileName, "Sequence", sequenceIndex)
-        data.frequencyResults[sequenceIndex] = calculateFrequencyForSequence(
-            sequence)
-        data.subSequenceFrequencyResults[sequenceIndex] = calculateFrequenciesForSubSequences(
-            sequence)
+        data.frequencyResults[sequenceIndex] = \
+            calculateFrequencyForSequence(sequence)
+        data.subSequenceFrequencyResults[sequenceIndex] = \
+            calculateFrequenciesForSubSequences(sequence)
 
     return data
 
@@ -26,7 +26,8 @@ def analyzeBalance(data: AnalysationRequest) -> AnalysationRequest:
         print("Calculating balance for",
               data.fileName, "Sequence", sequenceIndex)
         data.balances[sequenceIndex] = calculateBalanceForSequence(sequence)
-        data.subSequenceBalances[sequenceIndex] = calculateBalancesForSubSequences(sequence)
+        data.subSequenceBalances[sequenceIndex] = \
+            calculateBalancesForSubSequences(sequence)
 
     return data
 
@@ -41,7 +42,10 @@ def calculateBlockInfos(data: AnalysationRequest) -> AnalysationRequest:
               data.fileName, "Sequence", sequenceIndex)
         calculatedBlockInfos = calculateBlockInfosForSequence(sequence)
         for blockInfo in calculatedBlockInfos:
-            data.updateBlockInfoForSequence(sequenceIndex, blockInfo[1], blockInfo[0])
+            data.updateBlockInfoForSequence(
+                sequenceIndex,
+                blockInfo[1],
+                blockInfo[0])
 
     return data
 
@@ -58,9 +62,10 @@ def calculateBalancesForSubSequences(sequence) -> []:
         splittedList = np.array_split(sequence, subSequenceSize)
         resultDictionary[subSequenceDivisor] = []
         for entry in splittedList:
-            resultDictionary[subSequenceDivisor].append(calculateBalanceForSequence(entry))
-        subSequenceDivisor *= 10   
-    
+            resultDictionary[subSequenceDivisor].append(
+                calculateBalanceForSequence(entry))
+        subSequenceDivisor *= 10
+
     return resultDictionary
 
 
@@ -76,9 +81,10 @@ def calculateFrequenciesForSubSequences(sequence) -> {}:
         splittedList = np.array_split(sequence, subSequenceSize)
         resultDictionary[subSequenceDivisor] = []
         for entry in splittedList:
-            resultDictionary[subSequenceDivisor].append(calculateFrequencyForSequence(entry))
-        subSequenceDivisor *= 10   
-    
+            resultDictionary[subSequenceDivisor].append(
+                calculateFrequencyForSequence(entry))
+        subSequenceDivisor *= 10
+
     return resultDictionary
 
 

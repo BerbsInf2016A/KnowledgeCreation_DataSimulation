@@ -25,7 +25,10 @@ class AnalysationRequest:
         self.balances = []
         self.subSequenceBalances = []
 
-    def updateBlockInfoForSequence(self, sequenceIndex: int, blockSize: int, blockIndex: int):
+    def updateBlockInfoForSequence(self,
+                                   sequenceIndex: int,
+                                   blockSize: int,
+                                   blockIndex: int):
         """ Update the stored BlockInfos for a a given sequence,
             identified by the blockindex. """
         targetBlockInfoDictionary = self.blockInfos[sequenceIndex]
