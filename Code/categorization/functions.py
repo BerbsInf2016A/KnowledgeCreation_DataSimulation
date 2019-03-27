@@ -1,3 +1,4 @@
+import math
 import numpy as np
 from analysationrequest.request import AnalysationRequest
 
@@ -51,13 +52,14 @@ def calculateBalancesForSubSequences(sequence) -> []:
     sequenceLength = len(sequence)
     resultDictionary = {}
 
-    subSequenceSize = 10
-    while (sequenceLength / subSequenceSize) >= 10:
-        splittedList = np.array_split(sequence, sequenceLength/10)
-        resultDictionary[subSequenceSize] = []
+    subSequenceDivisor = 10
+    while (sequenceLength / subSequenceDivisor) >= 10:
+        subSequenceSize = math.ceil(sequenceLength/subSequenceDivisor)
+        splittedList = np.array_split(sequence, subSequenceSize)
+        resultDictionary[subSequenceDivisor] = []
         for entry in splittedList:
-            resultDictionary[subSequenceSize].append(calculateBalanceForSequence(entry))
-        subSequenceSize *= 10   
+            resultDictionary[subSequenceDivisor].append(calculateBalanceForSequence(entry))
+        subSequenceDivisor *= 10   
     
     return resultDictionary
 
@@ -68,13 +70,14 @@ def calculateFrequenciesForSubSequences(sequence) -> {}:
     sequenceLength = len(sequence)
     resultDictionary = {}
 
-    subSequenceSize = 10
-    while (sequenceLength / subSequenceSize) >= 10:
-        splittedList = np.array_split(sequence, sequenceLength/10)
-        resultDictionary[subSequenceSize] = []
+    subSequenceDivisor = 10
+    while (sequenceLength / subSequenceDivisor) >= 10:
+        subSequenceSize = math.ceil(sequenceLength/subSequenceDivisor)
+        splittedList = np.array_split(sequence, subSequenceSize)
+        resultDictionary[subSequenceDivisor] = []
         for entry in splittedList:
-            resultDictionary[subSequenceSize].append(calculateFrequencyForSequence(entry))
-        subSequenceSize *= 10   
+            resultDictionary[subSequenceDivisor].append(calculateFrequencyForSequence(entry))
+        subSequenceDivisor *= 10   
     
     return resultDictionary
 
