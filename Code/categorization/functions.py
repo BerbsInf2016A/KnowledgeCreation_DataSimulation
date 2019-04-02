@@ -116,7 +116,7 @@ def calculateBalanceForSequence(sequence) -> float:
         are unbalanced. """
     counter = 0
     if len(sequence) == 0:
-        return 1
+        return 0
     for value in sequence:
         if value == 1:
             counter += 1

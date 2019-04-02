@@ -59,8 +59,8 @@ def generateSubSequenceBalanceInfoPdf(sequenceIndex,
                 '-',
                 color=BALANCE_PLOT_COLOR,
                 rasterized=RASTERIZE_PLOTS)
-        ax.set_title(str(key) + "er SubSequenz")
-        ax.set_xlabel('SubSequenz')
+        ax.set_title(str(key) + "er Sub-Sequenzen")
+        ax.set_xlabel('Sub-Sequenz')
         ax.set_ylabel('Balance')
         ax.set_ylim(-0.05, 1.1)
 
@@ -91,8 +91,8 @@ def generateSubSequenceFrequencyInfoPdf(sequenceIndex,
                 '-',
                 color=FREQUENCY_PLOT_COLOR,
                 rasterized=RASTERIZE_PLOTS)
-        ax.set_title(str(key) + "er SubSequenz")
-        ax.set_xlabel('SubSequenz')
+        ax.set_title(str(key) + "er Sub-Sequenzen")
+        ax.set_xlabel('Sub-Sequenz')
         ax.set_ylabel('Frequenz')
         ax.set_ylim(-0.05, 1.1)
 
