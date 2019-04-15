@@ -1,0 +1,11 @@
+FROM python:3
+
+WORKDIR /usr/src/app
+
+RUN pip install numpy matplotlib
+
+ENV PYTHONUNBUFFERED=1
+
+COPY . .
+
+CMD [ "python", "./script_automated.py" ]
