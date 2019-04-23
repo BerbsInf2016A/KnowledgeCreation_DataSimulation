@@ -24,6 +24,7 @@ class AnalysationRequest:
         self.blockInfos = []
         self.balances = []
         self.subSequenceBalances = []
+        self.metadataDictionaries = []
 
     def updateBlockInfoForSequence(self,
                                    sequenceIndex: int,

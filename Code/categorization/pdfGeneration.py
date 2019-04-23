@@ -56,7 +56,7 @@ def generateSubSequenceBalanceInfoPdf(sequenceIndex,
         ax = figure.add_subplot(gs[currentRowIndex])
         currentRowIndex += 1
         ax.plot(values,
-                '-',
+                '.',
                 color=BALANCE_PLOT_COLOR,
                 rasterized=RASTERIZE_PLOTS)
         ax.set_title(str(key) + "er Sub-Sequenzen")
@@ -88,7 +88,7 @@ def generateSubSequenceFrequencyInfoPdf(sequenceIndex,
         ax = figure.add_subplot(gs[currentRowIndex])
         currentRowIndex += 1
         ax.plot(values,
-                '-',
+                '.',
                 color=FREQUENCY_PLOT_COLOR,
                 rasterized=RASTERIZE_PLOTS)
         ax.set_title(str(key) + "er Sub-Sequenzen")
@@ -103,6 +103,10 @@ def generateSubSequenceFrequencyInfoPdf(sequenceIndex,
     plt.close(figure)
 
 
+def extractValueFromMetaDataDictionary(metadataDictionary: {}, key):
+    return metadataDictionary.get(key, '')
+
+
 def generateSummaryPdf(sequenceIndex, sequence,
                        data: catData.AnalysationRequest):
     """ Generate a summary pdf for a sequnce in a given data file. """
@@ -112,11 +116,23 @@ def generateSummaryPdf(sequenceIndex, sequence,
     # plot sequence
     axes = figure.add_subplot(gs[0])
     axes.plot(sequence,
-              'ro',
+              'r.',
               markersize=MARKERSIZE,
               rasterized=RASTERIZE_PLOTS)
-    axes.set_title("Sequenz")
-    axes.set_xlabel('Index')
+    metaDataInfo = data.metadataDictionaries[sequenceIndex]
+    titlePostfix = \
+        extractValueFromMetaDataDictionary(metaDataInfo, 'Machine')
+    titlePostfix = titlePostfix + ' ' \
+        + extractValueFromMetaDataDictionary(metaDataInfo, 'Date')
+    
+    intervalPostfix = \
+        extractValueFromMetaDataDictionary(metaDataInfo, 'Interval')
+
+    if(intervalPostfix != ''):
+        intervalPostfix = '(Interval ' + intervalPostfix + ')'
+
+    axes.set_title("Sequenz " + titlePostfix)
+    axes.set_xlabel('Index ' + intervalPostfix)
     axes.set_ylabel('Wert')
     axes.set_ylim(-0.05, 1.1)
 

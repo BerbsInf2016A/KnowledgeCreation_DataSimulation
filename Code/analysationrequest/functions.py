@@ -31,6 +31,37 @@ def getAllFilePathsFromDiretoryPath(path: str):
     return files
 
 
+def containsMetaData(value: []) -> bool:
+    if(len(value) < 2):
+        return False
+    firstElementInList = value[0]
+    lastElementInList = value[-1]
+    return firstElementInList.startswith('$') \
+        and lastElementInList.endswith('$')
+
+
+def buildMetadataDictionary(values: []):
+    metaDataDictionary = {}
+    currentKey = ''
+    for index in range(len(values)):
+        if(index % 2 == 0):
+            currentKey = values[index].replace('$', '')
+        else:
+            metaDataDictionary[currentKey] = values[index].replace('$', '')
+    
+    return metaDataDictionary
+
+
+def extractMetadataInformation(data, rowIndex):
+    if(rowIndex < 0 or (len(data) - 1) < rowIndex):
+        return dict()
+    isMetaDataRow = containsMetaData(data[rowIndex])
+    if(isMetaDataRow):
+        return buildMetadataDictionary(data[rowIndex])
+    else:
+        return dict()
+        
+
 def readRawDataFile(sourceFile: str) -> AnalysationRequest:
     """ Read raw data files. Will only read csv files.
         The values will be parsed. """
@@ -38,46 +69,67 @@ def readRawDataFile(sourceFile: str) -> AnalysationRequest:
     source = AnalysationRequest(sourceFile)
     with open(sourceFile) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
-        rowIndex = -1
-        # Iterate the rows, each row is a sequence:
+        cachedData = []
+        
         for row in csv_reader:
+            cachedData.append(row)
+            
+        rowIndex = -1
+
+        # Iterate the rows, each row is a sequence:
+        for row in cachedData:
             rowIndex += 1
-            sequence = []
-            for entry in row:
-                # Split the entry
-                splitted = entry.split("|")
-                if len(splitted) != 2:
-                    raise ValueError('Error during parsing of file: ',
-                                     sourceFile,
-                                     " in row ",
-                                     rowIndex)
-                # Parse the values
-                # Check if the values are valid: isDigit only returns true,
-                # when the value is an integer and positive.
-                count = splitted[0]
-                countIsValid = count.isdigit()
-                if countIsValid is False:
-                    raise ValueError('Error during parsing of file: ',
-                                     sourceFile,
-                                     " in row ",
-                                     rowIndex,
-                                     " entry ",
-                                     entry,
-                                     " count is invalid")
-                value = splitted[1]
-                valueValid = isInteger(value)
-                if valueValid is False:
-                    raise ValueError('Error during parsing of file: ',
-                                     sourceFile,
-                                     " in row ", rowIndex, " entry ", entry,
-                                     " value is invalid")
-                # Count and value are valid. Cast the to int and save them.
-                sequence.append([int(count), int(value)])
+
+            # Do we have a meta-data info row or a value row:
+
+            # Handle meta-data row:
+            isMetaDataRow = containsMetaData(row)            
+            if(isMetaDataRow):
+                continue
+            
+            # Handle value row:
+            sequence = parseValueRow(row, sourceFile, rowIndex)
             # Sequence is finished, store it:
             source.rawSequences.append(sequence)
+            source.metadataDictionaries.append(extractMetadataInformation(cachedData, rowIndex - 1))
 
     print("Found sequences: ", str(len(source.rawSequences)))
     return source
+
+
+def parseValueRow(row, sourceFile, rowIndex):
+    sequence = []
+    for entry in row:
+        # Split the entry
+        splitted = entry.split("|")
+        if len(splitted) != 2:
+            raise ValueError('Error during parsing of file: ',
+                             sourceFile,
+                             " in row ",
+                             rowIndex)
+        # Parse the values
+        # Check if the values are valid: isDigit only returns true,
+        # when the value is an integer and positive.
+        count = splitted[0]
+        countIsValid = count.isdigit()
+        if countIsValid is False:
+            raise ValueError('Error during parsing of file: ',
+                             sourceFile,
+                             " in row ",
+                             rowIndex,
+                             " entry ",
+                             entry,
+                             " count is invalid")
+        value = splitted[1]
+        valueValid = isInteger(value)
+        if valueValid is False:
+            raise ValueError('Error during parsing of file: ',
+                             sourceFile,
+                             " in row ", rowIndex, " entry ", entry,
+                             " value is invalid")
+        # Count and value are valid. Cast the to int and save them.
+        sequence.append([int(count), int(value)])
+    return sequence
 
 
 def expandRawData(data: AnalysationRequest) -> AnalysationRequest:
