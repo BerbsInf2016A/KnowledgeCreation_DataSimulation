@@ -56,9 +56,10 @@ def generateSubSequenceBalanceInfoPdf(sequenceIndex,
         ax = figure.add_subplot(gs[currentRowIndex])
         currentRowIndex += 1
         ax.plot(values,
-                '.',
+                '.-',
                 color=BALANCE_PLOT_COLOR,
-                rasterized=RASTERIZE_PLOTS)
+                rasterized=RASTERIZE_PLOTS,
+                linewidth=0.25)
         ax.set_title(str(key) + "er Sub-Sequenzen")
         ax.set_xlabel('Sub-Sequenz')
         ax.set_ylabel('Balance')
@@ -88,9 +89,10 @@ def generateSubSequenceFrequencyInfoPdf(sequenceIndex,
         ax = figure.add_subplot(gs[currentRowIndex])
         currentRowIndex += 1
         ax.plot(values,
-                '.',
+                '.-',
                 color=FREQUENCY_PLOT_COLOR,
-                rasterized=RASTERIZE_PLOTS)
+                rasterized=RASTERIZE_PLOTS,
+                linewidth=0.25)
         ax.set_title(str(key) + "er Sub-Sequenzen")
         ax.set_xlabel('Sub-Sequenz')
         ax.set_ylabel('Frequenz')
