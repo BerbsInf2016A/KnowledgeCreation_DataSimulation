@@ -4,7 +4,7 @@
 Das automatisierte Skript schreibt diverse Log-Meldungen in die Konsole.
 Listing~\ref{lst:pythonlogs} ist ein Beispiel dafür, was durch das Skript geloggt wird.
 
-\lstnewenvironment{PyhtonLogs}
+\lstnewenvironment{PythonLogs}
 {\lstset{
 		captionpos=b,
 		frame=single,
@@ -25,7 +25,7 @@ Listing~\ref{lst:pythonlogs} ist ein Beispiel dafür, was durch das Skript gelog
 		basicstyle=\ttfamily\footnotesize,
 		numberbychapter=false}}{}
 
-\begin{PyhtonLogs}
+\begin{PythonLogs}
 Reading files from source path:
 .\sourceFiles
 Found 2 source files
@@ -59,4 +59,75 @@ Generating pdf reports for .\sourceFiles\TestDataShortShifting.csv Sequence 0
 
 Crosscorrelation for file .\sourceFiles\cross_corr_test.csv
 .\sourceFiles\cross_corr_test.csv exporting Cross-Correlation between sequence 0 and 1
-\end{PyhtonLogs}
+\end{PythonLogs}
+
+
+\section{Verwendung von Docker}
+\label{docker:examples}
+
+Ein verwendbarer Docker-File ist im Quellverzeichnis als \enquote{dockerfile} abgelegt.
+Aus dieser Datei kann ein Image erstellt werden, dass Python und die notwendigen Bibliotheken enthält.
+Aus diesem Image kann ein Container erstellt werden, in dem ein Quellverzeichnis des Host-Rechners gemountet wird.
+Dadurch hat der Container Zugriff auf die Dateien in diesem Ordner und kann diese Verarbeiten.
+Im Folgenden sind die notwendigen Befehle dokumentiert, um das Image und den Container zu erstellen und zu verwenden.
+\lstset{literate=%
+	{Ö}{{\"O}}1
+	{Ä}{{\"A}}1
+	{Ü}{{\"U}}1
+	{ß}{{\ss}}1
+	{ü}{{\"u}}1
+	{ä}{{\"a}}1
+	{ö}{{\"o}}1
+	{~}{{\textasciitilde}}1
+}
+\lstnewenvironment{DockerCommands}
+{\lstset{
+		captionpos=b,
+		frame=single,
+		label={lst:pythonlogs},
+		caption={Anhang: Beispiel für die Verwendung von Docker},
+		showspaces=false,
+		showtabs=false,
+		breaklines=true,
+		showstringspaces=false,
+		breakatwhitespace=true,
+		escapeinside={(*@}{@*)},
+		commentstyle=\color{greencomments},
+		morecomment = [l]{\#\ },
+		morekeywords={ },
+		keywordstyle=\color{blue},
+		stringstyle=\color{black},
+		morestring=[b]",
+		basicstyle=\ttfamily\footnotesize,
+		numberbychapter=false}}{}
+	
+\begin{DockerCommands}
+Befehlstemplate zur Erstellung des Images. Der Name füur das Image ist frei wählbar, muss aber in den folgenden Befehlen verwendet werden:
+	docker build . -t <image_name>
+Beispiel:
+		docker build . -t analysisImage
+Die Skripte die verwendet werden, sind ein fester Bestandteil des Images. Wenn Änderungen an den Skripten vorgenommen werden, muss auch das Image neu erstellt werden.
+Folglich muss dann auch der Container neu erstellt werden.
+		
+Befehlstemplate zur Erstellung eines Containers:
+	docker create  -v <Pfad zum Quellordner>:/usr/src/app/sourceFiles  --name <container_name>  <image_name>
+Beispiel:	
+	docker create  -v C:\Temp\sourcefiles:/usr/src/app/sourceFiles  --name MyAnalysisContainer  analysisImage
+Der Pfad zum Quellordner ist ein fester Bestandteil des Containers und kann nicht ohne weiteres verändert werden.
+Soll ein anderer Ordner verwendet werden, muss ein neuer Container erzeugt werden. Dadurch ist auch die Möglichkeit gegeben, unterschiedliche Ordner in unterschiedlichen Containern zu verwenden.
+
+Befehlstemplate zur Ausführung eines Containers:
+	docker start -a <container_name>
+Beispiel:
+	docker start -a MyAnalysisContainer
+Dadurch wird ein Container ausgeführt und die Ausgabe wird auf der Konsole ausgegeben. Der Container beendet sich nach Ausführung von selbst.
+
+Weitere, hilfreiche Befehle:
+
+Löschen eines Containers:
+	docker rm <container_name>
+Beenden eines Containers:
+	docker stop <container_name
+Löschen eines Images:
+	docker rmi <image_name>
+\end{DockerCommands}

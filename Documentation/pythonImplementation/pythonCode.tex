@@ -101,7 +101,14 @@ pip3 install numpy matplotlib
 \end{Pip3CommandLinux}
 
 \section{Verwendung von Docker}
-\textcolor{red}{TODO}
+Es besteht die Möglichkeit, die Skripte auch mit Hilfe von Docker-Container auszuführen.
+Die Verwendung von Docker hat Vor- und Nachteile, die allerdings nicht Bestandteil dieser Arbeit sind.
+Durch die Verwendung von Docker ist die lokale Installation von Python und den benötigten Bibliotheken nicht mehr notwendig.
+Allerdings ist dafür eine lauffähige Installation von Docker notwendig.
+
+Für die Verwendung von Docker existieren Beispiele im Anhang unter Kapitel~\ref{docker:examples}.
+
+\textcolor{red}{Quelle hinzufügen}
 
 \input{./pythonImplementation/project.tex}
 \input{./pythonImplementation/categorization.tex}
@@ -118,12 +125,12 @@ Automatisierung bedeutet in diesem Kontext, dass Quelldateien automatisch eingel
 Die Ergebnisse werden in Form von PDF-Dateien im Quellverzeichnis mit abgelegt.
 
 \section{Anleitung zur Ausführung Skripte}
-\textcolor{red}{Link to Docker}
 Das automatisierte Skript kann über die Kommandozeile ausgeführt werden.
 Optional ist es möglich einen Pfad zu einem Ordner anzugeben, in dem die Quelldateien abgelegt sind.
 Wenn kein Pfad angegeben wird, wird ein Ordner mit dem Namen \enquote{sourceFiles} verwendet, der sich im gleichen Verzeichnis wie das Skript befinden muss.
 Sollte dieser Ordner nicht existieren, legt das Skript diesen automatisch an.
 Die Quelldateien können dann in diesem Ordner abgelegt werden und werden bei der nächsten Ausführung des Skripts verarbeitet.
+Alternativ dazu kann Docker verwendet werden, siehe dazu auch im Anhang unter Kapitel~\ref{docker:examples}.
 
 \subsection{Kommando zur Ausführung}
 Nachdem man mit einer Konsole in das Verzeichnis gewechselt ist indem der Code angelegt ist, lässt sich das Skript über folgendes Kommando ausführen:
