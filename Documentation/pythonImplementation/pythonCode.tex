@@ -235,5 +235,16 @@ Der Übersicht wegen, werden einige Aktionen zusammengefasst und nicht im Detail
 \end{enumerate}
 
 \textcolor{red}{Ergebnisdarstellung Anhang}
+
 \section{Verbesserungsmöglichkeiten und Erweiterungen}
-\textcolor{red}{Multi-Prozess PDF Generierung}
+Da Matplotlib nicht threadsafe ist\footnote{Siehe: \cite{Stackoverflow2016}.}, kann die Generierung von PDF-Dateien nicht ohne Weiteres parallelisiert werden.
+Bei einer parallelen Generierung würde Matplotlib gleichzeitig aus verschiedenen Programmbereichen aus aufgerufen werden.
+Bei Programmen die nicht threadsafe sind, kann dies zu Fehlern führen.
+Wenn ein Programm threadsafe ist, sind solche parallelen Aufrufe ohne Behinderungen oder Fehler möglich.
+
+Da ein Großteil der Ausführungszeit für die Generierung der PDFs benötigt wird, wäre allerdings eine Parallelisierung in diesem Bereich von Vorteil.
+Eine mögliche Erweiterung um die Leistung durch Parallelisierung zu steigern, wäre die Einführung eines Multi-Prozess-Ansatzes zur Generierung der PDF-Dateien.
+Dabei würde für jede zu generierende Datei ein eigener Prozess gestartet werden, dessen Speicherbereich von den anderen Generierungsprozessen getrennt ist.
+Da ein Prozess schwergewichtiger als ein einfacher Thread ist, hat diese Lösung natürlich auch seine eigenen Nachteile.
+Ein weiterer Nachteil wäre die notwendige Verwaltung der Prozesse sowie die Kommunikation zwischen den Prozessen.
+Eine solche Lösung ist nur mit zusätzlichem Entwicklungsaufwand umsetzbar.
