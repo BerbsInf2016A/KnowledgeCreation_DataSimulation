@@ -1,15 +1,108 @@
 \chapter{Implementierungen in Python}
 
 \section{Warum Python?}
+Python ist eine Skriptsprache, die auch im wissenschaftlichen Umfeld und für maschinelles Lernen verwendet wird\footnote{Siehe: \cite{Fuxjaeger2017}.}.
+Dadurch existieren im Umfeld der Programmiersprache viele Bibliotheken die eingebunden und verwendet werden können.
+Aufgrund der großen Nutzerbasis und Dokumentation der verwendeten Bibliotheken sind notwendige Informationen leichter zu recherchieren.
+Ein weiterer Vorteil von Python kommt daher, dass es sich um eine Skriptsprache handelt, die interpretiert wird.
+Anpassungen können schnell umgesetzt und getestet werden, ohne die komplette Anwendung neu zu kompilieren und zu veröffentlichen.
 
 \section{Verwendete Bibliotheken}
-
+Zwei externe Bibliotheken werden für das Projekt benötigt:
+\begin{description}[style=nextline]
+	\item[NumPy] Eine Bibliothek für mathematische Operationen auf multi-dimensionalen Arrays\footnote{Siehe: \cite{Athanasias2014}.}. Aus dieser Bibliothek werden mathematische Funktionen verwendet.
+	\item[Matplotlib] Diese Bibliothek bietet Plotting-Funktionalitäten zur Darstellung von Graphiken\footnote{Siehe: \cite{Matplotlib2019}.}. Sie wird verwendet um PDF-Dateien aus der Analyse zu generieren.
+\end{description}
 \section{Installationsanleitung}
-\textcolor{red}{MATPLOTLIB, NUMPY + What is Pip? + Command}
+Damit die Skripte lauffähig sind, müssen sowohl Python als auch die zusätzlichen Bibliotheken installiert werden.
+Benötigt wird Python 3 (in der Entwicklung wurde Version 3.7.0 verwendet).
+Die zusätzlichen Bibliotheken können über \enquote{pip}\footnote{Siehe: \cite{Foundation2019}.}, das Paketverwaltungsprogramm für Python, installiert werden. 
+Folgende Befehle können zur Installation der Paketen verwendet werden.
 
+\subsection{Paketinstallation unter Windows}
+Unter Windows können die Pakete über das folgende Kommando installiert werden (vorausgesetzt, Python 3 ist installiert. Pip sollte bei der Installation von Python bereits installiert werden):
+\lstnewenvironment{PipCommandWindows}
+{\lstset{
+		captionpos=b,
+		frame=single,
+		label={lst:pipwindows},
+		caption={Kommando zur Installation der notwendigen Pakete unter Windows},
+		showspaces=false,
+		showtabs=false,
+		breaklines=true,
+		showstringspaces=false,
+		breakatwhitespace=true,
+		escapeinside={(*@}{@*)},
+		commentstyle=\color{greencomments},
+		morecomment = [l]{\#\ },
+		morekeywords={ },
+		keywordstyle=\color{blue},
+		stringstyle=\color{black},
+		morestring=[b]",
+		basicstyle=\ttfamily\footnotesize,
+		numberbychapter=false}}{}
 
-\section{Aufbau des Python Projekts}
+\begin{PipCommandWindows}
+	pip install numpy matplotlib
+\end{PipCommandWindows}
 
+\subsection{Paketinstallation unter Linux}
+Unter Linux kann es notwendig werden, die Pakete explizit für Python 3 zu installieren. Im Folgenden sind die dafür notwendigen Kommandos abgebildet.
+\lstnewenvironment{PipCommandLinux}
+{\lstset{
+		captionpos=b,
+		frame=single,
+		label={lst:piplinux},
+		caption={Kommando zur Installation der notwendigen Pakete unter Linux},
+		showspaces=false,
+		showtabs=false,
+		breaklines=true,
+		showstringspaces=false,
+		breakatwhitespace=true,
+		escapeinside={(*@}{@*)},
+		commentstyle=\color{greencomments},
+		morecomment = [l]{\#\ },
+		morekeywords={ },
+		keywordstyle=\color{blue},
+		stringstyle=\color{black},
+		morestring=[b]",
+		basicstyle=\ttfamily\footnotesize,
+		numberbychapter=false}}{}
+
+\begin{PipCommandLinux}
+	pip install numpy matplotlib
+\end{PipCommandLinux}
+Hinweis: Je nach Konfiguration des Systems kann auch folgendes Kommando notwendig sein, um die Pakete explizit unter Python 3 zu installieren: 
+
+\lstnewenvironment{Pip3CommandLinux}
+{\lstset{
+		captionpos=b,
+		frame=single,
+		label={lst:pip3linux},
+		caption={Kommando zur Installation der notwendigen Pakete unter Linux (Verwendung von pip3)},
+		showspaces=false,
+		showtabs=false,
+		breaklines=true,
+		showstringspaces=false,
+		breakatwhitespace=true,
+		escapeinside={(*@}{@*)},
+		commentstyle=\color{greencomments},
+		morecomment = [l]{\#\ },
+		morekeywords={ },
+		keywordstyle=\color{blue},
+		stringstyle=\color{black},
+		morestring=[b]",
+		basicstyle=\ttfamily\footnotesize,
+		numberbychapter=false}}{}
+
+\begin{Pip3CommandLinux}
+	pip3 install numpy matplotlib
+\end{Pip3CommandLinux}
+
+\section{Verwendung von Docker}
+\textcolor{red}{TODO}
+
+\input{./pythonImplementation/project.tex}
 \input{./pythonImplementation/categorization.tex}
 \input{./pythonImplementation/crosscorr_introduction.tex}
 \input{./pythonImplementation/crosscorrelation.tex}

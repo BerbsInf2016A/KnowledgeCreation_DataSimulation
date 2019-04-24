@@ -1,0 +1,32 @@
+\section{Aufbau des Python Projekts}
+Der Quellcode ist nach der jeweiligen Funktionalität in eigene Module aufgeteilt.
+Dadurch ist es auch möglich, nur einzelne Funktionalitäten in eigenen Skripten zu verwenden.
+Die Module selbst sind wiederum in einzelne Dateien gegliedert.
+Dadurch werden die Aufgaben und Funktionalitäten noch weiter aufgeteilt, um die Lesbarkeit des Codes zu erhöhen und die Komplexität zu reduzieren.
+
+\subsection{Top-Level}
+Im Oberverzeichnis befinden sich die folgenden Dateien und Ordner. Dieses Verzeichnis dient als Einstiegspunkt zur Ausführung der Skripte.
+\begin{description}[style=nextline]
+	\item[Skriptdateien] Der Einstiegspunkt zur automatisieren Ausführung bildet das Skript in \enquote{automated\_script.py}. Zum Zweck der Dokumentation sind weitere Beispielskripte abgelegt, die das Prefix \enquote{example} im Dateinamen tragen.
+	\item[Unterordner] In den Unterordnern \enquote{analysationrequest} \enquote{categorization} und \enquote{crosscorrelation} sind die Skripte für den jeweiligen Bereich abgelegt. Diese werden in den folgenden Sektionen genauer beschrieben. Eine Ausnahme bildet der \enquote{sourceFiles} Ordner. Dieser Ordner wird für die Quelldateien verwendet, wenn bei der Ausführung kein alternativer Pfad angegeben wird. Sollte der Ordner nicht existieren, so wird dieser automatisch erstellt.
+	\item[Docker-File] Diese Datei kann verwendet werden, um einen Docker-Container zu erstellen.
+	\item[Dependencies.txt] In dieser Datei ist der Befehl zur Installation der notwendigen Pakete hinterlegt.
+\end{description}
+
+\subsection{Analysation-Request}
+Das Modul \enquote{AnalysationRequest} bildet die Grundlage der Analysen.
+Für jede Quelldatei wird ein Request angelegt, der anschließend durch die weiteren Module verarbeitet wird.
+Die Ergebnisse der jeweiligen Module werden ebenfalls im Request festgehalten.
+Dieses Modul beinhaltet auch die Logik und Funktionalität zum Einlesen der Quelldateien, sowie zur Expansion der komprimierten Quelldaten. 
+
+\subsection{Categorization}
+Dieses Modul bietet die Funktionalität zur Kategorisierung von Sequenzen.
+Die Berechnung der Balance, Frequenz und der restlichen Sequenzwerte wird durch dieses Modul durchgeführt.
+Die Logik zur Erstellung der PDF-Dateien um die berechnet Werte zu plotten, befindet sich ebenfalls in diesem Modul.
+Die Funktionalität ist in Kapitel~\ref{chp:categorization} näher beschrieben.
+
+\subsection{Cross-Correlation}
+Dieses Modul dient der Berechnung der Kreuzkorrelation sowie der Suche nach Mustern in einer Sequenz mithilfe der Kreuzkorrelation.
+Dafür werden unterschiedliche Funktionen sowie Einstellungsmöglichkeiten geboten, die dem Anwendungsfall angepasst werden können.
+Die Logik zur Erstellung von PDF-Dateien um die in diesem Modul gewonnen Daten darzustellen, ist ebenfalls im Modul selbst enthalten.
+Die Funktionalität ist in den Kapiteln~\ref{chp:crosscorrelation:implementation} und \ref{chp:crosscorrelation:patternsearch} näher beschrieben.
