@@ -1,4 +1,5 @@
 \chapter{Implementierungen in Python}
+\label{chp:python:implementation}
 
 \section{Warum Python?}
 Python ist eine Skriptsprache, die auch im wissenschaftlichen Umfeld und für maschinelles Lernen verwendet wird\footnote{Siehe: \cite{Fuxjaeger2017}.}.
@@ -43,7 +44,7 @@ Unter Windows können die Pakete über das folgende Kommando installiert werden 
 		numberbychapter=false}}{}
 
 \begin{PipCommandWindows}
-	pip install numpy matplotlib
+pip install numpy matplotlib
 \end{PipCommandWindows}
 
 \subsection{Paketinstallation unter Linux}
@@ -70,7 +71,7 @@ Unter Linux kann es notwendig werden, die Pakete explizit für Python 3 zu insta
 		numberbychapter=false}}{}
 
 \begin{PipCommandLinux}
-	pip install numpy matplotlib
+pip install numpy matplotlib
 \end{PipCommandLinux}
 Hinweis: Je nach Konfiguration des Systems kann auch folgendes Kommando notwendig sein, um die Pakete explizit unter Python 3 zu installieren: 
 
@@ -96,7 +97,7 @@ Hinweis: Je nach Konfiguration des Systems kann auch folgendes Kommando notwendi
 		numberbychapter=false}}{}
 
 \begin{Pip3CommandLinux}
-	pip3 install numpy matplotlib
+pip3 install numpy matplotlib
 \end{Pip3CommandLinux}
 
 \section{Verwendung von Docker}
@@ -108,14 +109,124 @@ Hinweis: Je nach Konfiguration des Systems kann auch folgendes Kommando notwendi
 \input{./pythonImplementation/crosscorrelation.tex}
 
 
-\chapter{Automatische Ausführung der Skripte}
+\chapter{Ausführung der automatisierten Skripte}
+Die einzelnen Module sind durch Skripte automatisierbar.
+Ein Skript welches alle Module ausführt und als Einstiegspunkt dient, ist in der \enquote{automated\_script.py}-Datei abgelegt und kann direkt verwendet werden.
+Voraussetzung für die Ausführung sind die Pakete aus Kapitel~\ref{chp:python:implementation}, deren Installation im entsprechendem Kapitel beschrieben sind.
 
-\section{Bereitgestellte Skripte}
-\textcolor{red}{VS-Code + CMD Anleitung + Darstellung der Ergebnisse von Beispielsequenzen + Logging}
+Automatisierung bedeutet in diesem Kontext, dass Quelldateien automatisch eingelesen und verarbeitet werden.
+Die Ergebnisse werden in Form von PDF-Dateien im Quellverzeichnis mit abgelegt.
 
 \section{Anleitung zur Ausführung Skripte}
+\textcolor{red}{Link to Docker}
+Das automatisierte Skript kann über die Kommandozeile ausgeführt werden.
+Optional ist es möglich einen Pfad zu einem Ordner anzugeben, in dem die Quelldateien abgelegt sind.
+Wenn kein Pfad angegeben wird, wird ein Ordner mit dem Namen \enquote{sourceFiles} verwendet, der sich im gleichen Verzeichnis wie das Skript befinden muss.
+Sollte dieser Ordner nicht existieren, legt das Skript diesen automatisch an.
+Die Quelldateien können dann in diesem Ordner abgelegt werden und werden bei der nächsten Ausführung des Skripts verarbeitet.
 
+\subsection{Kommando zur Ausführung}
+Nachdem man mit einer Konsole in das Verzeichnis gewechselt ist indem der Code angelegt ist, lässt sich das Skript über folgendes Kommando ausführen:
+
+\lstnewenvironment{ExecuteCommandWindows}
+{\lstset{
+		captionpos=b,
+		frame=single,
+		label={lst:pip3linux},
+		caption={Kommando zur Ausführung des Skripts unter Windows},
+		showspaces=false,
+		showtabs=false,
+		breaklines=true,
+		showstringspaces=false,
+		breakatwhitespace=true,
+		escapeinside={(*@}{@*)},
+		commentstyle=\color{greencomments},
+		morecomment = [l]{\#\ },
+		morekeywords={ },
+		keywordstyle=\color{blue},
+		stringstyle=\color{black},
+		morestring=[b]",
+		basicstyle=\ttfamily\footnotesize,
+		numberbychapter=false}}{}
+
+\begin{ExecuteCommandWindows}
+Windows Kommandozeile:
+	python automated_script.py
+Windows Powershell:
+	python .\automated\_script.py
+Mit optionalem Parameter:
+	python automated_script.py C:\Temp\sourcefolder
+\end{ExecuteCommandWindows}
+
+Unter Linux analog dazu:
+
+\lstnewenvironment{ExecuteCommandLinux}
+{\lstset{
+		captionpos=b,
+		frame=single,
+		label={lst:pip3linux},
+		caption={Kommando zur Ausführung des Skripts unter Linux},
+		showspaces=false,
+		showtabs=false,
+		breaklines=true,
+		showstringspaces=false,
+		breakatwhitespace=true,
+		escapeinside={(*@}{@*)},
+		commentstyle=\color{greencomments},
+		morecomment = [l]{\#\ },
+		morekeywords={ },
+		keywordstyle=\color{blue},
+		stringstyle=\color{black},
+		morestring=[b]",
+		basicstyle=\ttfamily\footnotesize,
+		numberbychapter=false}}{}
+
+\begin{ExecuteCommandLinux}
+Je nach Konfiguration des Systems:
+	python automated_script.py
+Oder:
+	python3 automated_script.py
+\end{ExecuteCommandLinux}
+
+Anschließend wird das Skript ausgeführt und die Log-Meldungen werden auf der Konsole ausgegeben.
+Ein Beispiel für die ausgegebenen Log-Meldungen ist im Anhang unter Listing~\ref{lst:pythonlogs} zu sehen.
+
+\pagebreak
 \section{Ablauf der automatisierten Ausführung}
+Die folgende Aktionen werden durch das bereitgestellte Skript ausgeführt. 
+Der Übersicht wegen, werden einige Aktionen zusammengefasst und nicht im Detail dargestellt.
 
+\begin{enumerate}[nolistsep]
+	\item Auswahl des Quellverzeichnis (über optionalen Parameter oder Standardverzeichnis).
+	\item Einlesen der CSV-Dateien aus dem ausgewählten Quellverzeichnis.
+	\item Verarbeitung der einzelnen Quelldateien
+	\begin{enumerate}[nolistsep]
+		\item Anlegen eines Analysation-Requests
+		\item Analyse und Verarbeitung der einzelnen Zeilen zur Unterscheidung zwischen Rohdaten und Metadaten
+		\item Expansion der Rohdaten (Dekomprimierung)
+	\end{enumerate}
+	\item Kategorisierung der einzelnen Sequenzen
+	\begin{enumerate}[nolistsep]
+		\item Analyse der Frequenz
+		\begin{enumerate}[nolistsep]
+			\item Berechnung der Frequenz für die Quellsequenz
+			\item Bildung der Subsequenzen inklusive Berechnung der jeweiligen Frequenzen
+		\end{enumerate}
+		\item Analyse der Balance
+			\begin{enumerate}[nolistsep]
+			\item Berechnung der Balance für die Quellsequenz
+			\item Bildung der Subsequenzen inklusive Berechnung der jeweiligen Balance
+		\end{enumerate}
+		\item Generierung der PDF-Dateien zur Darstellung der Ergebnisse der Kategorisierung
+	\end{enumerate}
+	\item Berechnung der Kreuzkorrelation zwischen Sequenzen einer Quelldatei
+	\begin{enumerate}[nolistsep]
+		\item Vergleich der Quellsequenzen hinsichtlich der Möglichkeit die Kreuz-Korrelation zu berechnen
+		\item Berechnung der Kreuzkorrelation bei geeigneten Sequenz-Paaren
+		\item Generierung der PDF-Dateien zur Darstellung der Ergebnisse
+	\end{enumerate}
+\end{enumerate}
+
+\textcolor{red}{Ergebnisdarstellung Anhang}
 \section{Verbesserungsmöglichkeiten und Erweiterungen}
 \textcolor{red}{Multi-Prozess PDF Generierung}

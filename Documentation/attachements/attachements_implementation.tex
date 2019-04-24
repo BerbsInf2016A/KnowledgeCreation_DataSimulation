@@ -1,0 +1,62 @@
+\chapter{Anhang: Implementierung}
+\section{Log-Meldungen des automatisierten Skripts}
+\label{attachement:python:log}
+Das automatisierte Skript schreibt diverse Log-Meldungen in die Konsole.
+Listing~\ref{lst:pythonlogs} ist ein Beispiel dafür, was durch das Skript geloggt wird.
+
+\lstnewenvironment{PyhtonLogs}
+{\lstset{
+		captionpos=b,
+		frame=single,
+		label={lst:pythonlogs},
+		caption={Anhang: Beispiel für generierte Log-Meldungen},
+		showspaces=false,
+		showtabs=false,
+		breaklines=true,
+		showstringspaces=false,
+		breakatwhitespace=true,
+		escapeinside={(*@}{@*)},
+		commentstyle=\color{greencomments},
+		morecomment = [l]{\#\ },
+		morekeywords={ },
+		keywordstyle=\color{blue},
+		stringstyle=\color{black},
+		morestring=[b]",
+		basicstyle=\ttfamily\footnotesize,
+		numberbychapter=false}}{}
+
+\begin{PyhtonLogs}
+Reading files from source path:
+.\sourceFiles
+Found 2 source files
+
+Reading data from  .\sourceFiles\cross_corr_test.csv ...
+Found sequences:  2
+Expanding data for .\sourceFiles\cross_corr_test.csv Sequence 0
+Expanding data for .\sourceFiles\cross_corr_test.csv Sequence 1
+
+Reading data from  .\sourceFiles\TestDataShortShifting.csv ...
+Found sequences:  1
+Expanding data for .\sourceFiles\TestDataShortShifting.csv Sequence 0
+
+Calculating frequency for .\sourceFiles\cross_corr_test.csv Sequence 0
+Calculating frequency for .\sourceFiles\cross_corr_test.csv Sequence 1
+Calculating balance for .\sourceFiles\cross_corr_test.csv Sequence 0
+Calculating balance for .\sourceFiles\cross_corr_test.csv Sequence 1
+Calculating block size information for .\sourceFiles\cross_corr_test.csv
+Calculating block infos for .\sourceFiles\cross_corr_test.csv Sequence 0
+Calculating block infos for .\sourceFiles\cross_corr_test.csv Sequence 1
+
+Calculating frequency for .\sourceFiles\TestDataShortShifting.csv Sequence 0
+Calculating balance for .\sourceFiles\TestDataShortShifting.csv Sequence 0
+Calculating block size information for .\sourceFiles\TestDataShortShifting.csv
+Calculating block infos for .\sourceFiles\TestDataShortShifting.csv Sequence 0
+
+Generating pdfs...
+Generating pdf reports for .\sourceFiles\cross_corr_test.csv Sequence 0
+Generating pdf reports for .\sourceFiles\cross_corr_test.csv Sequence 1
+Generating pdf reports for .\sourceFiles\TestDataShortShifting.csv Sequence 0
+
+Crosscorrelation for file .\sourceFiles\cross_corr_test.csv
+.\sourceFiles\cross_corr_test.csv exporting Cross-Correlation between sequence 0 and 1
+\end{PyhtonLogs}
