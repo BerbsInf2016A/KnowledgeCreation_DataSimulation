@@ -1,4 +1,5 @@
 class Settings:
+    """ Contains setting parameters for the cross correlation """
     def __init__(self, plotNormalizedData=False,
                  plotCorrelations=False, plotNonNormalizedResults=False,
                  plotNormalizedResults=True, subtractMeanFromResult=True,

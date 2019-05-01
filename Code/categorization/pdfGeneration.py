@@ -126,7 +126,7 @@ def generateSummaryPdf(sequenceIndex, sequence,
         extractValueFromMetaDataDictionary(metaDataInfo, 'Machine')
     titlePostfix = titlePostfix + ' ' \
         + extractValueFromMetaDataDictionary(metaDataInfo, 'Date')
-    
+
     intervalPostfix = \
         extractValueFromMetaDataDictionary(metaDataInfo, 'Interval')
 

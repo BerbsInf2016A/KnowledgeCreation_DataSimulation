@@ -2,9 +2,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.gridspec import GridSpec
 
-# Execute the following command to install the python dependencies
-# pip install numpy scipy matplotlib ipython jupyter pandas sympy nose
-
 
 def normalized(a, axis=-1, order=2):
     # See:
@@ -17,13 +14,16 @@ def normalized(a, axis=-1, order=2):
 def getCorrelationDataForPatternSearch(seqA: [],
                                        pattern: [],
                                        plotCorrelation=False):
+    """ Calculate the correlation, based on numpy. """
     seqA = seqA.astype(float)
     pattern = pattern.astype(float)
 
     seqANorm = normalized(seqA)[0]
     patternNorm = normalized(pattern)[0]
 
+    # Calculate the correlation:
     correlated = np.correlate(seqANorm, patternNorm)
+    # Plot the information (if wanted)
     if plotCorrelation:
         fig = plt.figure(constrained_layout=True)
         gs = GridSpec(1, 1, figure=fig)
@@ -35,6 +35,7 @@ def getCorrelationDataForPatternSearch(seqA: [],
 
 
 def extractIndicesFromCorrelationData(correlationData, threshold=0.3):
+    """ Extracts indices from the correlation data """
     # Suppres scientific notation when printing floats:
     np.set_printoptions(suppress=True)
     sorted = np.argsort(correlationData)
@@ -46,5 +47,4 @@ def extractIndicesFromCorrelationData(correlationData, threshold=0.3):
         if value >= threshold:
             valuesList.append([int(index), value])
 
-    # Define the return value, first entry is index, which is an integer
     return np.asarray(valuesList)

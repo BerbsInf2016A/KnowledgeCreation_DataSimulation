@@ -56,6 +56,10 @@ def calculateBalancesForSubSequences(sequence) -> []:
     sequenceLength = len(sequence)
     resultDictionary = {}
 
+    # Calculate for sub-sequences
+    # The length of a subsequence is a mutiple of 10
+    # e.g. 10, 1000, 1000
+    # There must be at least 10 subsequences for each length.
     subSequenceDivisor = 10
     while (sequenceLength / subSequenceDivisor) >= 10:
         subSequenceSize = math.ceil(sequenceLength/subSequenceDivisor)
@@ -75,6 +79,10 @@ def calculateFrequenciesForSubSequences(sequence) -> {}:
     sequenceLength = len(sequence)
     resultDictionary = {}
 
+    # Calculate for sub-sequences
+    # The length of a subsequence is a mutiple of 10
+    # e.g. 10, 1000, 1000
+    # There must be at least 10 subsequences for each length.
     subSequenceDivisor = 10
     while (sequenceLength / subSequenceDivisor) >= 10:
         subSequenceSize = math.ceil(sequenceLength/subSequenceDivisor)

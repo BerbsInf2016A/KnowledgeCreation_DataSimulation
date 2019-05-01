@@ -26,24 +26,31 @@ def readFiles(sourceDirectoryPath: str) -> []:
 def getAllFilePathsFromDiretoryPath(path: str):
     """ Get all file paths in the given folder path. """
     files = [f for f in listdir(path) if isfile(join(path, f))]
+    # Only use CSV-Files
     files = [k for k in files if k.endswith(".csv")]
     files = [join(path, f) for f in files]
     return files
 
 
 def containsMetaData(value: []) -> bool:
+    """ Check if the array contains meta data. """
     if(len(value) < 2):
         return False
     firstElementInList = value[0]
     lastElementInList = value[-1]
+    # Meta data must start and end with a $ sign:
     return firstElementInList.startswith('$') \
         and lastElementInList.endswith('$')
 
 
 def buildMetadataDictionary(values: []):
+    """ Build a dictionary containing the meta data. """
     metaDataDictionary = {}
     currentKey = ''
     for index in range(len(values)):
+        # Since the meta data is basically a list of key-value pairs,
+        # every second entry is a new key. Additionally remove the
+        # $ signs, which are indicators for the meta data.
         if(index % 2 == 0):
             currentKey = values[index].replace('$', '')
         else:
@@ -53,8 +60,10 @@ def buildMetadataDictionary(values: []):
 
 
 def extractMetadataInformation(data, rowIndex):
+    """ Extracts the meta data for a given row index. """
     if(rowIndex < 0 or (len(data) - 1) < rowIndex):
         return dict()
+    # Check if the target row contains meta data:
     isMetaDataRow = containsMetaData(data[rowIndex])
     if(isMetaDataRow):
         return buildMetadataDictionary(data[rowIndex])
@@ -70,34 +79,40 @@ def readRawDataFile(sourceFile: str) -> AnalysationRequest:
     with open(sourceFile) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         cachedData = []
-        
+
+        # We need to read all data, since we need to lookup previous rows to
+        # get the meta data:
         for row in csv_reader:
             cachedData.append(row)
-            
+
         rowIndex = -1
 
         # Iterate the rows, each row is a sequence:
         for row in cachedData:
             rowIndex += 1
 
-            # Do we have a meta-data info row or a value row:
-
             # Handle meta-data row:
-            isMetaDataRow = containsMetaData(row)            
+            # Basically ignoring it. The next sequence row will read the
+            # the meta data from the previous row.
+            isMetaDataRow = containsMetaData(row)
             if(isMetaDataRow):
                 continue
-            
+
             # Handle value row:
             sequence = parseValueRow(row, sourceFile, rowIndex)
             # Sequence is finished, store it:
             source.rawSequences.append(sequence)
-            source.metadataDictionaries.append(extractMetadataInformation(cachedData, rowIndex - 1))
+            # Extract the meta data from the previous row.
+            # This will return a empty dictionary when there is no meta data.
+            source.metadataDictionaries.append(
+                extractMetadataInformation(cachedData, rowIndex - 1))
 
     print("Found sequences: ", str(len(source.rawSequences)))
     return source
 
 
-def parseValueRow(row, sourceFile, rowIndex):
+def parseValueRow(row, sourceFile, rowIndex) -> []:
+    """ Parsing a value row. """
     sequence = []
     for entry in row:
         # Split the entry

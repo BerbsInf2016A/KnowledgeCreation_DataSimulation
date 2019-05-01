@@ -3,6 +3,8 @@ import crosscorrelation.functions_crosscorrelation as fcc
 
 
 def executeCrossCorrelationForDatasets(datasets: []):
+    """ Iterates the datasets and calaculates the cross correlation
+        for suitable sequences """
     for dataset in datasets:
         if len(dataset.sequences) >= 2:
             print("\nCrosscorrelation for file", dataset.fileName)
@@ -10,6 +12,7 @@ def executeCrossCorrelationForDatasets(datasets: []):
                 for secondIdx, secondSequence in enumerate(dataset.sequences):
                     if secondIdx <= firstIndex:
                         continue
+                    # Only sequences with the same length can be used:
                     if len(firstSequence) != len(secondSequence):
                         print(dataset.fileName,
                               "Cross-Correlation between sequence",
@@ -17,6 +20,7 @@ def executeCrossCorrelationForDatasets(datasets: []):
                               str(secondIdx),
                               "ignored. Sequence-Length not equal!")
                         continue
+                    # Print information and create the export file path:
                     print(dataset.fileName,
                           "exporting Cross-Correlation between sequence",
                           str(firstIndex), "and", str(secondIdx))
@@ -28,5 +32,6 @@ def executeCrossCorrelationForDatasets(datasets: []):
                     correlationSettings = crossSettings.Settings()
                     correlationSettings.exportToPdf = True
                     correlationSettings.exportFilePath = exportPath
+                    # Execute the cross correlation:
                     fcc.crossCorrelation(firstSequence, secondSequence,
                                          correlationSettings)

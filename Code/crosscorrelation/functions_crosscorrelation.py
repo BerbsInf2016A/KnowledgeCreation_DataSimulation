@@ -110,6 +110,7 @@ def plotNormalizedCorrelationResults(figure, gridSystem, plotRow, seqA, seqB):
 
 
 def crossCorrelation(seqA: [], seqB: [], settings: crossSettings.Settings):
+    """ Calculate the cross correlation between to sequences. """
     seqA = np.asarray(seqA)
     seqB = np.asarray(seqB)
     if len(seqA) != len(seqB):
@@ -120,9 +121,12 @@ def crossCorrelation(seqA: [], seqB: [], settings: crossSettings.Settings):
     numberOfRowsToPlot = 2
     currentPlotRow = 0
 
+    # Normalize the data:
     seqANorm = normalized(seqA)[0]
     seqBNorm = normalized(seqB)[0]
 
+    # The number of rows which need to be plotted, depend
+    # on the settings. Calculate the needed number of rows:
     if settings.plotNormalizedData:
         numberOfRowsToPlot += 1
     if settings.plotCorrelations:
@@ -134,6 +138,7 @@ def crossCorrelation(seqA: [], seqB: [], settings: crossSettings.Settings):
     if settings.plotNormalizedResults:
         numberOfRowsToPlot += 1
 
+    # Plot the raw sequences:
     figure = plt.figure(constrained_layout=True)
     gs = GridSpec(numberOfRowsToPlot, 2, figure=figure)
     ax = figure.add_subplot(gs[currentPlotRow, 0])
@@ -144,6 +149,7 @@ def crossCorrelation(seqA: [], seqB: [], settings: crossSettings.Settings):
     ax.set_title('Raw data: Sequence B')
     currentPlotRow += 1
 
+    # Plotting the normalized data:
     if settings.plotNormalizedData:
         ax = figure.add_subplot(gs[currentPlotRow, 0])
         ax.plot(seqANorm, 'ro', rasterized=RASTERIZE_PLOTS)
@@ -181,6 +187,7 @@ def crossCorrelation(seqA: [], seqB: [], settings: crossSettings.Settings):
         if settings.plotNormalizedResults:
             currentPlotRow = plotNormalizedCorrelationResults(
                 figure, gs, currentPlotRow, seqA, seqB)
+
     if settings.drawResults:
         plt.draw()
     if settings.exportToPdf:
