@@ -1,0 +1,13 @@
+Allgemeines über die Implementierung
+Verwendete Bibliotheken + kurze Beschreibung
+Installationsanleitung
+Beschreibung des Projekts
+	Aufgaben der einzelnen Komponenten
+Bereitgestellte Skripte
+	Anleitung zur Ausführung
+	Darstellung von Ergebnissen von Beispielsequenzen ohne Interpretation
+	Beschreibung des Ablaufs bei der Ausführung
+	Verbesserungsmöglichkeiten und Erweiterungen
+	Metainfos übernehmen
+	
+	x Analyse + Bewertung von Kreuzkorrelation + Patternsearch x
