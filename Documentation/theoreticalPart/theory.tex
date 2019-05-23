@@ -2,10 +2,14 @@
 
 \chapter{Sequenzen}
 \label{chp:sequences}
-Bei den in dieser Arbeit verwendeten Datenstrukturen handelt es sich um \textit{Sequenzen}. Im Folgenden werden Sequenzen formal definiert und Begriffe zum beschreiben dieser eingeführt. Anschließend wird eine Klassifizierung anhand der definierten Eigenschaften vorgenommen. Die dabei entstandenen Klassen können bei der Suche von Mustern in Sequenzen helfen.  
+Bei den in dieser Arbeit verwendeten Datenstrukturen handelt es sich um \textit{Sequenzen}. Im Folgenden werden Sequenzen formal definiert und Begriffe zum beschreiben dieser eingeführt. Anschließend wird eine Klassifizierung anhand der definierten Eigenschaften vorgenommen. Die dabei entstandenen Klassen können bei der Suche von Mustern in Sequenzen helfen.
+
+Zuerst wird allerdings erst noch ein Blick auf bestehende Definitionen geworfen. Das Wort Sequenz stammt aus dem lateinischen und bedeutet Folge\footnote{https://www.duden.de/rechtschreibung/Sequenz}. Allgemein versteht man darunter eine Folge von gleichartigen oder ähnlichen Dingen\footnote{https://de.wiktionary.org/wiki/Sequenz}. Der Duden definiert im Kontext der Computerwissenschaften zudem eine Sequenz als Folge von hintereinander gespeicherten Daten\footnote{https://www.duden.de/rechtschreibung/Sequenz}. Da es sich bei Produktionsdaten um eben dies handelt, lässt sich der Begriff \textit{Sequenz} in dieser Arbeit verwenden. 
 
 \section{Allgemeine Definitionen}
 Zur Simulation von Realdaten werden Sequenzen als eine endliche Menge von zeitdiskreten Ereignissen beschrieben. Ein Ereignis wird durch ein \textit{Symbol} repräsentiert. Die Zusammenfassung aller  Symbole einer Sequenz nennt man \textit{Alphabet} und wird durch $\Sigma$ dargestellt. 
+
+Bei Sequenzen handelt es sich um nominalskalierte Daten\footnote{S. S. Stevens, On the theory of scales of measurement, Science, 1946}. Diese können weder in eine natürliche Reihenfolge gebracht werden, noch lassen sich Rechenoperationen wie Addition oder Multiplikation auf ihnen anwenden. Dies muss bei der weiteren Arbeit mit Sequenzen bedacht werden.
  
 \begin{theorem}
 Alphabet mit den Symbolen 0, 1 und 2: $\Sigma_1 = [0,1,2]$ oder mit den Symbolen a und b: $\Sigma_2 = [a,b]$. 
@@ -35,26 +39,27 @@ Weiterhin lassen sich Sequenzen anhand ihrer Dimensionen beschreiben. Während e
 Eine Sequenz mit den Alphabeten $\Sigma_{1} = [a,b]$ für die erste und $\Sigma_{2} = [A,B,C]$ für die zweite Dimension: $s = [\{a,C\},\{b,B\},\{a,B\},\{a,A\}]$.
 \end{theorem}
 
-\section{Der binäre Ansatz}
-Auf Grundlage der formalen Beschreibung wird für die folgende Arbeit die binäre Sequenz eingeführt. Eine binäre Sequenz ist eindimensional und kann zwei mögliche Zustände besitzen. Dazu wird das Alphabet $\Sigma = [0,1]$ mit 0 für \textit{keinen Fehlerzustand} und 1 für \textit{Fehlerzustand} eingeführt. Bei diesem Alphabet handelt es sich allerdings um nominalskalierte Daten\footnote{S. S. Stevens, On the theory of scales of measurement, Science, 1946}. Diese können weder in eine natürliche Reihenfolge gebracht werden, noch lassen sich Rechenoperationen wie Addition oder Multiplikation auf ihnen anwenden. Dies muss bei der weiteren Arbeit mit den Sequenzen bedacht werden.
+\section{Binäre Sequenzen}
+Auf Grundlage der formalen Beschreibung wird für die folgende Arbeit die binäre Sequenz eingeführt. Eine binäre Sequenz ist eindimensional und kann zwei mögliche Zustände besitzen. Dazu wird das Alphabet $\Sigma = [0,1]$ mit 0 für \textit{keinen Fehlerzustand} und 1 für \textit{Fehlerzustand} eingeführt.
 
-Ziel dieses Ansatzes ist eine größtmögliche Vereinfachung von Realdaten zu erzielen. Es wird angenommen, dass der Betrieb einer Produktionsmaschine sich entweder in einem gewünschten oder unerwünschten Zustand befindet. Unter letzterem versteht man jegliches ungeplante Verhalten, weshalb Vorgänge, wie bspw. das Umrüsten einer Maschine (geplant) als erwünschten und somit fehlerfreien Zustand gezählt werden. In Abbildung \ref{fig:full-status} sieht man eine Sequenz mit sechs möglichen Zuständen. Die Werte 0, 1, 2 stehen dabei für ein fehlerfreies und die Werte 3, 4, 5 für ein fehlerhaftes Verhalten der Produktionsmaschine. Durch das Zusammenfassen in diese beiden Kategorien, wird eine Vereinfachung der Sequenz erziehlt (siehe Abbildung \ref{fig:reduced-status}).
+Ziel dieses Ansatzes ist eine größtmögliche Vereinfachung von Realdaten zu erzielen. Es wird angenommen, dass der Betrieb einer Produktionsmaschine sich entweder in einem gewünschten oder unerwünschten Zustand befindet. Unter letzterem versteht man jegliches ungeplante Verhalten, weshalb Vorgänge, wie bspw. das Umrüsten einer Maschine (geplant) als erwünschten und somit fehlerfreien Zustand gezählt werden. In Abbildung \ref{fig:full-status} sieht man eine Sequenz mit sechs möglichen Zuständen. Die Werte 0, 1, 2 stehen dabei für ein fehlerfreies und die Werte 3, 4, 5 für ein fehlerhaftes Verhalten der Produktionsmaschine. Durch das Zusammenfassen in diese beiden Kategorien, wird eine Vereinfachung der Sequenz erziehlt (siehe Abbildung \ref{fig:reduced-status}).Das die Reduktion von mehreren auf zwei Zustände mit einem gewissen Informationsverlust einhergeht, muss bei der weiteren Arbeit mit den Sequenzen beachtet werden.
 
 \begin{figure}
 	\centering
-		\includegraphics[scale=0.35]{images/Zustandsreduktion/full}
+	\includegraphics[scale=0.32]{images/Zustandsreduktion/full}
 	\caption{Sequenz mit sechs Zuständen}
 	\label{fig:full-status}
 \end{figure}
 
 \begin{figure}
 	\centering
-		\includegraphics[scale=0.35]{images/Zustandsreduktion/reduced}
+		\includegraphics[scale=0.32]{images/Zustandsreduktion/reduced}
 	\caption{Sequenz mit zwei Zuständen}
 	\label{fig:reduced-status}
 \end{figure}
 
 \section{Eigenschaften}
+\label{properties}
 Um Sequenzen oder Teilsequenzen zu klassifizieren, müssen Eigenschaften definiert und voneinander abgegrenzt werden. Dazu werden die \textit{Balance} und \textit{Frequenz} einer Sequenz eingeführt.
 
 Mit der Balance wird das Verhältnis des Vorkommens eines Symbols zur Länge der Sequenz beschrieben. 
@@ -72,41 +77,55 @@ Balance(0) + Balance(1) = 1\ f\ddot{u}r\ \Sigma = [0,1]
 Man kann die Balance somit auch als Maß für die Ausrichtung einer Sequenz zu einem Symbol hin bezeichnen. Die Balance wird nach der Formel \ref{eq:balance} berechnet. Für eine binäre Sequenz gilt zudem Formel \ref{eq:binary-balance}. Mit ihr ist es möglich Balance(1) aus Balance(0) und anders herum zu berechnen.
 
 \begin{theorem}
-Aus $s = [1,0,0,0,1,0,1,1,1,1]$ mit $\Sigma = [0,1]$ und der Länge $|s| = 10$ folgen:
-
-$
-Balance(0) = \frac{Anzahl(0)}{|s|} = \frac{4}{10} = 0.4
-$
-
-$
-Balance(1) = \frac{Anzahl(1)}{|s|} = \frac{6}{10} = 0.6
-$
+Gegeben sind:
+\begin{itemize}[noitemsep]
+	\item Sequenz: $s = [1,0,0,0,1,0,1,1,1,1]$
+	\item Alphabet: $\Sigma = [0,1]$
+	\item Länge: $|s| = 10$
+\end{itemize}
+Daraus folgen:
+\begin{itemize}
+	\item [] $Balance(0) = \frac{Anzahl(0)}{|s|} = \frac{4}{10} = 0.4$
+	\item [] $Balance(1) = 1 - Balance(0) = 1 - 0.4 = 0.6$
+\end{itemize}
 \end{theorem}
 
-Daneben ist die Frequenz ist ein Maß für die Aktivität an Wertewechseln innerhalb einer Sequenz. Sie ist das Verhältnis zwischen der Anzahl der Wertewechsel und der Sequenzlänge und wird nach Formel \ref{eq:frequence} berechnet. 
+Daneben ist die Frequenz ein Maß für die Aktivität an Wertewechseln innerhalb einer Sequenz. Sie ist das Verhältnis zwischen der Anzahl an Wertewechsel und der Sequenzlänge. Sie wird nach Formel \ref{eq:frequence} berechnet. 
 
 \begin{equation}
 \label{eq:frequence}
 Frequenz = \frac{Anzahl\ der\ Wertewechsel}{Gesamtl\ddot{a}nge\ der\ Sequenz}
 \end{equation}
 
-Ein Wertewechsel tritt auf, wenn ein Element der Sequenz sich von seinem nachfolgendem Element unterscheidet, also $s_{i} \neq s_{i+1}$ ist. In einem Produktionsprozess könnte dies der Zeitpunkt sein, bei dem es zu einer Störung kommt, bzw. eine Störung behoben wurde. Bei einer binären Sequenz handelt es sich um den Wechsel von 0 auf 1, bzw. von 1 auf 0.
+Ein Wertewechsel tritt auf, wenn ein Element der Sequenz sich von seinem nachfolgendem Element unterscheidet, also $s_{i} \neq s_{i+1}$ ist. In einem Produktionsprozess könnte dies der Zeitpunkt sein, bei dem es zu einer Störung kommt, bzw. eine Störung behoben wurde. Bei einer binären Sequenz handelt es sich um den Wechsel von 0 auf 1 oder von 1 auf 0.
 
 \begin{theorem}
-Aus $s = [1,0,0,0,0,0,1,1,1,1]$ mit $\Sigma = [0,1]$ und der Länge $|s| = 10$ folgt:
-
-$
-Frequenz = \frac{Anzahl\ der\ Wertewechsel}{|s|} = \frac{2}{10} = 0.2
-$
+Gegeben sind:
+\begin{itemize}[noitemsep]
+	\item Sequenz: $s = [1,0,0,0,0,0,1,1,1,1]$
+	\item Alphabet: $\Sigma = [0,1]$
+	\item Länge: $|s| = 10$
+\end{itemize}
+Daraus folgt:
+\begin{itemize}[noitemsep]
+	\item [] $Frequenz = \frac{Anzahl\ der\ Wertewechsel}{|s|} = \frac{2}{10} = 0.2$
+\end{itemize}
 \end{theorem}
 
-Somit lassen sich mit Hilfe der Balance und Frequenz Aussagen darüber treffen, wie häufig ein Fehlerzustand in einer Sequenz auftritt und ob es häufig zu Wertewechseln kommt. Dabei bietet es sich an, besonders bei langen Sequenzen, sich auch die Eigenschaften von Teilsequenzen anzuschauen.
+Somit lassen sich mit Hilfe der Balance und Frequenz Aussagen darüber treffen, wie oft ein Fehlerzustand in einer Sequenz auftritt und ob es häufig zu Wertewechseln kommt. Dabei bietet es sich an, besonders bei langen Sequenzen, sich auch die Eigenschaften von Teilsequenzen anzuschauen. Das folgende - etwas größere - Beispiel soll dies verdeutlichen.
 
 \begin{theorem}
-Bei $s = [0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,1,0,1,0,1,0,1,0,1]$ mit $\Sigma = [0,1]$ und der Länge $|s| = 30$ werden die fünf Teilsequenzen $t_{0,5}(s)$, $t_{6,11}(s)$, $t_{12,17}(s)$, $t_{18,23}(s)$ und $t_{24,29}(s)$ betrachtet. Mit den Formeln \ref{eq:balance} und \ref{eq:frequence} ergeben sich für jede Teilsequenz sowie die gesamte Sequenz:
+Gegeben sind:
+\begin{itemize}[noitemsep]
+	\item Sequenz: $s = [0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,1,0,1,0,1,0,1,0,1]$
+	\item Alphabet: $\Sigma = [0,1]$
+	\item Länge: $|s| = 30$
+	\item Teilsequenzen: $t_{0,5}(s)$, $t_{6,11}(s)$, $t_{12,17}(s)$, $t_{18,23}(s)$ und $t_{24,29}(s)$
+\end{itemize}
+Daraus folgt mit den Formeln \ref{eq:balance} und \ref{eq:frequence} für jede Teilsequenz sowie die gesamte Sequenz:
 
 \begin{center}
-	\begin{tabular}{|c c c|} 
+	\begin{tabular}{|c c c|}
 		\hline
 		Sequenz & Balance(0) & Frequenz \\
 		\hline\hline
@@ -125,16 +144,30 @@ Bei $s = [0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,1,0,1,0,1,0,1,0,1]$ mit $\Si
 	\end{tabular}
 \end{center}
 
-Es zeigt sich, dass Balance und Frequenz in den Teilsequenzen teils stark variieren. Damit zeigt sich auch die Wichtigkeit Sequenzen nicht nur als Ganzes, sondern auch deren Verhalten über die Zeit zu betrachten. So sind zu Beginn noch keine Wertewechsel (Frequenz = 0) erkennbar, während zum Ende hin die Sequenz sehr aktiv wird (Frequenz = 0.8$\overline{3}$).
+
+
+Es zeigt sich, dass Balance und Frequenz in den Teilsequenzen teils stark variieren (vgl. Abbildungen \ref{fig:subsequences-balance} und \ref{fig:subsequences-frequency}). Damit zeigt sich auch die Wichtigkeit Sequenzen nicht nur als Ganzes, sondern auch deren Verhalten über die Zeit zu betrachten. So sind zu Beginn noch keine Wertewechsel (Frequenz = 0) erkennbar, während zum Ende hin die Sequenz sehr aktiv wird (Frequenz = 0.8$\overline{3}$).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.32]{images/Teilsequenzen/teilsequenzen_balance}
+	\caption{Balance ohne und mit fünf Teilsequenzen}
+	\label{fig:subsequences-balance}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.32]{images/Teilsequenzen/teilsequenzen_frequenz}
+	\caption{Frequenz ohne und mit fünf Teilsequenzen}
+	\label{fig:subsequences-frequency}
+\end{figure}
 \end{theorem}
 
-\section{Klassifizierung}
-Wenn man Sequenzen graphisch darstellt ergeben sich unterschiedliche Muster. Um die Klassifikation von Sequenzen zu erleichtern werden anhand der Balance und Frequenz Klassen für bestimmte Wertebereiche definiert. Die im folgenden vorgenommenen Definitionen haben zur Grundannahme, dass es sich um binäre Sequenzen handelt.
+\subsubsection{Wertebereich}
 
-Der kleinste Wert für die Balance oder Frequenz ist 0 und der größte kleiner gleich 1. Eine Sequenz mit einer niedrigen, bzw. hohen Balance wird als unausgeglichen beschrieben, während ein Wert um die 0.5 als ausgeglichen gilt. Dieser Ausgleich bezieht sich letztlich auf die Verteilung der Nullen und Einsen. Eine detaillierte Auflistung der unterschiedlichen Wertebereiche findet sich in Tabelle \ref{tab:balance}. 
+Der kleinste Wert für die Balance oder Frequenz ist 0 und der größte kleiner gleich 1. Eine Sequenz mit einer niedrigen, bzw. hohen Balance wird als unausgeglichen beschrieben, während ein Wert um die 0.5 als ausgeglichen gilt. Dieser Ausgleich bezieht sich letztlich auf die Verteilung der Nullen und Einsen. Eine detaillierte Auflistung der unterschiedlichen Wertebereiche findet sich in Tabelle~\ref{tab:balance}. 
 
-\begin{table}
-\label{tab:balance}
+\begin{table}[H]
 	\begin{center}
 		\begin{tabular}{|c c|} 
 			\hline
@@ -148,13 +181,13 @@ Der kleinste Wert für die Balance oder Frequenz ist 0 und der größte kleiner 
 			\hline
 		\end{tabular}
 		\caption{Balance}
+		\label{tab:balance}
 	\end{center}
 \end{table}
 
-Da mit der Frequenz ein Maß für die Wertewechsel innerhalb einer Sequenz bildet, entspricht ein Wert gegen 0 einer sehr inaktiven Sequenz mit nur sehr wenigen bis keinen Wertewechseln. Ein Wert von 1 steht hingegen für eine hochfrequente Sequenz, in der sehr viel Wertewechsel stattfinden. Eine detaillierte Auflistung der unterschiedlichen Wertebereiche findet sich in Tabelle \ref{tab:frequence}. 
+Da mit der Frequenz ein Maß für die Wertewechsel innerhalb einer Sequenz bildet, entspricht ein Wert gegen 0 einer sehr inaktiven Sequenz mit nur sehr wenigen bis keinen Wertewechseln. Ein Wert von 1 steht hingegen für eine hochfrequente Sequenz, in der sehr viel Wertewechsel stattfinden. Eine detaillierte Auflistung der unterschiedlichen Wertebereiche findet sich in Tabelle~\ref{tab:frequence}. 
 
-\begin{table}
-\label{tab:frequence}
+\begin{table}[H]
 	\begin{center}
 		\begin{tabular}{|c c|} 
 			\hline
@@ -168,34 +201,40 @@ Da mit der Frequenz ein Maß für die Wertewechsel innerhalb einer Sequenz bilde
 			\hline
 		\end{tabular}
 		\caption{Frequenz}
+		\label{tab:frequence}
 	\end{center}
 \end{table}
 
-Nachdem die unterschiedlichen Wertebereiche der Eigenschaften beschrieben wurden, können nun markante Grundmuster mit ihrer Hilfe klassifiziert werden.
+Mit der Balance und Frequenz sind nun zwei Eigenschaften definiert, mit denen sich grundsätzliche Aussagen über Sequenzen treffen lassen. Aus betriebswirtschaftlicher Sicht ist es erstrebenswert, die Balance(kein Fehlerzustand) möglichst hoch zu halten. Eine Balance von 1 wäre der Idealzustand, da somit kein Fehlerzustand in der Sequenz vorhanden ist. 
 
-Eine Sequenz befindet sich fast ausschließlich in einem Zustand. Änderungen treten fast gar nicht und wenn doch nur kurz auf. Dieses Muster wird \textit{Ausreißer} genannt und ist in Abbildung \ref{fig:ausreisser} dargestellt. Bei maschinellen Prozessen könnte man dieses Muster bei einer Maschine, welche im Regelbetrieb arbeitet und kurz einen Fehler wirft, beobachten. Wichtig dabei ist, dass schnell wieder ein Sprung in den Ausgangszustand stattfindet. Die Balance einer solchen Sequenz ist unausgeglichen und die Frequenz sehr niedrig.\\
+Wenn man die Frequenz einer Sequenz betrachtet, lässt sich grundsätzlich sagen, dass eine niederfrequente Sequenz ein wünschenswerter Zustand ist, denn wenige Wertewechsel sprechen für eine gewisse Kontinuität und Stabilität. Allerdings sollte man die Frequenz zusammen mit der Balance und nicht alleine betrachten. Denn eine niedrige Frequenz im Zusammenspiel mit einer niedrigen Balance(kein Fehlerzustand) würde bedeuten, dass sich eine Maschine konstant im Fehlerzustand befindet.
 
-Ein weiteres Grundmuster ist in Abbildung \ref{fig:zittern} dargestellt. Dieses zeigt einen regelmäßigen Wechsel zwischen den zwei möglichen Zuständen und wird als \textit{Zittern} bezeichnet. Dieses Verhalten ist eher untypisch für Produktionsmaschinen und dürfte nicht oft beobachtet werden. Hier wäre ein Rückschluss auf eine defekte Sensorik naheliegend. Solche Sequenzen haben eine Balance von ca. 0.5 sowie eine hohe Frequenz .\\ 
+\section{Klassifizierung}
+Wenn man Sequenzen graphisch darstellt ergeben sich unterschiedliche Muster. Um die Klassifikation von Sequenzen zu erleichtern, wurden in Kapitel \ref{properties} die Wertebereiche für Balance und Frequenz definiert. Im Folgenden werden markante Muster, welche in Teilsequenzen auftreten können, beschrieben.
 
-Bei dem dritten Muster befindet sich eine Sequenz zuerst in einem Zustand und verharrt nach einem Wertewechsel im anderen. Abbildung \ref{fig:wechsel} zeigt dieses Muster. In der Praxis kann so ein Muster auftreten, wenn eine Maschine im Regelbetrieb arbeitet und auf Grundlage eines Fehlers längere Zeit ausfällt. Durch diesen \textit{Wechsel} ergibt sich zudem der Name dieses Musters.
+Das erste Muster nennt sich \textit{Ausreißer} und ist in Abbildung \ref{fig:ausreisser} dargestellt. Eine solche Teilsequenz befindet sich fast ausschließlich in einem Zustand. Änderungen treten fast gar nicht und wenn doch nur kurz auf. Bei Produktionsprozessen kann man dieses Muster bei einer Maschine, welche im Regelbetrieb arbeitet und kurz einen Fehler wirft, beobachten. Wichtig dabei ist, dass schnell wieder ein Sprung in den Ausgangszustand stattfindet. Die Balance einer solchen Sequenz ist unausgeglichen und die Frequenz sehr niedrig.
 
-\begin{figure}
+\begin{figure}[H]
 	\centering
-		\includegraphics[scale=0.5]{images/Klassifizierung/ausreisser}
+	\includegraphics[scale=0.32]{images/Klassifizierung/ausreisser}
 	\caption{Sequenz mit einem Ausreißer}
 	\label{fig:ausreisser}
 \end{figure}
 
-\begin{figure}
+Ein weiteres Grundmuster ist in Abbildung \ref{fig:zittern} dargestellt. Dieses zeigt einen regelmäßigen Wechsel zwischen den zwei möglichen Zuständen und wird als \textit{Zittern} bezeichnet. Dieses Verhalten ist eher untypisch für Produktionsmaschinen und dürfte nicht oft beobachtet werden. Hier wäre ein Rückschluss auf eine defekte Sensorik naheliegend. Solche Sequenzen haben eine Balance von ca. 0.5 sowie eine hohe Frequenz .
+
+\begin{figure}[H]
 	\centering
-		\includegraphics[scale=0.5]{images/Klassifizierung/zittern}
+	\includegraphics[scale=0.32]{images/Klassifizierung/zittern}
 	\caption{Sequenz mit einem Zittern}
 	\label{fig:zittern}
 \end{figure}
 
-\begin{figure}
+Bei dem dritten Muster befindet sich eine Sequenz zuerst in einem Zustand und verharrt nach einem Wertewechsel im Anderen. Abbildung \ref{fig:wechsel} zeigt dieses Muster. In der Praxis kann so ein Muster auftreten, wenn eine Maschine im Regelbetrieb arbeitet und auf Grundlage eines Fehlers längere Zeit ausfällt. Durch diesen \textit{Wechsel} ergibt sich zudem der Name dieses Musters.
+
+\begin{figure}[H]
 	\centering
-		\includegraphics[scale=0.5]{images/Klassifizierung/wechsel}
+		\includegraphics[scale=0.32]{images/Klassifizierung/wechsel}
 	\caption{Sequenz mit einem Wechsel}
 	\label{fig:wechsel}
 \end{figure}
