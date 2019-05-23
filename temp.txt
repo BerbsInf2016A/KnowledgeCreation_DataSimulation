@@ -1,13 +1,10 @@
-Allgemeines über die Implementierung
-Verwendete Bibliotheken + kurze Beschreibung
-Installationsanleitung
-Beschreibung des Projekts
-	Aufgaben der einzelnen Komponenten
-Bereitgestellte Skripte
-	Anleitung zur Ausführung
-	Darstellung von Ergebnissen von Beispielsequenzen ohne Interpretation
-	Beschreibung des Ablaufs bei der Ausführung
-	Verbesserungsmöglichkeiten und Erweiterungen
-	Metainfos übernehmen
-	
-	x Analyse + Bewertung von Kreuzkorrelation + Patternsearch x
+Allgemein:
+	Abgabe: Wann und in welcher Form? Wohin mit dem Code?
+		Abgabe der Großen Studienarbeit bis spätestens Freitag, 14.06.2019
+		- 1 Exemplar an den Betreuer, 1 Exemplar an das Studiengangssekretariat
+		Abgabe im Sekretariat sowohl in gedruckter als auch in digitaler Form, d.h. auf CD/DVD
+		oder USB-Stick oder per Mail (pdf oder ZIP-Datei, Dateiname sollte Kurs und Name
+		enthalten)
+	Paper
+
+	Implementierung: Batch + MD
