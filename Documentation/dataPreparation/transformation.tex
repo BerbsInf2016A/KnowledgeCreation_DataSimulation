@@ -1,0 +1,43 @@
+\newpage
+\section{Daten Transformation} \label{ch:transformation}
+
+Nach der Untersuchung von simulierten Daten wurde auf reale Daten übergegangen. Dafür lagen uns Maschinendaten der Firma MPDV vor, welche über den Zeitraum 2016-2018 gesammelt wurden.
+
+\needspace{6\baselineskip}
+Wenn neben den simulierten Daten auch reale Daten untersucht werden sollen, dann müssen diese auf einen gemeinsamen Nenner gebracht werden, sodass die selben Methoden zur Untersuchung verwendet werden können. Daher lag der Entschluss nahe, die Maschinendaten der MPDV auf unser Format umzuwandeln.
+
+\needspace{6\baselineskip}
+Die Rohdaten wurden uns als CSV-Dateien gegeben, welche die Störmeldungen mehrerer Maschinen über mehrere Tage beinhalten. Als Ansatz wurde gewählt, ein Programm zu schreiben, welches die Rohdaten in unser Format umwandelt, wie es in \autoref{ch:format} beschrieben wurde. Hierfür wurde ebenfalls .NET Core verwendet, damit die Anwendung auf verschiedenen Betriebssystemen zum Einsatz kommen kann.
+
+\needspace{6\baselineskip}
+Bei einer Untersuchung der Rohdaten wurde klar, dass diese sehr viele Datensätze enthielt und relativ unübersichtlich aufgebaut war. Die Störmeldungen wurden einzeln aufgeführt, bei denen jeweils Start und Endzeit, sowie die entsprechende Meldung angegeben wurden. Die Zeiten sind jeweils in Sekunden angegeben und auf den gesamten Tag ausgelegt. Ein Ausschnitt wird in \autoref{csvRawdata} gezeigt. Bei dem jeweils ersten Ausdruck handelt es sich um den Maschinennamen, danach folgt Startzeit, Datum, Endzeit sowie die Störmeldung als Zahlencode.
+
+
+\needspace{8\baselineskip}
+\lstinputlisting[caption=CSV mit Rohdaten, label=csvRawdata, breaklines=true]{dataPreparation/content/rawdata.csv}
+
+
+\needspace{6\baselineskip}
+Die MPDV Dateien waren mit ihrer Größe bis zu 20 Megabyte relativ voll gepackt und mussten reduziert werden. Der Ansatz war, für jede Maschine und jeweils jeden Tag eine eigene Datei zu erstellen. Dies sollte die Möglichkeit verbessern gezielt dieselbe Maschine an unterschiedlichen Tagen oder verschiedene Maschinen miteinander zu vergleichen.
+
+\needspace{6\baselineskip}
+Die Konsolenanwendung zur Transformation ist relativ simpel aufgebaut und besitzt keinerlei Einstellungsmöglichkeiten. Als einziger Input ist der Pfad zu einer MPDV-Datei erforderlich. Der Algorithmus sortiert zuerst alle Einträge, welche in den Rohdaten zu finden sind. Dabei wird die Nutzung von Objektorientierter Programmierung genutzt. Ein Klassendiagramm ist unter \autoref{fig:transformationClass} zu sehen.
+
+\vspace{20pt}
+\needspace{6\baselineskip}
+\begin{figure}[tbph]
+	\centering 
+	\includegraphics[width=0.9\textwidth,keepaspectratio] {dataPreparation/images/transformationClass.png} 
+	\caption{\label {fig:transformationClass} Klassendiagramm für die Datenspeicherung} 
+\end{figure}
+
+\vspace{15pt}
+
+\needspace{6\baselineskip}
+Für jede neue Maschine wird ein neues Objekt angelegt mit dem jeweiligen Maschinennamen. Für jeden Tag, an dem Daten für die entsprechende Maschine vorliegen, wird ein \enquote{Day}-Objekt mit dem entsprechenden Datum der Maschine hinzugefügt. In diesem Objekt werden alle Einträge an diesem Tag gespeichert. Diese strukturierte Speicherung ermöglicht eine bessere Übersicht und verbessert die Weiterverarbeitung der Daten im nächsten Schritt.
+
+\needspace{6\baselineskip}
+Da in dem unter \autoref{ch:format} definiertem Format die Statusmeldungen in Intervallen gespeichert sind, muss nun eine Transformation stattfinden. Deswegen werden für jeden Tag die Sekunden fortlaufend hochgezählt und auf vorliegende Störmeldungen überprüft. Dabei gilt, dass jede Störmeldung mit einer \enquote{1} gekennzeichnet wird und der Normalzustand mit \enquote{0}.
+
+\needspace{6\baselineskip}
+Jede dieser umgewandelten Tage wird danach in einer eigenen Datei gespeichert und mit einem entsprechenden Header versehen. Der Header ist in diesem Fall wichtig, da ansonsten die Hintergrunddaten, von welcher Maschine und welchem Tag die Daten stammen, verloren gehen würden. Diese Dateien können im Anschluss ausgewertet werden.

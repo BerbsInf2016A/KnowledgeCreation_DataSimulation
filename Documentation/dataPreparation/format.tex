@@ -1,0 +1,53 @@
+\section{Datenformat} \label{ch:format}
+
+Da verschiedene Technologien während des Prozesses der Datenanalyse zum Einsatz kommen, muss ein einheitliches Format festgelegt werden, mit welchem die Daten gespeichert und weiter gegeben werden. Dabei waren die maßgeblichen Punkte, dass die Daten jederzeit von Menschen gelesen und überprüft werden können, sowie eine möglichst kompakte Speicherung. 
+
+\needspace{6\baselineskip}
+Das Format wurde daher auf eine CSV (Comma Separated Value) festgelegt. Dabei werden die einzelnen Daten hintereinander geschrieben und lediglich durch ein Komma (,) getrennt. Wie in \autoref{csvUnsorted} zu erkennen ist, kann auf den ersten Blick die Datenstruktur nachvollzogen werden. 
+
+\needspace{6\baselineskip}
+Bei den zu speichernden Daten handelt es sich um Binärdaten, welche nur zwei Zustände kennen: Funktionierend (0) und Störung (1). Dabei steht jedes Zeichen für einen Intervall, welchen wir standardmäßig auf eine Sekunde definiert haben.
+
+
+\needspace{8\baselineskip}
+\lstinputlisting[caption=Standard CSV mit Binär-Werten, label=csvUnsorted, breaklines=true]{dataPreparation/content/unsorted.csv}
+
+\vspace{30pt}
+\needspace{6\baselineskip}
+Ein Problem an dieser Form tritt auf, wenn er sich um eine große Menge an Daten in einer Datei handelt. Bei zu vielen Zeilen verliert ein Mensch schnell den Überblick. Außerdem haben große Datenmengen einen hohen Speicherbedarf auf der Festplatte und kann Größen von 100 Megabyte erreichen.
+
+\needspace{6\baselineskip}
+Daher wurde das Format ein wenig abgeändert. Aufgrund der beschränkten Analyse, welche sich lediglich auf Binärdaten bezieht, kommen häufig Wiederholungen vor. Als Resultat werden aufeinander folgende Intervalle mit denselben Werten in einem Eintrag gespeichert. Dabei wird zuerst der Wert und nach einem Trennstrich die Anzahl der Wiederholungen angegeben. In \autoref{csvSorted} kann erkannt werden, dass selbst eine große Datenmenge von 8000 Intervallen einfach überblickt werden kann.
+
+
+\needspace{8\baselineskip}
+\lstinputlisting[caption=CSV mit gruppierten Binär-Werten, label=csvSorted, breaklines=true]{dataPreparation/content/TestDataShortSpikes.csv}
+
+\newpage
+\needspace{6\baselineskip}
+Zusätzlich zu den gespeicherten Intervalldaten müssen auch allgemeine Informationen über den Inhalt der Datei gespeichert werden. Aus diesem Grund haben wir in der ersten Zeile einen \enquote{Header} mit allen dafür benötigten Informationen eingeführt. Zudem wird der Header durch das Dollarsymbol (\$) markiert, damit es beim maschinellen Auslesen leichter erfasst werden kann und nicht mit in die Auslese von Intervalldaten geraten kann.
+
+
+\needspace{6\baselineskip}
+In \autoref{csvHeader} ist der Header in einer Datei mit Maschinendaten enthalten. Die wichtigen Informationen sind, jeweils durch Komma getrennt, in drei sogenannten Key-Value-Paaren gespeichert. Das erste mit dem Namen \enquote{Machine} gibt den Namen der Maschine an, von welcher die Intervalle stammen. \enquote{Date} gibt den Tag an, an dem die Intervalle gemessen wurden. Unsere Dateien enthalten nur Werte von einem Tag, mehr dazu in \autoref{ch:transformation}. Unter \enquote{Intervall} wird der Abstand der einzelnen Intervalle in Millisekunden angegeben. Dieser Wert kann variiert werden und liegt im Standardfall bei einer Sekunde oder 1000 Millisekunden.
+
+\vspace{60pt}
+\needspace{4\baselineskip}
+\lstinputlisting[caption=CSV mit Headereintrag, label=csvHeader, breaklines=true]{dataPreparation/content/BUP1FUE1_2015-07-22.csv}
+
+\newpage
+\needspace{6\baselineskip}
+Für den Fall, dass zwei oder mehrere Intervallreihen miteinander verglichen werden sollen, können mehrere Reihen in einer Datei angegeben werden. Dabei gilt, dass ein Absatz den Beginn einer neuen Reihe einleitet. Wie in \autoref{csvMoreFiles} zu erkennen, enthält eine Zeile entweder einen Header, der für die darunter stehende Zeile Informationen enthält. Die Speicherung in einer Datei hilft bei einer gezielten Untersuchung der Intervall untereinander, da auf diese Weise besser nachvollzogen werden kann, welche Werte miteinander verglichen wurden.
+
+\vspace{30pt}
+\needspace{4\baselineskip}
+\lstinputlisting[caption=CSV mit mehreren Intervallreihen, label=csvMoreFiles, breaklines=true]{dataPreparation/content/moreFiles.csv}
+
+
+\vspace{20pt}
+\needspace{6\baselineskip}
+Die Erstellung einer Datei mit verschiedenen Daten geschieht nach aktuellem Stand nicht automatisch, sondern muss manuell ausgeführt werden. Ein Algorithmus zur Automatischen Untersuchung könnte in Zukunft angesetzt werden, wenn ein sinnvolles Vergleichsmuster ermittelt wurde. Unsere Untersuchung hat sich auf spezielle Vergleiche bezogen, weshalb manuelles Eingreifen gerechtfertigt war. 
+
+
+\needspace{6\baselineskip}
+Ein anderer Ansatz für die Speicherung der Intervalreihen hätte in einer Datenbank geschehen können. Dies hätte jedoch größeren Aufwand zur Folge und wäre problematisch beim Austausch der Daten untereinander gewesen. Da es im Umfang dieser Arbeit mit unserer Variante angemessen funktioniert hat, fanden wir den Einsatz einer Datenbank für unnötig.
