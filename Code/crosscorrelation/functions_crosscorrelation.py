@@ -110,6 +110,7 @@ def plotNormalizedCorrelationResults(figure, gridSystem, plotRow, seqA, seqB):
 
 
 def crossCorrelation(seqA: [], seqB: [], settings: crossSettings.Settings):
+    plt.close("all")
     """ Calculate the cross correlation between to sequences. """
     seqA = np.asarray(seqA)
     seqB = np.asarray(seqB)
@@ -190,6 +191,7 @@ def crossCorrelation(seqA: [], seqB: [], settings: crossSettings.Settings):
 
     if settings.drawResults:
         plt.draw()
+        plt.show()
     if settings.exportToPdf:
         figure.savefig(settings.exportFilePath, bbox_inches='tight')
         plt.close(figure)
