@@ -12,7 +12,6 @@ def executeCategorization(requests: List[request.AnalysationRequest]) -> []:
         print("")
         data = catFunc.analyzeFrequency(data)
         data = catFunc.analyzeBalance(data)
-        data = catFunc.calculateBlockInfos(data)
 
     print("\nGenerating pdfs...")
     for dataset in requests:

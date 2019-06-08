@@ -11,6 +11,5 @@ filePathBatches = fileAccessFuntions.getFilePathBatches(directoryPath)
 # Iterate over the batches of file paths:
 for filePathBatch in filePathBatches:
     requests = fileAccessFuntions.readFilesForFilePathBatch(filePathBatch)
-    # Execute the categorization: Calculating the balance, frequency and
-    # block-infos:
+    # Execute the categorization: Calculating the balance, frequency:
     executeCategorization(requests)

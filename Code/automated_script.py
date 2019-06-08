@@ -45,8 +45,7 @@ def executedForFolderPath(path):
         batchcounter += 1
         print("Executing batch", str(batchcounter), "of", str(len(filePathBatches)), "batches.")
         requests = fileAccessFuntions.readFilesForFilePathBatch(filePathBatch)
-        # Execute the categorization: Calculating the balance, frequency and
-        # block-infos:
+        # Execute the categorization: Calculating the balance, frequency:
         executeCategorization(requests)
         # This will calculate the cross correlation between sequences in the same
         # source file. Additionally, the sequences must have the same length.
