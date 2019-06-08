@@ -38,13 +38,19 @@ def main():
 
 def executedForFolderPath(path):
     # Read the csv source files and expand them:
-    requests = fileAccessFuntions.readFiles(path)
-    # Execute the categorization: Calculating the balance, frequency and
-    # block-infos:
-    executeCategorization(requests)
-    # This will calculate the cross correlation between sequences in the same
-    # source file. Additionally, the sequences must have the same length.
-    executeCrossCorrelationForDatasets(requests)
+    filePathBatches = fileAccessFuntions.getFilePathBatches(path)
+
+    batchcounter = 0
+    for filePathBatch in filePathBatches:
+        batchcounter += 1
+        print("Executing batch", str(batchcounter), "of", str(len(filePathBatches)), "batches.")
+        requests = fileAccessFuntions.readFilesForFilePathBatch(filePathBatch)
+        # Execute the categorization: Calculating the balance, frequency and
+        # block-infos:
+        executeCategorization(requests)
+        # This will calculate the cross correlation between sequences in the same
+        # source file. Additionally, the sequences must have the same length.
+        executeCrossCorrelationForDatasets(requests)
 
 
 if __name__ == "__main__":

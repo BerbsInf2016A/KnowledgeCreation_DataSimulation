@@ -6,13 +6,27 @@ import numpy as np
 from analysationrequest.request import AnalysationRequest
 
 
-def readFiles(sourceDirectoryPath: str) -> []:
+def getFilePathBatches(sourceDirectoryPath: str, batchSize=10) -> []:
     """ Execute the categorization for all csv files in the
         given source directory. """
     print('Reading files from source path:')
     print(sourceDirectoryPath)
-    files = getAllFilePathsFromDiretoryPath(sourceDirectoryPath)
-    print("Found", str(len(files)), "source files")
+    files = getAllFilePathsFromDirectoryPath(sourceDirectoryPath)    
+
+    batches = list(createBatchesOfSize(files, batchSize))
+    print("Found", str(len(files)), "source files splitted into", str(len(batches)), "batches.")
+    return batches
+
+
+def createBatchesOfSize(list, size):
+    """ Split a list into smaller batches. """
+    # For item i in a range that is a length of the size parameter,
+    for i in range(0, len(list), size):
+        # Create an index range for the list:
+        yield list[i:i+size]
+
+
+def readFilesForFilePathBatch(files):
     datasets = []
     for sourceFile in files:
         print("")
@@ -23,7 +37,7 @@ def readFiles(sourceDirectoryPath: str) -> []:
     return datasets
 
 
-def getAllFilePathsFromDiretoryPath(path: str):
+def getAllFilePathsFromDirectoryPath(path: str):
     """ Get all file paths in the given folder path. """
     files = [f for f in listdir(path) if isfile(join(path, f))]
     # Only use CSV-Files
