@@ -46,7 +46,9 @@ def executedForFolderPath(path):
         print("Executing batch", str(batchcounter), "of", str(len(filePathBatches)), "batches.")
         requests = fileAccessFuntions.readFilesForFilePathBatch(filePathBatch)
         # Execute the categorization: Calculating the balance, frequency:
-        executeCategorization(requests)
+        # Set the second parameter to True if you want to show the results in a
+        # Matplotlib window:
+        executeCategorization(requests, False)
         # This will calculate the cross correlation between sequences in the same
         # source file. Additionally, the sequences must have the same length.
         executeCrossCorrelationForDatasets(requests)

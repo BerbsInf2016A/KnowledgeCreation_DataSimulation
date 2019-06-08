@@ -190,6 +190,7 @@ def crossCorrelation(seqA: [], seqB: [], settings: crossSettings.Settings):
                 figure, gs, currentPlotRow, seqA, seqB)
 
     if settings.drawResults:
+        figure.canvas.set_window_title(settings.exportFilePath) 
         plt.draw()
         plt.show()
     if settings.exportToPdf:

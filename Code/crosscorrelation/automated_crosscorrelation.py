@@ -32,6 +32,7 @@ def executeCrossCorrelationForDatasets(datasets: []):
                     correlationSettings = crossSettings.Settings()
                     correlationSettings.exportToPdf = True
                     correlationSettings.exportFilePath = exportPath
+                    correlationSettings.drawResults = False
                     # Execute the cross correlation:
                     fcc.crossCorrelation(firstSequence, secondSequence,
                                          correlationSettings)

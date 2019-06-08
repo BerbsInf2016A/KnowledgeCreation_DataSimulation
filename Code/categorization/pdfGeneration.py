@@ -9,14 +9,18 @@ BALANCE_PLOT_COLOR = '#4286f4'
 RASTERIZE_PLOTS = False
 
 
-def generatePdfsForDataset(data: catData.AnalysationRequest):
+def generatePdfsForDataset(data: catData.AnalysationRequest, drawResults=False):
     """ Generate the pdfs for a dataset. """
     for sequenceIndex, sequence in enumerate(data.sequences):
         print("Generating pdf reports for",
               data.fileName, "Sequence", sequenceIndex)
-        generateSummaryPdf(sequenceIndex, sequence, data)
-        generateSubSequenceFrequencyInfoPdf(sequenceIndex, data)
-        generateSubSequenceBalanceInfoPdf(sequenceIndex, data)
+        plt.close("all")
+
+        generateSummaryPdf(sequenceIndex, sequence, data, drawResults)
+        generateSubSequenceFrequencyInfoPdf(sequenceIndex, data, drawResults)
+        generateSubSequenceBalanceInfoPdf(sequenceIndex, data, drawResults)
+        if drawResults:
+            plt.show()
 
 
 def resolveFrequencyValueToDescriptiveString(value):
@@ -40,15 +44,17 @@ def resolveBalanceValueToDescriptiveString(value):
 
 
 def generateSubSequenceBalanceInfoPdf(sequenceIndex,
-                                      data: catData.AnalysationRequest):
+                                      data: catData.AnalysationRequest,
+                                      drawResults: bool):
     """ Generate a pdf containing the balances for the sub sequences. """
 
     subSequenceBalances = data.subSequenceBalances[sequenceIndex]
 
-    figure = plt.figure(constrained_layout=True)
     numberOfNeededRows = len(subSequenceBalances)
     if numberOfNeededRows == 0:
         return
+
+    figure = plt.figure(constrained_layout=True)
     gs = GridSpec(numberOfNeededRows, 1, figure=figure)
 
     currentRowIndex = 0
@@ -69,19 +75,26 @@ def generateSubSequenceBalanceInfoPdf(sequenceIndex,
     exportPath = data.fileName.replace(
         ".csv", "_SubSequences_Balances_" + str(sequenceIndex) + ".pdf")
     figure.savefig(exportPath, bbox_inches='tight')
-    plt.close(figure)
+    
+    if drawResults:
+        figure.canvas.set_window_title(exportPath) 
+        plt.draw()
+    else:
+        plt.close(figure)
 
 
 def generateSubSequenceFrequencyInfoPdf(sequenceIndex,
-                                        data: catData.AnalysationRequest):
+                                        data: catData.AnalysationRequest,
+                                        drawResults: bool):
     """ Generate a pdf containing the frequencies for the sub sequences. """
 
     subSequenceFrequencies = data.subSequenceFrequencyResults[sequenceIndex]
-
-    figure = plt.figure(constrained_layout=True)
+    
     numberOfNeededRows = len(subSequenceFrequencies)
     if numberOfNeededRows == 0:
         return
+
+    figure = plt.figure(constrained_layout=True)
     gs = GridSpec(numberOfNeededRows, 1, figure=figure)
 
     currentRowIndex = 0
@@ -102,7 +115,12 @@ def generateSubSequenceFrequencyInfoPdf(sequenceIndex,
     exportPath = data.fileName.replace(
         ".csv", "_SubSequences_Frequency_" + str(sequenceIndex) + ".pdf")
     figure.savefig(exportPath, bbox_inches='tight')
-    plt.close(figure)
+
+    if drawResults:
+        figure.canvas.set_window_title(exportPath) 
+        plt.draw()
+    else:
+        plt.close(figure)
 
 
 def extractValueFromMetaDataDictionary(metadataDictionary: {}, key):
@@ -110,7 +128,8 @@ def extractValueFromMetaDataDictionary(metadataDictionary: {}, key):
 
 
 def generateSummaryPdf(sequenceIndex, sequence,
-                       data: catData.AnalysationRequest):
+                       data: catData.AnalysationRequest,
+                       drawResults: bool):
     """ Generate a summary pdf for a sequnce in a given data file. """
 
     figure = plt.figure(constrained_layout=True)
@@ -172,4 +191,8 @@ def generateSummaryPdf(sequenceIndex, sequence,
     exportPath = data.fileName.replace(
         ".csv",  "_Sequence_" + str(sequenceIndex) + ".pdf")
     figure.savefig(exportPath, bbox_inches='tight')
-    plt.close(figure)
+    if drawResults:
+        figure.canvas.set_window_title(exportPath) 
+        plt.draw()
+    else:
+        plt.close(figure)

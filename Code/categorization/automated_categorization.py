@@ -4,7 +4,7 @@ import analysationrequest.request as request
 from typing import List
 
 
-def executeCategorization(requests: List[request.AnalysationRequest]) -> []:
+def executeCategorization(requests: List[request.AnalysationRequest], drawResultsOnScreen=False) -> []:
     """ Execute the categorization for all csv files in the
         given source directory. """
 
@@ -15,5 +15,7 @@ def executeCategorization(requests: List[request.AnalysationRequest]) -> []:
 
     print("\nGenerating pdfs...")
     for dataset in requests:
-        generatePdfsForDataset(dataset)
+        # Set the second parameter to True if you want to view the results
+        # in a Matplotlib window.
+        generatePdfsForDataset(dataset, drawResultsOnScreen)
     return requests

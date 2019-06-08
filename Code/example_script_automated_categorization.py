@@ -12,4 +12,6 @@ filePathBatches = fileAccessFuntions.getFilePathBatches(directoryPath)
 for filePathBatch in filePathBatches:
     requests = fileAccessFuntions.readFilesForFilePathBatch(filePathBatch)
     # Execute the categorization: Calculating the balance, frequency:
-    executeCategorization(requests)
+    # Set the second parameter to True if you want to show the results in a
+    # Matplotlib window:
+    executeCategorization(requests, False)
