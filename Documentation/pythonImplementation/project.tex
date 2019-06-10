@@ -4,12 +4,12 @@ Dadurch ist es auch möglich, nur einzelne Funktionalitäten in eigenen Skripten
 Die Module selbst sind wiederum in einzelne Dateien gegliedert.
 Dadurch werden die Aufgaben und Funktionalitäten noch weiter aufgeteilt, um die Lesbarkeit des Codes zu erhöhen und die Komplexität zu reduzieren.
 
-\subsection{Top-Level}
+\subsection{Top-Level Ansicht}
 Im Oberverzeichnis befinden sich die folgenden Dateien und Ordner. Dieses Verzeichnis dient als Einstiegspunkt zur Ausführung der Skripte.
 \begin{description}[style=nextline]
-	\item[Skriptdateien] Der Einstiegspunkt zur automatisieren Ausführung bildet das Skript in \enquote{automated\_script.py}. Zum Zweck der Dokumentation sind weitere Beispielskripte abgelegt, die das Prefix \enquote{example} im Dateinamen tragen.
+	\item[Skriptdateien] Der Einstiegspunkt zur automatisierten Ausführung bildet das Skript in \enquote{automated\_script.py}. Zum Zweck der Dokumentation sind weitere Beispielskripte abgelegt, die das Prefix \enquote{example} im Dateinamen tragen.
 	\item[Unterordner] In den Unterordnern \enquote{analysationrequest} \enquote{categorization} und \enquote{crosscorrelation} sind die Skripte für den jeweiligen Bereich abgelegt. Diese werden in den folgenden Sektionen genauer beschrieben. Eine Ausnahme bildet der \enquote{sourceFiles} Ordner. Dieser Ordner wird für die Quelldateien verwendet, wenn bei der Ausführung kein alternativer Pfad angegeben wird. Sollte der Ordner nicht existieren, so wird dieser automatisch erstellt.
-	\item[Docker-File] Diese Datei kann verwendet werden, um einen Docker-Container zu erstellen.
+	\item[Docker-File] Diese Datei kann verwendet werden, um einen Docker-Container zu erstellen. Siehe dazu die notwendigen Befehle im Anhang unter ~\ref{docker:examples}.
 	\item[Dependencies.txt] In dieser Datei ist der Befehl zur Installation der notwendigen Pakete hinterlegt.
 \end{description}
 
@@ -17,7 +17,8 @@ Im Oberverzeichnis befinden sich die folgenden Dateien und Ordner. Dieses Verzei
 Das Modul \enquote{AnalysationRequest} bildet die Grundlage der Analysen.
 Für jede Quelldatei wird ein Request angelegt, der anschließend durch die weiteren Module verarbeitet wird.
 Die Ergebnisse der jeweiligen Module werden ebenfalls im Request festgehalten.
-Dieses Modul beinhaltet auch die Logik und Funktionalität zum Einlesen der Quelldateien, sowie zur Expansion der komprimierten Quelldaten. 
+Dieses Modul beinhaltet auch die Logik und Funktionalität zum Einlesen der Quelldateien, sowie zur Expansion der komprimierten Quelldaten.
+Eingelesen werden können Dateien die dem in Kapitel~\ref{csvMoreFiles} beschriebenen komprimierten Datenformat entsprechen.
 
 \subsection{Categorization}
 Dieses Modul bietet die Funktionalität zur Kategorisierung von Sequenzen.

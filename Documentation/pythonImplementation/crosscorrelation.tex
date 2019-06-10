@@ -1,14 +1,18 @@
 \chapter{Funktion zur Berechnung der Kreuz-Korrelation}
 \label{chp:crosscorrelation:implementation}
 Die Skripte zur Berechnung der Kreuz-Korrelation befinden sich im \enquote{crosscorrelation}-Verzeichnis.
+Diese Skripte werden von den automatisierten Skripten verwendet.
+Ein Aufrufen des hier beschriebenen Codes ist nur notwendig, wenn man eigene Skripte verfasst oder nur eine einzelne Funktion nutzen will.
 Das Python Skript \enquote{functions\_crosscorrelation.py} bietet als Einstiegspunkt die Funktion\\ \mbox{\enquote{crossCorrelation(...)}} an. Im Folgenden werden die Parameter und deren Bedeutung beschrieben.
+Im Anschluss werden die Auswirkungen der Parameter dargestellt.
 
 \section{Beschreibung der Parameter}
 
-Es gibt drei Parameter, die beim Aufruf der Funktion mitgegeben werden müssen. Dabei handelt es sich um die beiden Sequenzen, die verarbeitet werden sollen sowie um die Einstellungen. Aufgrund der vielen Einstellungsmöglichkeiten, wurden diese in eigene eigene Klasse ausgelagert, die beim Aufruf als dritter Parameter übergeben werden muss.
+Es gibt drei Parameter, die beim Aufruf der Funktion mitgegeben werden müssen. Dabei handelt es sich um die beiden Sequenzen, die verarbeitet werden sollen sowie um die Einstellungen. Aufgrund der vielen Einstellungsmöglichkeiten, wurden diese in eine eigene Klasse ausgelagert, die beim Aufruf als dritter Parameter übergeben werden muss.
 \begin{description}[style=nextline]
 \item[seqA] Die erste Datensequenz in Form eines eindimensionalen Arrays. Die enthaltenen Zahlenwerte müssen in Float konvertierbar sein.
 \item[seqB] Die zweite Datensequenz in Form eines eindimensionalen Arrays. Die enthaltenen Zahlenwerte müssen in Float konvertierbar sein.
+\item[settings] Die Einstellungen die verwendet werden sollen. 
 \end{description}
 
 \subsection{Einstellungsparameter}
@@ -50,7 +54,7 @@ Der Aufruf der Funktion mit den Standard-Parametern der Einstellungen, liefert f
     \caption[Ergebnis: Default-Parameter]{Ergebnis der Funktion bei Default-Parametern\footnotemark.}
     \label{fig:correlationDefaultParams}
 \end{figure}
-\footnotetext{Quelle: Eigene Darstellung}
+\footnotetext{ Quelle: Eigene Darstellung}
 
 \subsection{Auswirkungen des Parameter: plotNormalizedData}
 Durch setzen des optionalen Parameters \enquote{plotNormalizedData} auf True, werden die beiden Sequenzen, zusätzlich in normalisierter Form dargestellt. 
@@ -60,7 +64,7 @@ Siehe dazu Abbildung~\ref{fig:correlationPlotNormalizedData}.
     \caption[Ergebnis: plotNormalizedData]{Ergebnis der Funktion bei \enquote{plotNormalizedData = True} (Darstellung der Ergebnisse weggelassen)\footnotemark. }
     \label{fig:correlationPlotNormalizedData}
 \end{figure}
-\footnotetext{Quelle: Eigene Darstellung}
+\footnotetext{ Quelle: Eigene Darstellung}
 
 \subsection{Auswirkungen des Parameter: plotCorrelations}
 Durch setzen des optionalen Parameters \enquote{plotCorrelations} auf True, 
@@ -72,7 +76,7 @@ Siehe dazu Abbildung~\ref{fig:correlationPlotCorrelations}.
     \caption[Ergebnis: plotCorrelations]{Zusätzliche Ausgabe der Funktion bei \enquote{plotCorrelations = True} (Darstellung der Ergebnisse weggelassen)\footnotemark. }
     \label{fig:correlationPlotCorrelations}
 \end{figure}
-\footnotetext{Quelle: Eigene Darstellung}
+\footnotetext{ Quelle: Eigene Darstellung}
 
 \subsection{Auswirkungen des Parameter: plotNonNormalizedResults}
 Durch setzen des optionalen Parameters \enquote{plotNonNormalizedResults} auf True, können die Ergebnisse zusätzlich in unnormalisierter Form ausgegeben werden.
@@ -82,7 +86,7 @@ Siehe dazu Abbildung~\ref{fig:correlationPlotNonNormalizedResults}.
     \caption[Ergebnis: plotNonNormalizedResults]{Zusätzliche Ausgabe der Funktion bei \enquote{plotNonNormalizedResults = True}\footnotemark. }
     \label{fig:correlationPlotNonNormalizedResults}
 \end{figure}
-\footnotetext{Quelle: Eigene Darstellung}
+\footnotetext{ Quelle: Eigene Darstellung}
 
 \subsection{Auswirkungen des Parameter: plotNormalizedResults}
 Durch setzen des optionalen Parameters \enquote{plotNormalizedResults} auf False, kann die Ausgabe der normalisierten Ergebnisse verhindert werden.
@@ -112,14 +116,14 @@ und \ref{fig:correlationSubtractMeamFromResultFalse} zeigen die Auswirkung des P
     \caption[Ergebnis: subtractMeanFromResult = False]{Darstellung des Ergebnis bei \enquote{subtractMeanFromResult = False}. Ausschläge sind sehr schwer erkennbar\footnotemark. }
     \label{fig:correlationSubtractMeamFromResultFalse}
 \end{figure}
-\footnotetext{Quelle: Eigene Darstellung}
+\footnotetext{ Quelle: Eigene Darstellung}
 
 \begin{figure}[H]
     \includegraphics[width=\linewidth]{pythonImplementation/images/correlationSubtractMeamFromResultTrue.PNG}
     \caption[Ergebnis: subtractMeanFromResult = True]{Darstellung des Ergebnis bei \enquote{subtractMeanFromResult = True}. Ausschläge sind besser erkennbar\footnotemark. }
     \label{fig:correlationSubtractMeamFromResultTrue}
 \end{figure}
-\footnotetext{Quelle: Eigene Darstellung}
+\footnotetext{ Quelle: Eigene Darstellung}
 
 
 \section{Beispiel-Skripte}
@@ -147,7 +151,7 @@ Mit Hilfe der \enquote{getCorrelationDataForPatternSearch} Funktion kann nach ei
 \begin{description}
     \item[seqA] Die Sequenz in der nach dem Pattern gesucht werden soll. Übergeben in Form eines eindimensionalen Arrays. Die enthaltenen Zahlenwerte müssen in Float konvertierbar sein.
     \item[pattern] Das Pattern nach dem gesucht werden soll. Übergeben in Form eines eindimensionalen Arrays. Die enthaltenen Zahlenwerte müssen in Float konvertierbar sein.
-    \item[plotCorrelation] [Default: False] Auf True setzen, wenn die berechnete Kreuz-Korrelation dargestellt werden soll.
+    \item[plotCorrelation] [Default: False] Auf True setzen, wenn die berechnete Kreuz-Korrelation auf dem Monitor dargestellt werden soll.
 \end{description}
 Die Funktion gibt die berechnete Kreuz-Korrelation zurück, die in der nächsten Funktion \enquote{extractIndicesFromCorrelationData} verwendet werden kann.
 \\
@@ -162,7 +166,7 @@ jeweils nur der erste Index zurückgegeben, bei dem das Pattern auftritt. Bei ei
 Bei einem zu niedrigem Schwellwert werden auch Indizes zurückgegeben, die außerhalb des eigentlichen Patterns liegen. Diese Bereiche sind direkt vor und nach dem Ende des Patterns. Ein zu niedriger Schwellwert kann erkannt werden, wenn der gefundene Bereich größer als das Pattern selbst ist. Durch einen höheren Schwellwert kann dieses \enquote{Auswaschen} oder \enquote{Aufweichen} verhindert werden.
 
 \subsection{Beispiel für die Pattern-Suche}
-Vorbedingung: Eine Sequenzen mit 10000 Einträgen. \\
+Vorbedingung: Eine Sequenz mit 10000 Einträgen. \\
 SeqA:
 \[ a_{n} =
   \begin{cases}
@@ -182,7 +186,7 @@ Der Aufruf der \enquote{getCorrelationDataForPatternSearch} Funktion mit dem \en
   \caption[Patternsuche: Kreuz-Korrelation]{Kreuz-Korrelation der Patternsuche\footnotemark.}
   \label{fig:patternsearchCorrelation}
 \end{figure}
-\footnotetext{Quelle: Eigene Darstellung}
+\footnotetext{ Quelle: Eigene Darstellung}
 
 \begin{samepage}
 Mit Hilfe der dargestellten Kreuz-Korrelation kann der Schwellwert für die \enquote{extractIndicesFromCorrelationData} festgelegt werden.

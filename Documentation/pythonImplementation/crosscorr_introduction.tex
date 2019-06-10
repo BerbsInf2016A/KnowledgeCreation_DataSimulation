@@ -1,14 +1,19 @@
 \chapter{Kreuzkorrelation und Faltung}
+Dieses Kapitel beinhaltet eine kurze Einführung zur Kreuzkorrelation und der Faltung.
+Die Kreuzkorrelation wird im Projekt verwendet (siehe Kapitel~\ref{chp:crosscorrelation:implementation}), weshalb eine Einarbeitung in das Thema zum besseren Verständnis notwendig war.
+Für den Fall, dass das Projekt in zukünftigen Arbeiten verwendet wird, wurde dieses Kapitel hinzugefügt um den Einstieg zu erleichtern.
+
+
 \section{Einführung Kreuzkorrelation}
 Die Kreuzkorrelation wird verwendet, um die Korrelation zwischen zwei Signalen oder Sequenzen zu berechnen. Dabei werden unterschiedliche Zeitverschiebungen zwischen
 den Sequenzen eingesetzt. NumPy verwendet dabei folgende Formel für die 
-Kreuzkorrelation\footnote{Siehe: Dokumentation NumPy:\cite{DocumentationNumpyCorrelate} und Definition Kreuzkorrelation: \cite{DefinitionCrossCorrelation}.}.
+Kreuzkorrelation\footnote{ Siehe: Dokumentation NumPy:\cite{DocumentationNumpyCorrelate} und Definition Kreuzkorrelation: \cite{DefinitionCrossCorrelation}.}.
 
 \[
   f \star g \equiv \int\limits_{-\infty}^{+\infty} \overline{f}(-t)*g(t)
 \]
 Die Formel kann in eine Form umgewandelt werden, aus der die Verschiebung einer Sequenz gegenüber einer anderen besser ersichtlich 
-ist\footnote{Umformung: siehe: \cite{DefinitionCrossCorrelation}.}:
+ist\footnote{ Umformung: siehe: \cite{DefinitionCrossCorrelation}.}:
 \[
   f \star g \equiv \int\limits_{-\infty}^{+\infty} \overline{f}(-\tau)*g(t + \tau) \text{ } \mathrm{d}\tau
 \]
@@ -25,7 +30,7 @@ Abbildung~\ref{fig:compareConvulationCrosscorrelationAutoCorrelation} bietet ein
   \caption[Vergleich zwischen Faltung, Kreuzkorrelation und Autokorrelation]{Vergleicht die Faltung, Kreuzkorrelation und Autokorrelation\footnotemark}
   \label{fig:compareConvulationCrosscorrelationAutoCorrelation}
 \end{figure}
-\footnotetext{Quelle: \cite[]{CompareConvulationCrosscorrelationAutoCorrelation}}
+\footnotetext{ Quelle: \cite[]{CompareConvulationCrosscorrelationAutoCorrelation}}
 
 \begin{figure}[H]
   \centering
@@ -33,7 +38,7 @@ Abbildung~\ref{fig:compareConvulationCrosscorrelationAutoCorrelation} bietet ein
   \caption[Beispiel 1 für die Faltung]{Darstellung einer eindimensionalen Faltung\footnotemark}
   \label{fig:convolutionExample1}
 \end{figure}
-\footnotetext{Quelle: \cite[]{ConvultionExample1Wikimedia}}
+\footnotetext{ Quelle: \cite[]{ConvultionExample1Wikimedia}}
 
 \begin{figure}[H]
   \centering
@@ -41,7 +46,7 @@ Abbildung~\ref{fig:compareConvulationCrosscorrelationAutoCorrelation} bietet ein
   \caption[Beispiel 2 für die Faltung]{Faltung zweier Gaussfunktionen\footnotemark}
   \label{fig:convolutionExample2}
 \end{figure}
-\footnotetext{Quelle: \cite[]{ConvultionExample2Wikimedia}}
+\footnotetext{ Quelle: \cite[]{ConvultionExample2Wikimedia}}
 
 \section{Bedeutung der unterschiedlichen Modi}
 \begin{samepage}
@@ -50,8 +55,8 @@ Abbildung~\ref{fig:compareConvulationCrosscorrelationAutoCorrelation} bietet ein
     & \text{Sequenz A: von }a[0] \text{ bis }a[L_A - 1] \text{ mit } L_A = \text{Länge von Sequenz A}\\
     & \text{Sequenz A: von }b[0] \text{ bis }b[L_B - 1] \text{ mit } L_B = \text{Länge von Sequenz B}
   \end{align*}
-  Als Quelle dient die Dokumentation\footnote{Dokumentation NumPy Correlate: \cite{DocumentationNumpyCorrelate}.} sowie eine Beschreibung der 
-  Modi\footnote{Beschreibung der Modi: \cite{NumPyCorrelationModesExplained}.}.
+  Als Quelle dient die Dokumentation\footnote{ Dokumentation NumPy Correlate: \cite{DocumentationNumpyCorrelate}.} sowie eine Beschreibung der 
+  Modi\footnote{ Beschreibung der Modi: \cite{NumPyCorrelationModesExplained}.}.
 \end{samepage}
 
 
@@ -67,7 +72,7 @@ sich dort nicht mehr voll überlappen.
 
 \subsection{Modus: Same}
 Liefert ein Ergebnis der Länge $ max(L_A, L_B) $ . Dabei können ebenfalls Effekte an den Rändern auftreten.\\
-Die Berechnug findet im Bereich von $ \frac{(L_B - 1)}{2} \text{ bis } L_A - 1 + \frac{L_B - 1}{2} $ statt. \\
+Die Berechnung findet im Bereich von $ \frac{(L_B - 1)}{2} \text{ bis } L_A - 1 + \frac{L_B - 1}{2} $ statt. \\
 Sollte $ L_A < L_B $ gelten, werden die beiden Sequenzen vor der Berechnung ausgetauscht.
 
 

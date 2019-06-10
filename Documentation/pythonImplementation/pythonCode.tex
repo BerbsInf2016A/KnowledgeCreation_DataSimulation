@@ -2,29 +2,30 @@
 \label{chp:python:implementation}
 
 \section{Warum Python?}
-Python ist eine Skriptsprache, die auch im wissenschaftlichen Umfeld und für maschinelles Lernen verwendet wird\footnote{Siehe: \cite{Fuxjaeger2017}.}.
+Python ist eine Skriptsprache, die auch im wissenschaftlichen Umfeld und für maschinelles Lernen verwendet wird\footnote{ Siehe: \cite{Fuxjaeger2017}.}.
 Dadurch existieren im Umfeld der Programmiersprache viele Bibliotheken die eingebunden und verwendet werden können.
 Aufgrund der großen Nutzerbasis und Dokumentation der verwendeten Bibliotheken sind notwendige Informationen leichter zu recherchieren.\\
 Ein weiterer Vorteil von Python kommt daher, dass es sich um eine Skriptsprache handelt, die interpretiert wird.
 Anpassungen können schnell umgesetzt und getestet werden, ohne die komplette Anwendung neu zu kompilieren und zu veröffentlichen.
 Dadurch ist Python allerdings auch weniger für schnelle Berechnungen geeignet.
-Deshalb wurde für numerische Berechnungen die Bibliothek NumPy entwickelt, die Berechnungen erheblich schneller ausführen kann\footnote{\cite[vgl.][S.173f]{Woyand2017}.}.
-Im Bereich der Grafikgenerierung bietet sich das Paket Matplotlib an, da es das meistverbreitete und eines der umfangreichsten Paket zur Erstellung von Plots ist\footnote{\cite[vgl.][S.173f]{Rossant2013}.}.
+Deshalb wurde für numerische Berechnungen die Bibliothek NumPy entwickelt, die Berechnungen erheblich schneller ausführen kann\footnote{ \cite[vgl.][S.173f]{Woyand2017}.}.
+Im Bereich der Grafikgenerierung bietet sich das Paket Matplotlib an, da es das meistverbreitete und eines der umfangreichsten Paket zur Erstellung von Plots ist\footnote{ \cite[vgl.][S.173f]{Rossant2013}.}.
 
 \section{Verwendete Bibliotheken}
 Zwei externe Bibliotheken werden für das Projekt benötigt:
 \begin{description}[style=nextline]
-	\item[NumPy] Eine Bibliothek für mathematische Operationen auf multi-dimensionalen Arrays\footnote{Siehe: \cite{Athanasias2014}.}. Aus dieser Bibliothek werden mathematische Funktionen verwendet.
-	\item[Matplotlib] Diese Bibliothek bietet Plotting-Funktionalitäten zur Darstellung von Graphiken\footnote{Siehe: \cite{Matplotlib2019}.}. Sie wird verwendet um PDF-Dateien aus der Analyse zu generieren.
+	\item[NumPy] Eine Bibliothek für mathematische Operationen auf multi-dimensionalen Arrays\footnote{ Siehe: \cite{Athanasias2014}.}. Aus dieser Bibliothek werden mathematische Funktionen verwendet.
+	\item[Matplotlib] Diese Bibliothek bietet Plotting-Funktionalitäten zur Darstellung von Grafiken\footnote{ Siehe: \cite{Matplotlib2019}.}. Sie wird verwendet um PDF-Dateien aus der Analyse zu generieren.
 \end{description}
 \section{Installationsanleitung}
 Damit die Skripte lauffähig sind, müssen sowohl Python als auch die zusätzlichen Bibliotheken installiert werden.
 Benötigt wird Python 3 (in der Entwicklung wurde Version 3.7.0 verwendet).
-Die zusätzlichen Bibliotheken können über \enquote{pip}\footnote{Siehe: \cite{Foundation2019}.}, das Paketverwaltungsprogramm für Python, installiert werden. 
-Folgende Befehle können zur Installation der Paketen verwendet werden.
+Die zusätzlichen Bibliotheken können über \enquote{pip}\footnote{ Siehe: \cite{Foundation2019}.}, das Paketverwaltungsprogramm für Python, installiert werden. 
+Folgende Befehle können zur Installation der Pakete verwendet werden.
+Die Installation der Pakete ist nur einmalig notwendig.
 
 \subsection{Paketinstallation unter Windows}
-Unter Windows können die Pakete über das folgende Kommando installiert werden (vorausgesetzt, Python 3 ist installiert. Pip sollte bei der Installation von Python bereits installiert werden):
+Unter Windows können die Pakete über das folgende Kommando (in einer Konsole) installiert werden (vorausgesetzt, Python 3 ist installiert. Pip sollte bei der Installation von Python bereits installiert werden):
 \lstnewenvironment{PipCommandWindows}
 {\lstset{
 		captionpos=b,
@@ -50,14 +51,15 @@ Unter Windows können die Pakete über das folgende Kommando installiert werden 
 pip install numpy matplotlib
 \end{PipCommandWindows}
 
-\subsection{Paketinstallation unter Linux}
-Unter Linux kann es notwendig werden, die Pakete explizit für Python 3 zu installieren. Im Folgenden sind die dafür notwendigen Kommandos abgebildet.
+\subsection{Paketinstallation unter Linux / MacOS}
+
+Unter Linux/MacOS kann es notwendig werden, die Pakete explizit für Python 3 zu installieren (nach der Installation von Python 3). Im Folgenden sind die dafür notwendigen Kommandos abgebildet.
 \lstnewenvironment{PipCommandLinux}
 {\lstset{
 		captionpos=b,
 		frame=single,
 		label={lst:piplinux},
-		caption={Kommando zur Installation der notwendigen Pakete unter Linux},
+		caption={Kommando zur Installation der notwendigen Pakete unter Linux/MacOS},
 		showspaces=false,
 		showtabs=false,
 		breaklines=true,
@@ -110,8 +112,6 @@ Durch die Verwendung von Docker ist die lokale Installation von Python und den b
 Allerdings ist dafür eine lauffähige Installation von Docker notwendig.
 
 Für die Verwendung von Docker existieren Beispiele im Anhang unter Kapitel~\ref{docker:examples}.
-
-\textcolor{red}{Quelle hinzufügen}
 
 \input{./pythonImplementation/project.tex}
 \input{./pythonImplementation/categorization.tex}
@@ -168,7 +168,7 @@ Mit optionalem Parameter:
 	python automated_script.py C:\Temp\sourcefolder
 \end{ExecuteCommandWindows}
 
-Unter Linux analog dazu:
+Unter Linux/MacOS analog dazu:
 
 \lstnewenvironment{ExecuteCommandLinux}
 {\lstset{
@@ -203,11 +203,16 @@ Ein Beispiel für die ausgegebenen Log-Meldungen ist im Anhang unter Listing~\re
 
 \pagebreak
 \section{Ablauf der automatisierten Ausführung}
-Die folgende Aktionen werden durch das bereitgestellte Skript ausgeführt. 
+Die folgende Aktionen werden durch das bereitgestellte Skript (\enquote{automated\_script.py}) ausgeführt. 
 Der Übersicht wegen, werden einige Aktionen zusammengefasst und nicht im Detail dargestellt.
+Hinweis: Die Dateien des Quellverzeichnisses werden in Batches der Größe 10 abgearbeitet.
+Die Verarbeitung erfolgt Batch-weise, um den Ressourcenverbrauch gering zu halten.
+Ansonsten müssten zu Beginn alle Dateien eingelesen und im Arbeitsspeicher gehalten werden.
+Da das automatisierte Skript eine potenziell große Anzahl an Quelldateien lesen muss, könnte dies zu einem großen Ressourcenbedarf führen.
 
 \begin{enumerate}[nolistsep]
 	\item Auswahl des Quellverzeichnis (über optionalen Parameter oder Standardverzeichnis).
+	\item Aufteilung der Quelldatei-Pfade in Batches. Je Batch:
 	\item Einlesen der CSV-Dateien aus dem ausgewählten Quellverzeichnis.
 	\item Verarbeitung der einzelnen Quelldateien
 	\begin{enumerate}[nolistsep]
@@ -240,7 +245,7 @@ Der Übersicht wegen, werden einige Aktionen zusammengefasst und nicht im Detail
 Die Ergebnisse einer Ausführung sind im Anhang und Kapitel~\ref{attachement:python:results} dargestellt.
 
 \section{Verbesserungsmöglichkeiten und Erweiterungen}
-Da Matplotlib nicht threadsafe ist\footnote{Siehe: \cite{Stackoverflow2016}.}, kann die Generierung von PDF-Dateien nicht ohne Weiteres parallelisiert werden.
+Da Matplotlib nicht threadsafe ist\footnote{ Siehe: \cite{Stackoverflow2016}.}, kann die Generierung von PDF-Dateien nicht ohne Weiteres parallelisiert werden.
 Bei einer parallelen Generierung würde Matplotlib gleichzeitig aus verschiedenen Programmbereichen aus aufgerufen werden.
 Bei Programmen die nicht threadsafe sind, kann dies zu Fehlern führen.
 Wenn ein Programm threadsafe ist, sind solche parallelen Aufrufe ohne Behinderungen oder Fehler möglich.

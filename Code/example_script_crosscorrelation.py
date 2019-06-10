@@ -31,8 +31,11 @@ sequenceForPatternSearch[0][[1005, 1007, 1010, 6005, 6007, 6010]] = 1
 
 pattern = np.asarray([1, 0, 1, 0, 0, 1, 0])
 
-correlatedSearch = ps.getCorrelationDataForPatternSearch(sequenceForPatternSearch, pattern)
+showCorrelationData = False
+correlatedSearch = ps.getCorrelationDataForPatternSearch(sequenceForPatternSearch, pattern, showCorrelationData)
 indices = ps.extractIndicesFromCorrelationData(correlatedSearch, threshold=0.3)
+if showCorrelationData:
+    plt.show()
 
 # Print the indices (sorted) in one line:
 oneLineIndices = []

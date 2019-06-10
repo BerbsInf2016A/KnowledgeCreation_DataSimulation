@@ -1,6 +1,7 @@
 \chapter{Kategorisierung von Sequenzen}
 \label{chp:categorization}
 Im folgenden Kapitel wird die Implementierung der Skripte vorgestellt, die unterschiedliche Eigenschaften von Sequenzen berechnen und ausgeben.
+Die erstellten Auswertungen basieren auf den in Kapitel~\ref{chp:procedure} vorgestellten Eigenschaften und Vorgehen.
 \section{Kategorisierte Eigenschaften}
 Folgende Eigenschaften werden für Sequenzen ermittelt:
 \begin{description}
@@ -17,6 +18,7 @@ Die Balance wird nach folgender Formel berechnet:
 Balance = \frac{Anzahl\ Wert = 1}{Gesamtl\ddot{a}nge\ der\ Sequenz}
 \]
 Bei einer leeren Sequenz ist der Standardrückgabewert 0.
+Der berechnete Wert entspricht der im Abschnitt~\ref{subsection:balance} vorgestellten Balance(1).
 \subsubsection{Beispiel für eine ausgeglichene Sequenz}
 Die folgende Sequenz mit einer Länge von 10000 Einträgen folgt der folgenden Vorschrift und ist in Abbildung~\ref{fig:example_balance_equal} abgebildet:
 \[ a_{n} =
@@ -31,7 +33,7 @@ Die folgende Sequenz mit einer Länge von 10000 Einträgen folgt der folgenden V
 	\caption[Darstellung einer ausgeglichenen Sequenz]{Stellt eine ausgeglichene (Balance = 0.5) Sequenz dar\footnotemark.}
 	\label{fig:example_balance_equal}
 \end{figure}
-\footnotetext{Quelle: Eigene Darstellung}
+\footnotetext{ Quelle: Eigene Darstellung}
 
 Für diese Sequenz wird eine Balance von 0.5 berechnet, da es genau so viele Werte mit 1 als auch 0 gibt. 
 \subsubsection{Beispiel für eine unausgeglichene Sequenz}
@@ -48,7 +50,7 @@ Die folgende Sequenz mit einer Länge von 10000 Einträgen folgt der folgenden V
 	\caption[Darstellung einer unausgeglichenen Sequenz]{Stellt eine unausgeglichene (Balance = 0.9) Sequenz dar\footnotemark.}
 	\label{fig:example_balance_unequal}
 \end{figure}
-\footnotetext{Quelle: Eigene Darstellung}
+\footnotetext{ Quelle: Eigene Darstellung}
 
 Für diese Sequenz wird eine Balance von 0.9 berechnet, da diese deutlich Richtung 1 tendiert. 
 \subsection{Berechnung der Frequenz}
@@ -61,6 +63,7 @@ Frequenz = \frac{Anzahl\ der\ Wert\ddot{a}nderungen}{Gesamtl\ddot{a}nge\ der\ Se
 
 Ein Wert <= 0.25 gilt als \enquote{Niederfrequent}, ein Wert x > 0.25 und < 0.75 gilt als \enquote{Mittelfrequent} und Werte >= 0.75 als \enquote{Hochfrequent}.
 Der Standardrückgabewert einer leeren Sequenz ist 0. 
+Der berechnete Wert entspricht der im Abschnitt~\ref{subsection:frequence} vorgestellten Frequenz.
 
 \subsubsection{Beispiel einer niederfrequenten Sequenz}
 Eine niederfrequente Sequenz mit einer Länge von 10000 Einträgen ist in Abbildung~\ref{fig:example_frequence_low} abgebildet:
@@ -70,7 +73,7 @@ Eine niederfrequente Sequenz mit einer Länge von 10000 Einträgen ist in Abbild
 	\caption[Darstellung einer niederfrequenten Sequenz]{Stellt eine niederfrequente Sequenz dar\footnotemark.}
 	\label{fig:example_frequence_low}
 \end{figure}
-\footnotetext{Quelle: Eigene Darstellung}
+\footnotetext{ Quelle: Eigene Darstellung}
 
 Diese Sequenz hat eine berechneten Frequenzwert von 0. Die Anzahl an Wertewechsel im Verhältnis zur Länge der Sequenz ist sehr niedrig.
 
@@ -82,7 +85,7 @@ Eine mittelfrequente Sequenz mit einer Länge von 10000 Einträgen ist in Abbild
 	\caption[Darstellung einer mittelfrequenten Sequenz]{Stellt eine mittelfrequente Sequenz dar\footnotemark.}
 	\label{fig:example_frequence_middle}
 \end{figure}
-\footnotetext{Quelle: Eigene Darstellung}
+\footnotetext{ Quelle: Eigene Darstellung}
 
 Diese Sequenz hat eine berechneten Frequenzwert von 0.4 und gilt damit als mittelfrequent.
 
@@ -94,17 +97,18 @@ Eine hochfrequente Sequenz mit einer Länge von 10000 Einträgen ist in Abbildun
 	\caption[Darstellung einer hochfrequenten Sequenz]{Stellt eine hochfrequente Sequenz dar\footnotemark.}
 	\label{fig:example_frequence_high}
 \end{figure}
-\footnotetext{Quelle: Eigene Darstellung}
+\footnotetext{ Quelle: Eigene Darstellung}
 
 Diese Sequenz hat eine berechneten Frequenzwert von 0.9 und gilt damit als hochfrequent.
 
 \subsection{Auswertung der Sub-Sequenzen}
-Im Zuge des Projekts wurde es ersichtlich, dass eine grafische Darstellung von Sequenzen in ihrer gesamte Länge nicht optimal für alle Fälle geeignet ist.
+Im Zuge des Projekts wurde ersichtlich, dass eine grafische Darstellung von Sequenzen in ihrer gesamten Länge nicht optimal für alle Fälle geeignet ist.
 Wenn man die unterschiedlichen Sequenzen aus Abbildung~\ref{fig:example_frequence_middle} und Abbildung~\ref{fig:example_frequence_high} vergleicht, so sehen diese auf den ersten Blick identisch aus.
 Bei der Auswertung der Frequenz sind diese aber unterschiedliche einzuordnen.
 Dieser Effekt entsteht durch die Länge der Sequenzen und deren Darstellung in den generierten PDF Dateien.\\
 Mit einer Analyse der Sequenzen in ihrer Gesamtlänge gehen auch zusätzliche Informationen verloren. Die Information ob eine Sequenz im ersten Drittel niederfrequent und zum Ende hin hochfrequent wird, kann durch einen einzelnen Zahlenwert nicht abgebildet werden.\\
-Um die Unterschiede zu verdeutlichen, ist es notwendig die Sequenzen in kleinere Teilsequenzen zu unterteilen und diese zu vergleichen.
+Um die Unterschiede zu verdeutlichen, ist es notwendig die Sequenzen in kleinere Teilsequenzen zu unterteilen und diese zu vergleichen.\\
+Die Aufteilung in Sequenzen entspricht dem in Kapitel~\ref{sec:classification} vorgestellten Vorgehen.
 
 \subsubsection{Vorgehen zur Berechnung der Sub-Sequenzlängen}
 Eine Sequenz wird je nach deren Länge in unterschiedlich große Teilsequenzen zerlegt. Diese Sub-Sequenzen werden ebenfalls im Bezug auf die Balance und Frequenz analysiert und die Ergebnisse werden in den entsprechenden PDF Dateien dargestellt.
@@ -143,9 +147,19 @@ while (sequenceLength / subSequenceLength ) >= 10
 \end{SubSequenceLength}
 
 Die Länge der möglichen Sub-Sequenzen startet bei 10 und wird bei jeder Iteration um den Faktor 10 erhöht. 
-Die geschieht so lange, bis die Anzahl der Sub-Sequenzen 10 unterschreitet.\\
+Dies geschieht so lange, bis die Anzahl der entstehenden Sub-Sequenzen 10 unterschreitet.\\
 Eine Sequenz der Länge 1000 wird dabei in Sub-Sequenzen der Länge 10 und 100 aufgeteilt.
 Eine Sequenz der Länge 10000 wird in Sub-Sequenzen der Länge 10, 100 und 1000 aufgeteilt.
+
+\subsubsection{Benennung der Sub-Sequenzen}
+In den Schaubildern und den generierten PDF-Dateien ist von 10er-Sub-Sequenzen, 100er Sub-Sequenzen usw. die Rede.
+Die Zehnerpotenz ist dabei die Länge der Sub-Sequenz über die der Wert (Balance oder Frequenz) berechnet wurde.
+Der Index auf der X-Achse entspricht dem Index der Sub-Sequenz.
+Die erste 10er-Sub-Sequenz startet bei dem ersten Element in der Sequenz und beinhaltet die ersten 10 Elemente. 
+Über diese Elemente wurden die Werte berechnet.
+Die 10er-Sub-Sequenz mit dem nächst größeren Index enthält die nächsten 10 Elemente.
+Die Sub-Sequenzen überschneiden sich dabei nicht.
+
 
 \subsubsection{Beispiel für die analysierte Sub-Sequenzen}
 Im Folgenden wird ein Beispiel für die generierten Sub-Sequenzen und deren Darstellung gegeben. 
@@ -159,7 +173,7 @@ Die Sequenz ist in dieser Form graphisch schwer zu analysieren, wenn man beispie
 	\caption[Darstellung einer zu analysierenden Sequenz]{Stellt eine zu analysierende Sequenz dar\footnotemark.}
 	\label{fig:example_subsequence}
 \end{figure}
-\footnotetext{Quelle: Eigene Darstellung}
+\footnotetext{ Quelle: Eigene Darstellung}
 
 Stellt man allerdings die Teilsequenzen dar, erhöht sich der Detailgrad und es wird ein Verlauf der Frequenz und der Balance ersichtlich.
 Durch den erhöhten Detailgrad können die Sequenzen besser analysiert werden (falls dies notwendig ist).
@@ -176,7 +190,7 @@ Kurze Ausschläge sind allerdings in kurzen Sub-Sequenzlängen besser erkennbar.
 	\caption[Darstellung der Sub-Sequenzen im Bezug auf die Balance]{Stellt die Balance der Sub-Sequenzen dar\footnotemark.}
 	\label{fig:example_subsequence_balances}
 \end{figure}
-\footnotetext{Quelle: Eigene Darstellung}
+\footnotetext{ Quelle: Eigene Darstellung}
 
 \newpage
 Analog dazu wird auch die Frequenz der Sub-Sequenzen analysiert. Das Ergebnis ist in Abbildung~\ref{fig:example_subsequence_frequences} dargestellt.
@@ -186,7 +200,7 @@ Analog dazu wird auch die Frequenz der Sub-Sequenzen analysiert. Das Ergebnis is
 	\caption[Darstellung der Sub-Sequenzen im Bezug auf die Frequenz]{Stellt die Frequenz der Sub-Sequenzen dar\footnotemark.}
 	\label{fig:example_subsequence_frequences}
 \end{figure}
-\footnotetext{Quelle: Eigene Darstellung}
+\footnotetext{ Quelle: Eigene Darstellung}
 
 
 
@@ -202,7 +216,7 @@ Es ist nicht überraschen, dass diese sehr konstant ist und den Frequenzwert von
 	\caption[Darstellung der Sub-Sequenzen im Bezug auf die Frequenz einer mittelfrequenten Sequenz]{Stellt die Frequenz der Sub-Sequenzen einer mittelfrequenten Sequenz dar\footnotemark.}
 	\label{fig:example_frequence_middle_subsequences}
 \end{figure}
-\footnotetext{Quelle: Eigene Darstellung}
+\footnotetext{ Quelle: Eigene Darstellung}
 
 Die Sub-Sequenzen der hochfrequenten Sequenz aus Abbildung~\ref{fig:example_frequence_high} zeigen hingegen ein neues Detail, welches nicht in der Gesamtansicht erkennbar ist.
 Auch hier ist der hohe Wert für die Frequenz erkennbar, allerdings ist dieser nicht so gleichmäßig wie bei der mittelfrequenten Sequenz.
@@ -213,4 +227,4 @@ Die Sub-Sequenzen sind in Abbildung~\ref{fig:example_frequence_high_subsequences
 	\caption[Darstellung der Sub-Sequenzen im Bezug auf die Frequenz einer hochfrequenten Sequenz]{Stellt die Frequenz der Sub-Sequenzen einer hochfrequenten Sequenz dar\footnotemark.}
 	\label{fig:example_frequence_high_subsequences}
 \end{figure}
-\footnotetext{Quelle: Eigene Darstellung}
+\footnotetext{ Quelle: Eigene Darstellung}
