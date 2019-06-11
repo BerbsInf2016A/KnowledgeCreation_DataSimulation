@@ -29,6 +29,11 @@ def executeCrossCorrelationForDatasets(datasets: []):
                         str(firstIndex)
                         + "_Sequence_" + str(secondIdx) + ".pdf")
 
+                    # If you want to adjust the settings and plot a lot of 
+                    # information, it is recommended to disable the pdf generation
+                    # and only to draw the results. Then choose the settings you need
+                    # and enable pdf generation again. 
+                    # Reason: the space on a single PDF page is limited.
                     correlationSettings = crossSettings.Settings()
                     correlationSettings.exportToPdf = True
                     correlationSettings.exportFilePath = exportPath

@@ -1,4 +1,4 @@
-\chapter{Analyseprojekt}
+\chapter{Implementierung des Analyseprojekts}
 \label{chp:python:implementation}
 In diesem Kapitel wird das implementierte Projekt zur Analyse der Daten vorgestellt.
 In den folgenden Kapiteln werden die implementierte Skripte mit den angebotenen Funktionen dargestellt. 
@@ -277,7 +277,59 @@ Da das automatisierte Skript eine potenziell große Anzahl an Quelldateien lesen
 	\end{enumerate}
 \end{enumerate}
 
-Die Ergebnisse einer Ausführung sind im Anhang unter Kapitel~\ref{attachement:python:results} dargestellt.
+
+\section{Benennung der erzeugten Dateien}
+Die Namen der generierten Dateien beginnen immer mit dem Namen der jeweiligen Quelldatei, damit eine Zuordnung gewährleistet ist.
+Wenn eine Quelldatei mehr als eine Sequenz enthält, werden die einzelnen Sequenzen von 0 an durchnummeriert.
+Die erste Sequenz in der Quelldatei bekommt dabei den Index 0, die zweite den Index 1 usw.
+Wenn zwei Sequenzen mit gleicher Länge in einer Quelldatei abgelegt werden, wird automatisch die Kreuzkorrelation zwischen den beiden Sequenzen berechnet.
+Um die Ergebnisdatei zuordnen zu können, bekommen diese eine Benennung entsprechend der Sequenzindizes.
+Die Namen der Ergebnisdateien zu den Sub-Sequenzen beinhalten ebenfalls den Index der zugehörigen Sequenz.
+Ein Beispiel der Benennung ist im Anhang unter Abbildung~\ref{fig:source_folder_results} dargestellt.
+
+\section{Übernommene Metadaten}
+Wenn die Quelldateien Metadateninformationen beinhalten, werden diese in die PDFs übernommen.
+Dabei ist es unerheblich, ob jede Sequenz in einer Quelldatei Metadateninformationen beinhaltet.
+Wenn die Metadaten vorhanden sind, werden diese für die entsprechende Sequenz übernommen.
+
+\subsection{Beispiel}
+In Listing~\ref{lst:metadata} sind vier Sequenzen abgebildet, von denen nur zwei über Metadateninformationen verfügen.
+Die generierten Dateien werden mit den Metadaten erweitert, allerdings nur bei den beiden Sequenzen, die über die zusätzlichen Information verfügen.
+
+\lstnewenvironment{MetadataExample}
+{\lstset{
+		captionpos=b,
+		frame=single,
+		label={lst:metadata},
+		caption={Quelldatei mit Sequenzen (mit und ohne Metadaten)},
+		showspaces=false,
+		showtabs=false,
+		breaklines=true,
+		showstringspaces=false,
+		breakatwhitespace=true,
+		escapeinside={(*@}{@*)},
+		commentstyle=\color{greencomments},
+		morecomment = [l]{\#\ },
+		morekeywords={ },
+		keywordstyle=\color{blue},
+		stringstyle=\color{black},
+		morestring=[b]",
+		basicstyle=\ttfamily\footnotesize,
+		numberbychapter=false}}{}
+
+\begin{MetadataExample}
+$Machine,Maschine2,Start,2015-07-22-00-00-00,End,2015-07-22-24-00-00,Interval,1000ms$
+1004|0,1|1,999|0,1|1,2000|0,1|1
+$Machine,Maschine1,Start,2015-07-22-00-00-00,End,2015-07-22-24-00-00,Interval,1000ms$
+1000|0,1|1,999|0,1|1,2000|0,1|1,4|0
+1000|0,1|1,999|0,1|1,2000|0,1|1,4|0
+1000|0,1|1,999|0,1|1,2000|0,1|1,4|0	
+\end{MetadataExample}
+
+
+\section{Ergebnis der Ausführung}
+Die Ergebnisse der Analyse wird im Quellverzeichnis in Form von PDF-Dateien abgelegt.
+Beispiele für die generierten PDF Dateien sind im Anhang unter Kapitel~\ref{attachement:python:results} zu finden.
 
 \section{Verbesserungsmöglichkeiten und Erweiterungen}
 Da Matplotlib nicht threadsafe ist\footnote{ Siehe: \cite{Stackoverflow2016}.}, kann die Generierung von PDF-Dateien nicht ohne Weiteres parallelisiert werden.
