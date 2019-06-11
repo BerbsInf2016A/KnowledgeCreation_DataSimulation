@@ -7,7 +7,7 @@ Die gezeigten Bilder werden in dieser Form durch die automatisierten Skripte ers
 \section{Kategorisierte Eigenschaften}
 Folgende Eigenschaften werden für Sequenzen ermittelt:
 \begin{description}
-	\item[Balance] Die Balance ist ein Maß für die \enquote{Richtung} in die eine Sequenz ausgerichtet ist. Damit wird der Tendenz zu 0 oder 1 ein Wert zugeordnet. Die Balance kann Werte zwischen 0 und 1 annehmen. Die beiden Grenzen sind ebenfalls im Wertebereich vorhanden. Eine Sequenz mit einer Balance von 0.5 gilt als ausgeglichen, das bedeutet, dass die Sequenz so viele 0er wie 1er enthält.
+	\item[Balance] Die Balance ist ein Maß für die \enquote{Richtung} in die eine Sequenz ausgerichtet ist. Damit wird der Tendenz zu 0 oder 1 ein Wert zugeordnet. Die Balance kann Werte zwischen 0 und 1 annehmen. Die beiden Grenzen sind ebenfalls im Wertebereich vorhanden. Eine Sequenz mit einer Balance von 0.5 gilt als ausgeglichen, das bedeutet, dass die Sequenz so viele 0en wie 1en enthält.
 	\item[Frequenz] Die Frequenz ist ein Maß für die Aktivität an Wertewechseln innerhalb einer Sequenz. Ein Wert gegen 0 entspricht einer sehr inaktiven Sequenz mit nur sehr wenigen bis keinen Wertewechsel. Ein Wert von 1 steht für eine hochfrequente Sequenz, in der sehr viel Wertewechsel stattfinden.
 	\item[Sub-Sequenz] Die zu analysierenden Sequenzen werden anhand ihrer Länge in kleinere Sub-Sequenzen aufgeteilt, für die ebenfalls die Balance und Frequenz berechnet werden.
 \end{description}
@@ -212,7 +212,7 @@ Die in Abbildung~\ref{fig:example_frequence_middle} und Abbildung~\ref{fig:examp
 Allerdings unterscheiden sich diese in ihrem Wert für die Frequenz (0.4 zu 0.9).
 Dieser Unterschied ist auch deutlich, wenn man sich die Frequenz der entsprechenden Sub-Sequenzen anschaut.\\
 Die Sub-Sequenzen der mittelfrequenten Sequenz aus Abbildung~\ref{fig:example_frequence_middle} sind in Abbildung~\ref{fig:example_frequence_middle_subsequences} dargestellt. 
-Es ist nicht überraschen, dass diese sehr konstant ist und den Frequenzwert von 0.4 wiedergibt.
+Es ist nicht überraschend, dass diese sehr konstant ist und den Frequenzwert von 0.4 wiedergibt.
 \begin{figure}[H]
 	\includegraphics[width=\linewidth]{pythonImplementation/images/example_frequence_middle_subsequences.PNG}
 	\caption[Darstellung der Sub-Sequenzen im Bezug auf die Frequenz einer mittelfrequenten Sequenz]{Stellt die Frequenz der Sub-Sequenzen einer mittelfrequenten Sequenz dar\footnotemark.}

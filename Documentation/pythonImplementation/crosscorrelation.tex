@@ -57,7 +57,7 @@ Der Aufruf der Funktion mit den Standard-Parametern der Einstellungen, liefert f
 \footnotetext{ Quelle: Eigene Darstellung}
 
 \subsection{Auswirkungen des Parameter: plotNormalizedData}
-Durch setzen des optionalen Parameters \enquote{plotNormalizedData} auf True, werden die beiden Sequenzen, zusätzlich in normalisierter Form dargestellt. 
+Durch Setzen des optionalen Parameters \enquote{plotNormalizedData} auf True, werden die beiden Sequenzen, zusätzlich in normalisierter Form dargestellt. 
 Siehe dazu Abbildung~\ref{fig:correlationPlotNormalizedData}. 
 \begin{figure}[H]
     \includegraphics[width=\linewidth]{pythonImplementation/images/correlationPlotNormalizedData.PNG}
@@ -67,7 +67,7 @@ Siehe dazu Abbildung~\ref{fig:correlationPlotNormalizedData}.
 \footnotetext{ Quelle: Eigene Darstellung}
 
 \subsection{Auswirkungen des Parameter: plotCorrelations}
-Durch setzen des optionalen Parameters \enquote{plotCorrelations} auf True, 
+Durch Setzen des optionalen Parameters \enquote{plotCorrelations} auf True, 
 wird die Kreuz-Korrelation der beiden Sequenzen berechnet.
 Dabei werden alle drei Berechnungsmethoden \enquote{Valid}, \enquote{Same} und \enquote{Full} dargestellt.
 Siehe dazu Abbildung~\ref{fig:correlationPlotCorrelations}. 
@@ -79,7 +79,7 @@ Siehe dazu Abbildung~\ref{fig:correlationPlotCorrelations}.
 \footnotetext{ Quelle: Eigene Darstellung}
 
 \subsection{Auswirkungen des Parameter: plotNonNormalizedResults}
-Durch setzen des optionalen Parameters \enquote{plotNonNormalizedResults} auf True, können die Ergebnisse zusätzlich in unnormalisierter Form ausgegeben werden.
+Durch Setzen des optionalen Parameters \enquote{plotNonNormalizedResults} auf True, können die Ergebnisse zusätzlich in unnormalisierter Form ausgegeben werden.
 Siehe dazu Abbildung~\ref{fig:correlationPlotNonNormalizedResults}. 
 \begin{figure}[H]
     \includegraphics[width=\linewidth]{pythonImplementation/images/correlationPlotNonNormalizedResults.PNG}
@@ -89,7 +89,7 @@ Siehe dazu Abbildung~\ref{fig:correlationPlotNonNormalizedResults}.
 \footnotetext{ Quelle: Eigene Darstellung}
 
 \subsection{Auswirkungen des Parameter: plotNormalizedResults}
-Durch setzen des optionalen Parameters \enquote{plotNormalizedResults} auf False, kann die Ausgabe der normalisierten Ergebnisse verhindert werden.
+Durch Setzen des optionalen Parameters \enquote{plotNormalizedResults} auf False, kann die Ausgabe der normalisierten Ergebnisse verhindert werden.
 
 \subsection{Auswirkungen des Parameter: subtractMeanFromResult}
 Um die Auswirkung des Parameters darzustellen, werden folgende Sequenzen vorrausgesetzt (je 10000 Einträge):\\
@@ -164,7 +164,7 @@ Die Funktion kann verwendet werden, um die Indizes zu berechnen, an denen das Pa
 übergeben werden. Als Rückgabe erhält man die Indizes und der Wert der Korrelation an dieser Stelle.\\
 Optional kann ein Schwellwert übergeben werden. Je nachdem wie dieser Schwellwert gewählt ist, werden mehr oder weniger Indizes zurückgegeben. Bei einem hohen Schwellwert wird 
 jeweils nur der erste Index zurückgegeben, bei dem das Pattern auftritt. Bei einem niedriger gewählten Schwellwert werden alle Indizes zurückgegeben, an denen das Pattern auftritt. 
-Bei einem zu niedrigem Schwellwert werden auch Indizes zurückgegeben, die außerhalb des eigentlichen Patterns liegen. Diese Bereiche sind direkt vor und nach dem Ende des Patterns. Ein zu niedriger Schwellwert kann erkannt werden, wenn der gefundene Bereich größer als das Pattern selbst ist. Durch einen höheren Schwellwert kann dieses \enquote{Auswaschen} oder \enquote{Aufweichen} verhindert werden.
+Bei einem zu niedrigem Schwellwert werden auch Indizes zurückgegeben, die außerhalb des eigentlichen Patterns liegen. Diese Bereiche befinden sich direkt vor und nach dem Ende des Patterns. Ein zu niedriger Schwellwert kann erkannt werden, wenn der gefundene Bereich größer als das Pattern selbst ist. Durch einen höheren Schwellwert kann dieses \enquote{Auswaschen} oder \enquote{Aufweichen} verhindert werden.
 
 \subsection{Beispiel für die Pattern-Suche}
 Vorbedingung: Eine Sequenz mit 10000 Einträgen. \\

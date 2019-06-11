@@ -8,7 +8,7 @@ Es beinhaltet die Quelldateien, die analysiert werden sollen.
 	\caption[Anhang: Quellverzeichnis vor der Ausführung]{Abbildung des Quellverzeichnisses, bevor das Skript ausgeführt wurde\footnotemark.}
 	\label{fig:source_folder}
 \end{figure}
-\footnotetext{Quelle: Eigene Darstellung}
+\footnotetext{ Quelle: Eigene Darstellung}
 
 Bei der Ausführung des Skripts werden die generierten PDF-Dateien im Quellverzeichnis mit abgelegt.
 Dadurch ergibt sich danach das in Abbildung~\ref{fig:source_folder_results} dargestellte Ergebnis.
@@ -48,7 +48,7 @@ Abbildung~\ref{fig:result:sub:bal} zeigt exemplarisch den Inhalt einer generiert
 	\caption[Anhang: Balance der Sub-Sequenzen]{Stellt den Inhalt einer generierten PDF-Datei mit den Balancen der Sub-Sequenzen dar\footnotemark.}
 	\label{fig:result:sub:bal}
 \end{figure}
-
+\footnotetext{ Quelle: Eigene Darstellung}
 \newpage
 \subsection{Kreuzkorrelation}
 Abbildung~\ref{fig:result:crosscorr} zeigt exemplarisch den Inhalt einer generierten PDF-Datei, die die berechnete Kreuzkorrelation beinhaltet.
@@ -126,10 +126,10 @@ Crosscorrelation for file .\sourceFiles\cross_corr_test.csv
 \section{Verwendung von Docker}
 \label{docker:examples}
 
-Ein verwendbarer Docker-File ist im Quellverzeichnis als \enquote{dockerfile} abgelegt.
-Aus dieser Datei kann ein Image erstellt werden, dass Python und die notwendigen Bibliotheken enthält.
+Ein verwendbares Docker-File ist im Quellverzeichnis als \enquote{dockerfile} abgelegt.
+Aus dieser Datei kann ein Image erstellt werden, das Python und die notwendigen Bibliotheken enthält.
 Aus diesem Image kann ein Container erstellt werden, in dem ein Quellverzeichnis des Host-Rechners gemountet wird.
-Dadurch hat der Container Zugriff auf die Dateien in diesem Ordner und kann diese Verarbeiten.
+Dadurch hat der Container Zugriff auf die Dateien in diesem Ordner und kann diese verarbeiten.
 Im Folgenden sind die notwendigen Befehle dokumentiert, um das Image und den Container zu erstellen und zu verwenden.
 \lstset{literate=%
 	{Ö}{{\"O}}1
