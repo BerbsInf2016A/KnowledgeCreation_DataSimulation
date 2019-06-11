@@ -150,7 +150,7 @@ def parseValueRow(row, sourceFile, rowIndex) -> []:
                              entry,
                              " count is invalid")
         value = splitted[1]
-        valueValid = isInteger(value)
+        valueValid = isInteger(value) and (int(value) == 0 or int(value) == 1)
         if valueValid is False:
             raise ValueError('Error during parsing of file: ',
                              sourceFile,
