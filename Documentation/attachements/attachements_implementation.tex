@@ -122,25 +122,35 @@ Im Folgenden sind die notwendigen Befehle dokumentiert, um das Image und den Con
 		numberbychapter=false}}{}
 	
 \begin{DockerCommands}
-Befehlstemplate zur Erstellung des Images. Der Name füur das Image ist frei wählbar, muss aber in den folgenden Befehlen verwendet werden:
+Befehlstemplate zur Erstellung des Images. Der Name für das Image ist frei wählbar,
+muss aber in den folgenden Befehlen verwendet werden:
 	docker build . -t <image_name>
 Beispiel:
-		docker build . -t analysisImage
-Die Skripte die verwendet werden, sind ein fester Bestandteil des Images. Wenn Änderungen an den Skripten vorgenommen werden, muss auch das Image neu erstellt werden.
+	docker build . -t analysisImage
+	
+Die Skripte die verwendet werden, sind ein fester Bestandteil des Images.
+Wenn Änderungen an den Skripten vorgenommen werden, muss auch das Image neu erstellt
+werden.
 Folglich muss dann auch der Container neu erstellt werden.
 		
 Befehlstemplate zur Erstellung eines Containers:
 	docker create  -v <Pfad zum Quellordner>:/usr/src/app/sourceFiles  --name <container_name>  <image_name>
 Beispiel:	
 	docker create  -v C:\Temp\sourcefiles:/usr/src/app/sourceFiles  --name MyAnalysisContainer  analysisImage
-Der Pfad zum Quellordner ist ein fester Bestandteil des Containers und kann nicht ohne weiteres verändert werden.
-Soll ein anderer Ordner verwendet werden, muss ein neuer Container erzeugt werden. Dadurch ist auch die Möglichkeit gegeben, unterschiedliche Ordner in unterschiedlichen Containern zu verwenden.
+Der Pfad zum Quellordner ist ein fester Bestandteil des Containers und kann nicht
+ohne weiteres verändert werden.
+Soll ein anderer Ordner verwendet werden, muss ein neuer Container erzeugt werden.
+Dadurch ist auch die Möglichkeit gegeben, unterschiedliche Ordner in 
+unterschiedlichen Containern zu verwenden.
 
 Befehlstemplate zur Ausführung eines Containers:
 	docker start -a <container_name>
 Beispiel:
 	docker start -a MyAnalysisContainer
-Dadurch wird ein Container ausgeführt und die Ausgabe wird auf der Konsole ausgegeben. Der Container beendet sich nach Ausführung von selbst.
+Dadurch wird ein Container ausgeführt und die Ausgabe wird auf der Konsole 
+ausgegeben. Der Container beendet sich nach Ausführung von selbst.
+
+
 
 Weitere, hilfreiche Befehle:
 

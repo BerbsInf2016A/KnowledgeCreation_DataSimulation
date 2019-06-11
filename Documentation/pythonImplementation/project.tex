@@ -18,7 +18,15 @@ Das Modul \enquote{AnalysationRequest} bildet die Grundlage der Analysen.
 Für jede Quelldatei wird ein Request angelegt, der anschließend durch die weiteren Module verarbeitet wird.
 Die Ergebnisse der jeweiligen Module werden ebenfalls im Request festgehalten.
 Dieses Modul beinhaltet auch die Logik und Funktionalität zum Einlesen der Quelldateien, sowie zur Expansion der komprimierten Quelldaten.
+
+
+\subsubsection{Validierung des Datenformats}
 Eingelesen werden können Dateien die dem in Kapitel~\ref{csvMoreFiles} beschriebenen komprimierten Datenformat entsprechen.
+Dabei werden die angegebenen Werte überprüft.
+Das Format schreibt vor, dass ein einzelner Eintrag die Anzahl und den Wert der Sequenz für diesen Block hat.
+Wenn die Anzahl nicht größer 0 ist, wird eine entsprechende Fehlermeldung ausgegeben.
+Auch der Wert wird dahingehend überprüft, dass dieser nur 0 oder 1 sein kann.
+Angaben die keine Zahlen sind werden nicht akzeptiert. 
 
 \subsection{Categorization}
 Dieses Modul bietet die Funktionalität zur Kategorisierung von Sequenzen.

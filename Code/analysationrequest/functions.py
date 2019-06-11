@@ -140,7 +140,7 @@ def parseValueRow(row, sourceFile, rowIndex) -> []:
         # Check if the values are valid: isDigit only returns true,
         # when the value is an integer and positive.
         count = splitted[0]
-        countIsValid = count.isdigit()
+        countIsValid = count.isdigit() and int(count) > 0
         if countIsValid is False:
             raise ValueError('Error during parsing of file: ',
                              sourceFile,

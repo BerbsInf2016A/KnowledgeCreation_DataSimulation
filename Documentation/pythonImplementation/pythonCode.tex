@@ -1,5 +1,10 @@
-\chapter{Implementierungen in Python}
+\chapter{Analyseprojekt}
 \label{chp:python:implementation}
+In diesem Kapitel wird das implementierte Projekt zur Analyse der Daten vorgestellt.
+In den folgenden Kapiteln werden die implementierte Skripte mit den angebotenen Funktionen dargestellt. 
+Dabei wird auch auf die Bedeutung und Wirkung der Parameter eingegangen.
+Für die Analysen wird es empfohlen, die automatisierten Skripte zu verwenden, deren Ausführung in Kapitel~\ref{chp:execution:scripts} beschrieben wird.
+Beispiele für das Ergebnis einer Ausführung ist im Anhang unter Kapitel~\ref{attachement:python:results} dargestellt.
 
 \section{Warum Python?}
 Python ist eine Skriptsprache, die auch im wissenschaftlichen Umfeld und für maschinelles Lernen verwendet wird\footnote{ Siehe: \cite{Fuxjaeger2017}.}.
@@ -120,12 +125,14 @@ Für die Verwendung von Docker existieren Beispiele im Anhang unter Kapitel~\ref
 
 
 \chapter{Ausführung der automatisierten Skripte}
+\label{chp:execution:scripts}
 Die einzelnen Module sind durch Skripte automatisierbar.
 Ein Skript welches alle Module ausführt und als Einstiegspunkt dient, ist in der \enquote{automated\_script.py}-Datei abgelegt und kann direkt verwendet werden.
 Voraussetzung für die Ausführung sind die Pakete aus Kapitel~\ref{chp:python:implementation}, deren Installation im entsprechendem Kapitel beschrieben sind.
 
 Automatisierung bedeutet in diesem Kontext, dass Quelldateien automatisch eingelesen und verarbeitet werden.
 Die Ergebnisse werden in Form von PDF-Dateien im Quellverzeichnis mit abgelegt.
+Beispiele für die Ergebnisse einer Ausführung sind im Anhang unter Kapitel~\ref{attachement:python:results} dargestellt.
 
 \section{Anleitung zur Ausführung der Skripte}
 Das automatisierte Skript kann über die Kommandozeile ausgeführt werden.
@@ -136,7 +143,7 @@ Die Quelldateien können dann in diesem Ordner abgelegt werden und werden bei de
 Alternativ dazu kann Docker verwendet werden, siehe dazu auch im Anhang unter Kapitel~\ref{docker:examples}.
 
 \subsection{Kommando zur Ausführung}
-Nachdem man mit einer Konsole in das Verzeichnis gewechselt ist indem der Code angelegt ist, lässt sich das Skript über folgendes Kommando ausführen:
+Nachdem man mit einer Konsole in das Verzeichnis gewechselt ist in dem der Code angelegt ist, lässt sich das Skript über folgendes Kommando ausführen:
 
 \lstnewenvironment{ExecuteCommandWindows}
 {\lstset{
@@ -201,6 +208,34 @@ Oder:
 Anschließend wird das Skript ausgeführt und die Log-Meldungen werden auf der Konsole ausgegeben.
 Ein Beispiel für die ausgegebenen Log-Meldungen ist im Anhang unter Listing~\ref{lst:pythonlogs} zu sehen.
 
+\section{Hinweis zur zusätzlichen Anzeige der generierten Daten}
+Bei der Ausführung werden automatisiert PDF-Dateien erzeugt.
+Die Auflösung der PDF-Dateien kann bei der Analyse zu einem Problem werden, wenn diese nicht mehr ausreicht.
+Deshalb ist es möglich, eine Anzeige der generierten Daten zu aktivieren, bei der mehr Möglichkeiten zur Analyse bestehen.
+Dabei öffnet Matplotlib ein Fenster, in dem die Graphen genauer betrachtet werden können.
+Die Fenster sind in Abbildung~\ref{fig:matplotlib:view} dargestellt.\\
+Die Anzeige ist einzeln für die Kategorisierung und die Kreuzkorrelation aktivierbar.
+Entsprechende Kommentare sind in den Skripten gesetzt.
+\\
+\textbf{Warnung:} Das Skript wird so lange blockiert, bis alle geöffneten Fenster wieder geschlossen wurden.
+Dies ist eine Beschränkung durch Matplotlib.
+
+\subsection{Anzeige der Kategorisierungsdaten} Die Anzeige in einem extra Fenster kann in dem Skript \enquote{automated\_script.py} beim Aufruf der Funktion \enquote{executeCategorization} aktiviert werden.
+Dafür muss der zweite Parameter auf True gesetzt werden.
+Dann wird sowohl die Übersichtseite einer Sequenz, sowie die Darstellung der Sub-Sequenzen angezeigt(Balance und Frequenz je in einem eigenen Fenster).
+	
+	
+\subsection{Anzeige der Kreuzkorrelation} Da die Funktionen zur Berechnung der Kreuzkorrelation deutlich mehr Einstellungsmöglichkeiten besitzen, sind diese in einer eigenen Klasse abgelegt.
+Diese Einstellungen werden beim Aufruf zur Berechnung der Kreuzkorrelation mitgegeben.
+Wenn man die zusätzliche Anzeige aktivieren möchte, muss man in der \enquote{automated\_crosscorrelation.py} Datei den Parameter \enquote{drawResults} auf True setzen.
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{pythonImplementation/images/matplot_view.PNG}
+	\caption[Zusätzliche Anzeige der Ergebnisse]{Stellt die Ergebnisse der Kategorisierung in zusätzlichen Fenstern dar\footnotemark. }
+	\label{fig:matplotlib:view}
+\end{figure}
+\footnotetext{ Quelle: Eigene Darstellung}
+
 \pagebreak
 \section{Ablauf der automatisierten Ausführung}
 Die folgende Aktionen werden durch das bereitgestellte Skript (\enquote{automated\_script.py}) ausgeführt. 
@@ -242,7 +277,7 @@ Da das automatisierte Skript eine potenziell große Anzahl an Quelldateien lesen
 	\end{enumerate}
 \end{enumerate}
 
-Die Ergebnisse einer Ausführung sind im Anhang und Kapitel~\ref{attachement:python:results} dargestellt.
+Die Ergebnisse einer Ausführung sind im Anhang unter Kapitel~\ref{attachement:python:results} dargestellt.
 
 \section{Verbesserungsmöglichkeiten und Erweiterungen}
 Da Matplotlib nicht threadsafe ist\footnote{ Siehe: \cite{Stackoverflow2016}.}, kann die Generierung von PDF-Dateien nicht ohne Weiteres parallelisiert werden.
