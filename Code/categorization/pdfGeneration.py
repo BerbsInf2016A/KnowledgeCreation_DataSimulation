@@ -140,11 +140,19 @@ def generateSummaryPdf(sequenceIndex, sequence,
               'r.',
               markersize=MARKERSIZE,
               rasterized=RASTERIZE_PLOTS)
+    # Extract meta data:
     metaDataInfo = data.metadataDictionaries[sequenceIndex]
     titlePostfix = \
         extractValueFromMetaDataDictionary(metaDataInfo, 'Machine')
-    titlePostfix = titlePostfix + ' ' \
-        + extractValueFromMetaDataDictionary(metaDataInfo, 'Date')
+
+    startTime = extractValueFromMetaDataDictionary(metaDataInfo, 'Start')
+    endTime = extractValueFromMetaDataDictionary(metaDataInfo, 'End')
+
+    if(startTime != ''):
+        titlePostfix = titlePostfix + ' Start: ' + startTime
+
+    if(endTime != ''):
+        titlePostfix = titlePostfix + ' End: ' + endTime
 
     intervalPostfix = \
         extractValueFromMetaDataDictionary(metaDataInfo, 'Interval')
