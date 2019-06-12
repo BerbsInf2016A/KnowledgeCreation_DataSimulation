@@ -6,6 +6,9 @@ import matplotlib.pyplot as plt
 MARKERSIZE = 3
 FREQUENCY_PLOT_COLOR = '#23a877'
 BALANCE_PLOT_COLOR = '#4286f4'
+# Set the following parameter to True if you want to plot
+# big sequences. PDF files of big sequences will take their time to load.
+# If you use rasterization, the resolution of the plot will be lower.
 RASTERIZE_PLOTS = False
 
 
