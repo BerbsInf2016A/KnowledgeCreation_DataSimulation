@@ -20,31 +20,31 @@ Die Ergebnisse der Literaturrecherche befindet sich im Anhang \ref{attachement:l
 Zur Simulation von Realdaten werden Sequenzen als eine endliche Menge von zeitdiskreten Ereignissen beschrieben. Ein Ereignis wird durch ein \textit{Symbol} repräsentiert. Die Zusammenfassung aller  Symbole einer Sequenz nennt man \textit{Alphabet} und wird durch $\Sigma$ dargestellt.
 
 \begin{theorem}
-	Alphabet mit den Symbolen 0, 1 und 2: $\Sigma_1 = [0,1,2]$ oder mit den Symbolen a und b: $\Sigma_2 = [a,b]$. 
+Alphabet mit den Symbolen 0, 1 und 2: $\Sigma_1 = [0,1,2]$ oder mit den Symbolen a und b: $\Sigma_2 = [a,b]$. 
 \end{theorem}
 
 Eine Sequenz besitzt zudem eine Indexmenge $I$. Diese ist eine endliche linear geordnete Menge von 0 bis $n-1$ mit der Mächtigkeit $n$. Diese entspricht der Länge der Sequenz.
 
 \begin{theorem}
-	Indexmenge $I = [0,1,2,...,n-1]$ mit der Mächtigkeit $|I| = n$.
+Indexmenge $I = [0,1,2,...,n-1]$ mit der Mächtigkeit $|I| = n$.
 \end{theorem}
 
 Somit lässt sich eine Sequenz als Funktion $s : I \rightarrow \Sigma$ schreiben. Jedem Element der Menge $I$ (Index) wird ein Symbol des Alphabets $\Sigma$ zugeordnet.
 
 \begin{theorem}
-	Aus $\Sigma = [a,b]$ und $n = 5$ folgt $s = [a,b,a,a,b]$.
+Aus $\Sigma = [a,b]$ und $n = 5$ folgt $s = [a,b,a,a,b]$.
 \end{theorem}
 
 Einen zusammenhängenden Bereich einer Sequenz bezeichnet man mit \textit{Teilsequenz} $t_{i,j}(s) = s[i,...,j]$. Mit Hilfe von Teilsequenzen lassen sich Sequenzen detaillierter betrachten. Bei zeitdiskreten Datenströmen lassen sich so bestimmte Zeiträume ohne den Einfluss vorheriger oder folgender Ereignisse betrachten. 
 
 \begin{theorem}
-	Aus $s = [0,0,0,0,1,0,1,0,1]$ folgt $t_{4,8}(s) = [1,0,1,0,1] $.
+Aus $s = [0,0,0,0,1,0,1,0,1]$ folgt $t_{4,8}(s) = [1,0,1,0,1] $.
 \end{theorem}
 
 Weiterhin lassen sich Sequenzen anhand ihrer Dimensionen beschreiben. Während eindimensionale Sequenzen an einer Stelle im Index nur einen Wert haben, haben mehrdimensionale Sequenzen mehr als einen Wert. In der Realität würde dies bspw. bedeuten, dass zu einem Zeitpunkt mehrere Informationen zum Zustand einer Maschine erfasst werden. Deshalb bietet es sich an, für jede Dimension ein eigenes Alphabet aufzustellen.
 
 \begin{theorem}
-	Eine Sequenz mit den Alphabeten $\Sigma_{1} = [a,b]$ für die erste und $\Sigma_{2} = [A,B,C]$ für die zweite Dimension: $s = [\{a,C\},\{b,B\},\{a,B\},\{a,A\}]$.
+Eine Sequenz mit den Alphabeten $\Sigma_{1} = [a,b]$ für die erste und $\Sigma_{2} = [A,B,C]$ für die zweite Dimension: $s = [\{a,C\},\{b,B\},\{a,B\},\{a,A\}]$.
 \end{theorem}
 
 \section{Binäre Sequenzen}
@@ -64,7 +64,7 @@ In Abbildung \ref{fig:binary-sequences-full} sieht man eine Sequenz mit sechs m�
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.32]{images/sequences/binary-sequences-reduced}
+		\includegraphics[scale=0.32]{images/sequences/binary-sequences-reduced}
 	\caption{Sequenz mit zwei Zuständen}
 	\label{fig:binary-sequences-reduced}
 \end{figure}
@@ -90,17 +90,17 @@ Balance(0) + Balance(1) = 1;\ f\ddot{u}r\ \Sigma = [0,1]
 Man kann die Balance somit auch als Maß für die Ausrichtung einer Sequenz zu einem Symbol hin bezeichnen. Die Balance wird nach der Formel \ref{eq:properties-sequences-balance} berechnet. Für eine binäre Sequenz gilt zudem Formel \ref{eq:properties-sequences-binary-balance}. Mit ihr ist es möglich Balance(1) aus Balance(0) und anders herum zu berechnen.
 
 \begin{theorem}
-	Gegeben sind:
-	\begin{itemize}[noitemsep]
-		\item Sequenz: $s = [1,0,0,0,1,0,1,1,1,1]$
-		\item Alphabet: $\Sigma = [0,1]$
-		\item Länge: $|s| = 10$
-	\end{itemize}
-	Daraus folgt:
-	\begin{itemize}
-		\item [] $Balance(0) = \frac{Anzahl(0)}{|s|} = \frac{4}{10} = 0.4$
-		\item [] $Balance(1) = 1 - Balance(0) = 1 - 0.4 = 0.6$
-	\end{itemize}
+Gegeben sind:
+\begin{itemize}[noitemsep]
+	\item Sequenz: $s = [1,0,0,0,1,0,1,1,1,1]$
+	\item Alphabet: $\Sigma = [0,1]$
+	\item Länge: $|s| = 10$
+\end{itemize}
+Daraus folgt:
+\begin{itemize}
+	\item [] $Balance(0) = \frac{Anzahl(0)}{|s|} = \frac{4}{10} = 0.4$
+	\item [] $Balance(1) = 1 - Balance(0) = 1 - 0.4 = 0.6$
+\end{itemize}
 \end{theorem}
 
 \subsubsection{Frequenz}
@@ -115,16 +115,16 @@ Frequenz = \frac{Anzahl\ der\ Wertewechsel}{Gesamtl\ddot{a}nge\ der\ Sequenz}
 Ein Wertewechsel tritt auf, wenn ein Element der Sequenz sich von seinem Nachfolger unterscheidet, also $s_{i} \neq s_{i+1}$ ist. In einem Produktionsprozess könnte dies der Zeitpunkt sein, bei dem es zu einer Störung kommt, bzw. diese behoben wurde. Bei einer binären Sequenz handelt es sich um den Wechsel von 0 auf 1 oder von 1 auf 0.
 
 \begin{theorem}
-	Gegeben sind:
-	\begin{itemize}[noitemsep]
-		\item Sequenz: $s = [1,0,0,0,0,0,1,1,1,1]$
-		\item Alphabet: $\Sigma = [0,1]$
-		\item Länge: $|s| = 10$
-	\end{itemize}
-	Daraus folgt:
-	\begin{itemize}[noitemsep]
-		\item [] $Frequenz = \frac{Anzahl\ der\ Wertewechsel}{|s|} = \frac{2}{10} = 0.2$
-	\end{itemize}
+Gegeben sind:
+\begin{itemize}[noitemsep]
+	\item Sequenz: $s = [1,0,0,0,0,0,1,1,1,1]$
+	\item Alphabet: $\Sigma = [0,1]$
+	\item Länge: $|s| = 10$
+\end{itemize}
+Daraus folgt:
+\begin{itemize}[noitemsep]
+	\item [] $Frequenz = \frac{Anzahl\ der\ Wertewechsel}{|s|} = \frac{2}{10} = 0.2$
+\end{itemize}
 \end{theorem}
 
 Somit lassen sich mit Hilfe der Balance und Frequenz Aussagen darüber treffen, wie oft ein Fehlerzustand in einer Sequenz auftritt und ob es häufig zu Wertewechseln kommt. 
@@ -134,50 +134,50 @@ Somit lassen sich mit Hilfe der Balance und Frequenz Aussagen darüber treffen, 
 Dabei bietet es sich an, besonders bei langen Sequenzen, sich auch die Eigenschaften von Teilsequenzen anzuschauen. Das folgende - etwas größere - Beispiel soll dies verdeutlichen.
 
 \begin{theorem}
-	Gegeben sind:
-	\begin{itemize}[noitemsep]
-		\item Sequenz: $s = [0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,1,0,1,0,1,0,1,0,1]$
-		\item Alphabet: $\Sigma = [0,1]$
-		\item Länge: $|s| = 30$
-		\item Teilsequenzen: $t_{0,5}(s)$, $t_{6,11}(s)$, $t_{12,17}(s)$, $t_{18,23}(s)$ und $t_{24,29}(s)$
-	\end{itemize}
-	Daraus folgt mit den Formeln \ref{eq:properties-sequences-balance} und \ref{eq:properties-sequences-frequency} für jede Teilsequenz sowie die gesamte Sequenz:
-	
-	\begin{center}
-		\begin{tabular}{|c c c|}
-			\hline
-			Sequenz & Balance(0) & Frequenz \\
-			\hline\hline
-			s & $0.4\overline{3}$ & $0.3\overline{6}$ \\ 
-			\hline
-			$t_{0,5}(s)$ & 1 & 0 \\ 
-			\hline
-			$t_{6,11}(s)$ & $0.\overline{3}$ & $0.1\overline{6}$ \\
-			\hline
-			$t_{12,17}(s)$ & 0 & 0 \\
-			\hline
-			$t_{18,23}(s)$ & $0.\overline{3}$ & $0.\overline{6}$ \\
-			\hline
-			$t_{24,29}(s)$ & 0.5 & $0.8\overline{3}$ \\
-			\hline
-		\end{tabular}
-	\end{center}
-	
-	Es zeigt sich, dass Balance und Frequenz in den Teilsequenzen teils stark variieren. Damit ergibt sich auch die Wichtigkeit, Sequenzen nicht nur als Ganzes, sondern auch deren Verhalten über die Zeit zu betrachten. So treten bis Index 12 immer mehr Fehlerzustände auf und werden ab Index 17 wieder weniger (vgl. Abbildung \ref{fig:properties-subsequences-balance}). Bei der Frequenz zeigen sich zu Beginn noch keine Wertewechsel, während zum Ende hin die Sequenz sehr aktiv wird (vgl. Abbildung \ref{fig:properties-subsequences-frequency}).
-	
-	\begin{figure}[H]
-		\centering
-		\includegraphics[scale=0.32]{images/sequences/subsequences-balance}
-		\caption{Balance ohne und mit fünf Teilsequenzen}
-		\label{fig:properties-subsequences-balance}
-	\end{figure}
-	
-	\begin{figure}[H]
-		\centering
-		\includegraphics[scale=0.32]{images/sequences/subsequences-frequency}
-		\caption{Frequenz ohne und mit fünf Teilsequenzen}
-		\label{fig:properties-subsequences-frequency}
-	\end{figure}
+Gegeben sind:
+\begin{itemize}[noitemsep]
+	\item Sequenz: $s = [0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,1,0,1,0,1,0,1,0,1]$
+	\item Alphabet: $\Sigma = [0,1]$
+	\item Länge: $|s| = 30$
+	\item Teilsequenzen: $t_{0,5}(s)$, $t_{6,11}(s)$, $t_{12,17}(s)$, $t_{18,23}(s)$ und $t_{24,29}(s)$
+\end{itemize}
+Daraus folgt mit den Formeln \ref{eq:properties-sequences-balance} und \ref{eq:properties-sequences-frequency} für jede Teilsequenz sowie die gesamte Sequenz:
+
+\begin{center}
+	\begin{tabular}{|c c c|}
+		\hline
+		Sequenz & Balance(0) & Frequenz \\
+		\hline\hline
+		s & $0.4\overline{3}$ & $0.3\overline{6}$ \\ 
+		\hline
+		$t_{0,5}(s)$ & 1 & 0 \\ 
+		\hline
+		$t_{6,11}(s)$ & $0.\overline{3}$ & $0.1\overline{6}$ \\
+		\hline
+		$t_{12,17}(s)$ & 0 & 0 \\
+		\hline
+		$t_{18,23}(s)$ & $0.\overline{3}$ & $0.\overline{6}$ \\
+		\hline
+		$t_{24,29}(s)$ & 0.5 & $0.8\overline{3}$ \\
+		\hline
+	\end{tabular}
+\end{center}
+
+Es zeigt sich, dass Balance und Frequenz in den Teilsequenzen teils stark variieren. Damit ergibt sich auch die Wichtigkeit, Sequenzen nicht nur als Ganzes, sondern auch deren Verhalten über die Zeit zu betrachten. So treten bis Index 12 immer mehr Fehlerzustände auf und werden ab Index 17 wieder weniger (vgl. Abbildung \ref{fig:properties-subsequences-balance}). Bei der Frequenz zeigen sich zu Beginn noch keine Wertewechsel, während zum Ende hin die Sequenz sehr aktiv wird (vgl. Abbildung \ref{fig:properties-subsequences-frequency}).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.32]{images/sequences/subsequences-balance}
+	\caption{Balance ohne und mit fünf Teilsequenzen}
+	\label{fig:properties-subsequences-balance}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.32]{images/sequences/subsequences-frequency}
+	\caption{Frequenz ohne und mit fünf Teilsequenzen}
+	\label{fig:properties-subsequences-frequency}
+\end{figure}
 \end{theorem}
 
 \subsubsection{Wertebereich}

@@ -1,0 +1,9 @@
+\chapter{Fazit}
+\label{chp:conclusion}
+In Kapitel \ref{chp:sequences} wurde die binäre Sequenz, welche die Zustände 0 für \textit{kein Fehlerzustand} und 1 für \textit{Fehlerzustand} definiert, eingeführt. Sie stellt die geringste Komplexität einer Sequenz für ein Mehrzustandssystem dar und besitzt die Eigenschaften der Balance und Frequenz mit der sie beschrieben werden kann. Der Vorteil der Sequenzen liegt darin, dass sie sich auch für komplexerer Produktionsdaten verwenden lassen. Mit weiteren Symbolen, lassen sich weitere Zustände abbilden.
+
+Maschinen in Fertigungslinien haben meistens Abhängigkeiten zueinander. Diese lassen sich durch die Visualisierung der Daten oder deren Eigenschaften, aber auch durch die Kreuzkorrelationsfunktion nachweisen. Für die Klassifizierung von Sequenzen wurden zudem grundlegende Muster definiert. Diese lassen sich ebenfalls über die Kreuzkorrelation in Sequenzen nachweisen.
+
+Die auf Grundlage der definierten Eigenschaften vorgestellten Vorgehensweisen zur Analyse von Produktionsdaten, lassen sich automatisiert auf Daten anwenden. Für die Verarbeitung wurde ein proprietäres Datenformat beschrieben. Daneben wurde ein Tool zur Generierung von Simulationsdaten sowie ein Konverter für ein Maschinendatenformat in C\# mit dem .NET Core Framework entwickelt.
+
+Die automatisierte Auswertung der Simulations- bzw. Produktionsdaten findet mit Hilfe einer in Python geschriebenen Anwendung statt. Diese bietet Module zur Berechnung der Balance und Frequenz sowie der Kreuzkorrelation. Automatisiert können so beliebig viele Sequenzen nach den beschriebenen Verfahren verarbeitet werden. Die erstellten PDFs können zur weiteren Analyse herangezogen werden.
