@@ -167,7 +167,7 @@ Befehlstemplate zur Erstellung des Images. Der Name für das Image ist frei wäh
 muss aber in den folgenden Befehlen verwendet werden:
 	docker build . -t <image_name>
 Beispiel:
-	docker build . -t analysisImage
+	docker build . -t analysisimage
 	
 Die Skripte die verwendet werden, sind ein fester Bestandteil des Images.
 Wenn Änderungen an den Skripten vorgenommen werden, muss auch das Image neu erstellt
@@ -177,7 +177,7 @@ Folglich muss dann auch der Container neu erstellt werden.
 Befehlstemplate zur Erstellung eines Containers:
 	docker create  -v <Pfad zum Quellordner>:/usr/src/app/sourceFiles  --name <container_name>  <image_name>
 Beispiel:	
-	docker create  -v C:\Temp\sourcefiles:/usr/src/app/sourceFiles  --name MyAnalysisContainer  analysisImage
+	docker create  -v C:\Temp\sourcefiles:/usr/src/app/sourceFiles  --name MyAnalysisContainer  analysisimage
 Der Pfad zum Quellordner ist ein fester Bestandteil des Containers und kann nicht
 ohne weiteres verändert werden.
 Soll ein anderer Ordner verwendet werden, muss ein neuer Container erzeugt werden.
