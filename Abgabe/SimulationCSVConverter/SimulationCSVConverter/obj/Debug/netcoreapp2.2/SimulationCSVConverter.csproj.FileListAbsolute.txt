@@ -1,0 +1,11 @@
+C:\Users\tobia\Documents\Visual Studio 2017\Projects\SimulationCSVConverter\SimulationCSVConverter\obj\Debug\netcoreapp2.2\SimulationCSVConverter.csprojAssemblyReference.cache
+C:\Users\tobia\Documents\Visual Studio 2017\Projects\SimulationCSVConverter\SimulationCSVConverter\obj\Debug\netcoreapp2.2\SimulationCSVConverter.csproj.CoreCompileInputs.cache
+C:\Users\tobia\Documents\Visual Studio 2017\Projects\SimulationCSVConverter\SimulationCSVConverter\obj\Debug\netcoreapp2.2\SimulationCSVConverter.AssemblyInfoInputs.cache
+C:\Users\tobia\Documents\Visual Studio 2017\Projects\SimulationCSVConverter\SimulationCSVConverter\obj\Debug\netcoreapp2.2\SimulationCSVConverter.AssemblyInfo.cs
+C:\Users\tobia\Documents\Visual Studio 2017\Projects\SimulationCSVConverter\SimulationCSVConverter\bin\Debug\netcoreapp2.2\SimulationCSVConverter.deps.json
+C:\Users\tobia\Documents\Visual Studio 2017\Projects\SimulationCSVConverter\SimulationCSVConverter\bin\Debug\netcoreapp2.2\SimulationCSVConverter.runtimeconfig.json
+C:\Users\tobia\Documents\Visual Studio 2017\Projects\SimulationCSVConverter\SimulationCSVConverter\bin\Debug\netcoreapp2.2\SimulationCSVConverter.runtimeconfig.dev.json
+C:\Users\tobia\Documents\Visual Studio 2017\Projects\SimulationCSVConverter\SimulationCSVConverter\bin\Debug\netcoreapp2.2\SimulationCSVConverter.dll
+C:\Users\tobia\Documents\Visual Studio 2017\Projects\SimulationCSVConverter\SimulationCSVConverter\bin\Debug\netcoreapp2.2\SimulationCSVConverter.pdb
+C:\Users\tobia\Documents\Visual Studio 2017\Projects\SimulationCSVConverter\SimulationCSVConverter\obj\Debug\netcoreapp2.2\SimulationCSVConverter.dll
+C:\Users\tobia\Documents\Visual Studio 2017\Projects\SimulationCSVConverter\SimulationCSVConverter\obj\Debug\netcoreapp2.2\SimulationCSVConverter.pdb
