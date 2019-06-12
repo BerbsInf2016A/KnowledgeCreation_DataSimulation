@@ -332,7 +332,7 @@ Die Ergebnisse der Analyse wird im Quellverzeichnis in Form von PDF-Dateien abge
 Beispiele für die generierten PDF Dateien sind im Anhang unter Kapitel~\ref{attachement:python:results} zu finden.
 
 \section{Verbesserungsmöglichkeiten und Erweiterungen}
-Da Matplotlib nicht threadsafe ist\footnote{ Siehe: \cite{Stackoverflow2016}.}, kann die Generierung von PDF-Dateien nicht ohne Weiteres parallelisiert werden.
+Da Matplotlib nicht threadsafe ist\footnote{ Siehe: \cite{StackOverflow2016}.}, kann die Generierung von PDF-Dateien nicht ohne Weiteres parallelisiert werden.
 Bei einer parallelen Generierung würde Matplotlib gleichzeitig aus verschiedenen Programmbereichen aus aufgerufen werden.
 Bei Programmen die nicht threadsafe sind, kann dies zu Fehlern führen.
 Wenn ein Programm threadsafe ist, sind solche parallelen Aufrufe ohne Behinderungen oder Fehler möglich.
