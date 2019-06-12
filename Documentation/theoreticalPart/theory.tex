@@ -5,9 +5,15 @@
 \label{chp:sequences}
 Bei den in dieser Arbeit verwendeten Datenstrukturen handelt es sich um \textit{Sequenzen}. Im Folgenden werden Sequenzen formal definiert und Begriffe zum Beschreiben dieser eingeführt. Daneben wird die binäre Sequenz als spezielle Abstraktion vorgestellt. Anschließend wird auf die zeitliche Korrelation zwischen Sequenzen eingegangen sowie Muster für eine Klassifizierung von Teilsequenzen definiert.
 
-Zuerst wird allerdings erst noch ein Blick auf bestehende Definitionen für \textit{Sequenz} geworfen. Das Wort stammt aus dem Lateinischen und bedeutet Folge\footnote{https://www.duden.de/rechtschreibung/Sequenz}. Allgemein versteht man darunter eine Folge von gleichartigen oder ähnlichen Dingen\footnote{https://de.wiktionary.org/wiki/Sequenz}. Der Duden definiert im Kontext der Computerwissenschaften zudem eine Sequenz als Folge von hintereinander gespeicherten Daten\footnote{https://www.duden.de/rechtschreibung/Sequenz}. Da es sich bei Produktionsdaten um eben dies handelt, lässt sich der Begriff \textit{Sequenz} in dieser Arbeit verwenden. 
+Zuerst wird allerdings noch ein Blick auf bestehende Definitionen für \textit{Sequenz} geworfen. Das Wort stammt aus dem Lateinischen und bedeutet Folge\footnote{ \cite{SequenzDuden}}. Allgemein versteht man darunter eine Folge von gleichartigen oder ähnlichen Dingen\footnote{ \cite{SequenzWiktionary}}. Der Duden definiert im Kontext der Computerwissenschaften zudem eine Sequenz als Folge von hintereinander gespeicherten Daten\footnote{ \cite{SequenzDuden}}. Da es sich bei Produktionsdaten um eben dies handelt, lässt sich der Begriff \textit{Sequenz} in dieser Arbeit verwenden. 
 
-Bei den hier verwendeten Sequenzen handelt es sich um nominalskalierte Daten\footnote{S. S. Stevens, On the theory of scales of measurement, Science, 1946}. Diese können weder in eine natürliche Reihenfolge gebracht werden, noch lassen sich Rechenoperationen wie Addition oder Multiplikation auf ihnen anwenden. Dies muss bei der weiteren Arbeit mit Sequenzen bedacht werden.
+Bei den hier verwendeten Sequenzen handelt es sich um nominalskalierte Daten\footnote{ \cite{Stevens1946}}. Diese können weder in eine natürliche Reihenfolge gebracht werden, noch lassen sich Rechenoperationen wie Addition oder Multiplikation auf ihnen anwenden. Dies muss bei der weiteren Arbeit mit Sequenzen bedacht werden.
+
+\section{Stand der Forschung}
+\label{chp:state-of-research-sequences}
+Den aktuellen Stand der Forschung und bisher geleistete Arbeit in diesem Gebiet sind nicht einfach herauszuarbeiten. Besonders im Bereich der Wissensgenerierung aus Produktionsdaten gestaltet es sich schwer Grundlagenliteratur zu finden. Ein Großteil der Veröffentlichungen beschäftigt sich auf einem höheren Level mit diesem Thema. Dagegen gibt es mehr wissenschaftliche Grundlagenliteratur im Bereich der Bioinformatik, die sich mit diesem Thema auseinandersetzt. Unter dem Stichwort \textit{Sequenzanalyse} findet man bspw. Algorithmen zur Analyse von DNA/RNA oder grundlegende Definitionen zum Umgang mit Sequenzen\footnote{ Siehe: \cite{Algoseq2014}}.
+
+Die Ergebnisse der Literaturrecherche befindet sich im Anhang \ref{attachement:literature-research}. 
 
 \section{Allgemeine Definitionen}
 \label{chp:definitions-sequences}
@@ -68,7 +74,6 @@ In Abbildung \ref{fig:binary-sequences-full} sieht man eine Sequenz mit sechs m�
 Um Sequenzen oder Teilsequenzen zu klassifizieren, müssen Eigenschaften definiert und voneinander abgegrenzt werden. Dazu werden die \textit{Balance} und \textit{Frequenz} einer Sequenz eingeführt.
 
 \subsubsection{Balance}
-\label{subsection:balance}
 
 Mit der Balance wird das Verhältnis des Vorkommens eines Symbols zur Länge der Sequenz beschrieben. 
 
@@ -99,7 +104,7 @@ Daraus folgt:
 \end{theorem}
 
 \subsubsection{Frequenz}
-\label{subsection:frequence}
+
 Daneben ist die Frequenz ein Maß für die Aktivität an Wertewechseln innerhalb einer Sequenz. Sie ist das Verhältnis zwischen der Anzahl an Wertewechsel und der Sequenzlänge. Sie wird nach Formel \ref{eq:properties-sequences-frequency} berechnet. 
 
 \begin{equation}
@@ -158,8 +163,6 @@ Daraus folgt mit den Formeln \ref{eq:properties-sequences-balance} und \ref{eq:p
 	\end{tabular}
 \end{center}
 
-
-
 Es zeigt sich, dass Balance und Frequenz in den Teilsequenzen teils stark variieren. Damit ergibt sich auch die Wichtigkeit, Sequenzen nicht nur als Ganzes, sondern auch deren Verhalten über die Zeit zu betrachten. So treten bis Index 12 immer mehr Fehlerzustände auf und werden ab Index 17 wieder weniger (vgl. Abbildung \ref{fig:properties-subsequences-balance}). Bei der Frequenz zeigen sich zu Beginn noch keine Wertewechsel, während zum Ende hin die Sequenz sehr aktiv wird (vgl. Abbildung \ref{fig:properties-subsequences-frequency}).
 
 \begin{figure}[H]
@@ -179,7 +182,7 @@ Es zeigt sich, dass Balance und Frequenz in den Teilsequenzen teils stark variie
 
 \subsubsection{Wertebereich}
 
-Der kleinste Wert für die Balance oder Frequenz ist 0 und der größte kleiner gleich 1. Eine Sequenz mit einer niedrigen, bzw. hohen Balance wird als unausgeglichen beschrieben, während ein Wert um die 0.5 als ausgeglichen gilt. Dieser Ausgleich bezieht sich letztlich auf die Verteilung der Nullen und Einsen. Eine detaillierte Auflistung der unterschiedlichen Wertebereiche findet sich in Tabelle~\ref{tab:properties-balance}. 
+Der kleinste Wert für die Balance oder Frequenz ist 0 und der größte kleiner gleich 1. Eine Sequenz mit einer niedrigen, bzw. hohen Balance wird als unausgeglichen beschrieben, während ein Wert um die 0.5 als ausgeglichen gilt. Dieser Ausgleich bezieht sich letztlich auf die Verteilung der Nullen und Einsen. Eine detaillierte Auflistung der unterschiedlichen Wertebereiche findet sich in Tabelle~\ref{tab:properties-balance}. Da die Balance für zwei Zustände berechnet werden kann, wird der Einfachheit halber - wenn von Balance gesprochen wird - implizit die Balance von \textit{Fehlerzustand}, bzw. $B(1)$ angenommen. 
 
 \begin{table}[H]
 	\begin{center}
@@ -219,9 +222,9 @@ Da mit der Frequenz ein Maß für die Wertewechsel innerhalb einer Sequenz bilde
 	\end{center}
 \end{table}
 
-Mit der Balance und Frequenz sind nun zwei Eigenschaften definiert, mit denen sich grundsätzliche Aussagen über Sequenzen treffen lassen. Aus betriebswirtschaftlicher Sicht ist es erstrebenswert, die Balance von \textit{kein Fehlerzustand} möglichst hoch zu halten. Eine Balance von 1 wäre der Idealzustand, da somit kein Fehlerzustand in der Sequenz vorhanden ist. 
+Mit der Balance und Frequenz sind nun zwei Eigenschaften definiert, mit denen sich grundsätzliche Aussagen über Sequenzen treffen lassen. Aus betriebswirtschaftlicher Sicht ist es erstrebenswert, die Balance von \textit{Fehlerzustand} möglichst niedrig zu halten. Eine Balance von 0 wäre der Idealzustand, da somit kein Fehlerzustand in der Sequenz vorhanden ist. 
 
-Wenn man die Frequenz einer Sequenz betrachtet, lässt sich grundsätzlich sagen, dass eine niederfrequente Sequenz ein wünschenswerter Zustand ist, denn wenige Wertewechsel sprechen für eine gewisse Kontinuität und Stabilität. Allerdings sollte man die Frequenz zusammen mit der Balance und nicht alleine betrachten. Denn eine niedrige Frequenz im Zusammenspiel mit einer niedrigen Balance von \textit{kein Fehlerzustand} würde bedeuten, dass sich eine Maschine konstant im Fehlerzustand befindet.
+Wenn man die Frequenz einer Sequenz betrachtet, lässt sich grundsätzlich sagen, dass eine niederfrequente Sequenz ein wünschenswerter Zustand ist, denn wenige Wertewechsel sprechen für eine gewisse Kontinuität und Stabilität. Allerdings sollte man die Frequenz zusammen mit der Balance und nicht alleine betrachten. Denn eine niedrige Frequenz im Zusammenspiel mit einer hohen Balance würde bedeuten, dass sich eine Maschine konstant im Fehlerzustand befindet.
 
 \section{Korrelation}
 \label{chp:correlation-sequences}
@@ -234,11 +237,11 @@ Bisher wurden Sequenzen nur für sich alleine betrachtet und nicht im Zusammenha
 	\label{fig:correlation-sequences-corr}
 \end{figure}
 
-Mit Hilfe der Korrelation als Maß für den Zusammenhang zwischen Sequenzen, wird eine solche Betrachtung möglich. In der Signalanalyse wird dafür die Kreuzkorrelationsfunktion verwendet. Auch wenn eine zeitliche Korrelation zwischen Sequenzen so nachgewiesen werden kann, ist dies noch kein Nachweis für einen kausalen Zusammenhang. Die Implementierung dieser Funktion sowie deren beispielhafte Verwendung finden sich in Kapitel \ref{chp:crosscorrelation:implementation}.
+Mit Hilfe der Korrelation als Maß für den Zusammenhang zwischen Sequenzen, wird eine solche Betrachtung möglich. In der Signalanalyse wird dafür die Kreuzkorrelationsfunktion verwendet. Auch wenn eine zeitliche Korrelation zwischen Sequenzen so nachgewiesen werden kann, ist dies noch kein Nachweis für einen kausalen Zusammenhang. Die Implementierung dieser Funktion sowie deren beispielhafte Verwendung findet sich in Kapitel \ref{chp:crosscorrelation:implementation}.
 
 \section{Klassifizierung}
 \label{chp:classification-sequences}
-Wenn man Sequenzen graphisch darstellt ergeben sich unterschiedliche Muster. Um die Klassifikation von Sequenzen zu erleichtern, wurden in Kapitel \ref{chp:properties-sequences} die Wertebereiche für Balance und Frequenz definiert. Im Folgenden werden markante Muster, welche in Teilsequenzen auftreten können, beschrieben. Wenn im Weiteren von Balance gesprochen wird, ist damit die Balance von \textit{kein Fehlerzustand} gemeint.
+Wenn man Sequenzen graphisch darstellt ergeben sich unterschiedliche Muster. Um die Klassifikation von Sequenzen zu erleichtern, wurden in Kapitel \ref{chp:properties-sequences} die Wertebereiche für Balance und Frequenz definiert. Im Folgenden werden markante Muster, welche in Teilsequenzen auftreten können, beschrieben.
 
 Das erste Muster nennt sich \textit{Ausreißer} und ist in Abbildung \ref{fig:classification-sequences-outlier} dargestellt. Eine solche Teilsequenz befindet sich fast ausschließlich in einem Zustand. Änderungen treten fast gar nicht und wenn doch nur kurz auf. Bei Produktionsprozessen kann man dieses Muster bei einer Maschine, welche im Regelbetrieb arbeitet und kurz einen Fehler wirft, beobachten. Wichtig dabei ist, dass schnell wieder ein Sprung in den Ausgangszustand stattfindet. Die Balance einer solchen Sequenz ist unausgeglichen und die Frequenz sehr niedrig.
 
