@@ -599,4 +599,5 @@ dmypy.json
 *.pyc
 
 !/Documentation/prefix/image/logo-dhbw-eps-converted-to.pdf
+!/Documentation/prefix/*.pdf
 !/Abgabe/*.pdf
